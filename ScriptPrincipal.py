@@ -1,5 +1,7 @@
 """
-Script principal
+Script principal donde se ejecuta la extraccion de rostros y 
+posteriormetne el entrenamiento
+
 """
 print(__doc__)
 import pyrebase
