@@ -1,6 +1,7 @@
 """
 ===================================================
 Reconocedor de caras por SVM y PCA
+from LFW example scikit-learning
 ===================================================
 
 """
