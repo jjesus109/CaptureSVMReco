@@ -5,7 +5,7 @@ import matplotlib.image as mpimg
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 import pickle
 
-tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
+tomaDatos = open("/home/pi/Desktop/P2/archivo_modelo_LBP.pickle", "rb")
 datos = pickle.load(tomaDatos)
 clf = datos["modelo"]
 pca = datos["pca"]
@@ -97,7 +97,8 @@ def mayorFrecuencia(dk2):
 video_capture = cv2.VideoCapture(1)
 nombre="sin reconocer"
 
-def deteccionContinua():    
+##def deteccionContinua():
+while True:
     _, frame = video_capture.read()
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -151,11 +152,10 @@ def deteccionContinua():
     cv2.putText(canvas, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
     numeroappend += 1
     cv2.imshow('Video', canvas)
-    cv2.imshow('Video correccion', Clahe_Gamma)
+##    cv2.imshow('Video correccion', Clahe_Gamma)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
-
-#        break
+       break
     
 video_capture.release()
 cv2.destroyAllWindows()

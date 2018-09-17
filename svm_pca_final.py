@@ -1,7 +1,6 @@
 """
 ===================================================
 Reconocedor de caras por SVM y PCA
-from LFW example scikit-learning
 ===================================================
 
 """
@@ -141,7 +140,7 @@ def SVM(carpeta,target_names):
     
     print(classification_report(y_test, y_pred, target_names=target_names))
     print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))
-    
+    """
     def plot_confusion_matrix(cm, classes, normalize=False, title='Confusion matrix', cmap=pl.cm.Blues):
         #This function prints and plots the confusion matrix. 
         if normalize:
@@ -175,14 +174,14 @@ def SVM(carpeta,target_names):
     
     cnf_matrix = confusion_matrix(y_test, y_pred)
     plot_confusion_matrix(cnf_matrix, classes=target_names, normalize=True, title='Normalized confusion matrix')
+"""    
+    import pickle
+    datos = {"modelo":clf, "pca": pca, "target_names": target_names}
+    data = open(carpeta+"/archivo_modelo_LBP.pickle",'wb')
+    pickle.dump(datos, data)
+    
+ 
+##    return clf, pca   
     
     
-    
-    return clf, pca   
-    
-#    import pickle
-#    datos = {"modelo":clf, "pca": pca}
-#    data = open("archivo_modelo_LBP.pickle",'wb')
-#    pickle.dump(datos, data)
-#    
     

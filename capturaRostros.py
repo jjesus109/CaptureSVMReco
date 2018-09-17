@@ -38,7 +38,7 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
     tamanioCara =  (0,0,0)
     resizeW = 96
     resizeH = 130
-    video_capture = cv2.VideoCapture(1)
+    video_capture = cv2.VideoCapture(0)
     # Ajuste de ancho de espacio de visualizacion de camara
 #    video_capture.set(3,800)
     # Ajuste de alto de espacion de visualizacion de camara
@@ -66,9 +66,9 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
                 tamanioCara = (0,0,0)
             else:
                 tamanioCara = np.shape(crop_img)
-#            cv2.imshow('Video original Gris', gray)
+            cv2.imshow('Video original Gris', gray)
 #            cv2.imshow('Video', frame)
-#            cv2.imshow('Video corregido', Clahe_Gamma)
+##             cv2.imshow('Video corregido', Clahe_Gamma)
             
             """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
             PERSONA FRENTE A LA CAMAR"""
@@ -94,4 +94,4 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
         conexionCamara = False
     video_capture.release()
     cv2.destroyAllWindows()
-    return conexionCamara
+    return conexionCamara,video_capture
