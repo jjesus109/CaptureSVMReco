@@ -1,6 +1,7 @@
 """
 Script principal
 """
+print(__doc__)
 import pyrebase
 import time
 import pathlib
