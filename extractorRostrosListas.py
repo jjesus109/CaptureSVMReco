@@ -79,52 +79,52 @@ if video_capture.isOpened():
     while True:
             
         _, frame = video_capture.read()
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+#        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
         
-        CorreccionGamma = ajusteGamma(gray,1.8)
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-        Clahe_Gamma = clahe.apply(CorreccionGamma)
+#        CorreccionGamma = ajusteGamma(gray,1.8)
+#        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+#        Clahe_Gamma = clahe.apply(CorreccionGamma)
         
-        gris,crop_img, frame = detect(Clahe_Gamma, frame)
+#        gris,crop_img, frame = detect(Clahe_Gamma, frame)
         # Para evitar que devuelve basura en este caso un entero cuando 
         # no reconcoe algun rostro
-        if crop_img.all()==0:
-            tamanioCara = (0,0,0)
-        else:
-            tamanioCara = np.shape(crop_img)
-        cv2.imshow('Video original Gris', gray)
+#        if crop_img.all()==0:
+#            tamanioCara = (0,0,0)
+#        else:
+#            tamanioCara = np.shape(crop_img)
+#        cv2.imshow('Video original Gris', gray)
         cv2.imshow('Video', frame)
-        cv2.imshow('Video corregido', Clahe_Gamma)
+#        cv2.imshow('Video corregido', Clahe_Gamma)
         
         """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
         PERSONA FRENTE A LA CAMAR"""
-            
-        if tamanioCara[0] >int(resizeW*0.7):
-            # ajust de tamaño de rostros
-            crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-#            cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuario)+"_"+str(numeroImagen)+".png", crop_img)
-#            numeroImagen += 1
-            
-        if numeroImagen >=80:
-            if numeroUsuario >= nUsuarios:
-                break
-            else:            
-                print("********Termino de adquisisción de usuario"+str(numeroUsuario))
-                time.sleep(6)
-                print("********Empieza usuario "+str(numeroUsuario))
-                numeroUsuario+=1
-                numeroImagen=1
-    
-        
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+#            
+#        if tamanioCara[0] >int(resizeW*0.7):
+#            # ajust de tamaño de rostros
+#            crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+##            cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuario)+"_"+str(numeroImagen)+".png", crop_img)
+##            numeroImagen += 1
+#            
+#        if numeroImagen >=80:
+#            if numeroUsuario >= nUsuarios:
+#                break
+#            else:            
+#                print("********Termino de adquisisción de usuario"+str(numeroUsuario))
+#                time.sleep(6)
+#                print("********Empieza usuario "+str(numeroUsuario))
+#                numeroUsuario+=1
+#                numeroImagen=1
+#    
+#        
+#        if cv2.waitKey(1) & 0xFF == ord('q'):
+#            break
 #        print("numeroImagen")
 #        print(numeroImagen)
         
     #    print(tamanioCara[0])
     
-        print(video_capture.get(5))
+#        print(video_capture.get(5))
 else:
     print("No se pudo conectar con la camara")
     
