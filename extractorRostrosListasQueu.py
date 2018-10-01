@@ -5,8 +5,8 @@ import cv2
 # https://docs.opencv.org/3.0-beta/modules/videoio/doc/reading_and_writing_video.html?highlight=videocapture#videocapture-isopened
 
 import numpy as np
-#import time
-#import pathlib
+import time
+import pathlib
 from multiprocessing import Process
 from multiprocessing import Queue
 
@@ -16,19 +16,9 @@ smile_cascade = cv2.CascadeClassifier('haarcascade_smile.xml')
 
 
 
-#NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-#NombreCarpetaTraining =NombreCarpetaPrueba + "/training_set"
-#NombreCarpetaTest =NombreCarpetaPrueba + "/test_set"
-#pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
-#pathlib.Path(NombreCarpetaTraining).mkdir(parents=True, exist_ok=True)
-#pathlib.Path(NombreCarpetaTest).mkdir(parents=True, exist_ok=True)
-#for i in range(numeroClases):
-#    NombreCarpetaUsuario=NombreCarpetaTest + "/Usuario"+str(i+1)
-#    pathlib.Path(NombreCarpetaUsuario).mkdir(parents=True, exist_ok=True)
-#    NombreCarpetaUsuario=NombreCarpetaTraining + "/Usuario"+str(i+1)
-#    pathlib.Path(NombreCarpetaUsuario).mkdir(parents=True, exist_ok=True)
 
-
+NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
+pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 
 nUsuarios=1
 numeroImagen = 1
@@ -81,13 +71,15 @@ def ajusteGamma(imagen,gamma=1.0):
     return cv2.LUT(imagen,table)
 
 
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 # Ajuste de ancho de espacio de visualizacion de camara
 #video_capture.set(3,800)
 # Ajuste de alto de espacion de visualizacion de camara
 #video_capture.set(4,600)
 #Ajustar frames por segundo
 video_capture.set(5,20)
+numeroImagen=0
+
 if video_capture.isOpened():
     print("Inicializacion de camara exitosa")
     print("Comienza captura de video")
@@ -110,6 +102,11 @@ if video_capture.isOpened():
         if vectorDim !=[0,0,0,0]:
             medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
             cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
+            crop_img = Clahe_Gamma[medidasY2:medidasY1, medidasX1:medidasX2]
+            crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+            cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuario)+"_"+str(numeroImagen)+".png", crop_img)
+            numeroImagen += 1
+            
         print("VectorDim")
         print(vectorDim)
 #        gris,crop_img, frame = detect(Clahe_Gamma, frame)
@@ -143,7 +140,9 @@ if video_capture.isOpened():
 #                numeroImagen=1
 #    
 #        
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+#        if cv2.waitKey(1) & 0xFF == ord('q'):
+#            break
+        if numeroImagen>=70:
             break
 #        print("numeroImagen")
 #        print(numeroImagen)
