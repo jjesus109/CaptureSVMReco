@@ -65,71 +65,71 @@ def ajusteGamma(imagen,gamma=1.0):
         for i in np.arange(0,256)]).astype("uint8")
     return cv2.LUT(imagen,table)
 
-
-video_capture = cv2.VideoCapture(0)
-# Ajuste de ancho de espacio de visualizacion de camara
-#video_capture.set(3,800)
-# Ajuste de alto de espacion de visualizacion de camara
-#video_capture.set(4,600)
-#Ajustar frames por segundo
-video_capture.set(5,10)
-if video_capture.isOpened():
-    print("Inicializacion de camara exitosa")
-    print("Comienza captura de video")
-    while True:
-            
-        _, frame = video_capture.read()
-#        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    
-        
-#        CorreccionGamma = ajusteGamma(gray,1.8)
-#        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-#        Clahe_Gamma = clahe.apply(CorreccionGamma)
-        
-#        gris,crop_img, frame = detect(Clahe_Gamma, frame)
-        # Para evitar que devuelve basura en este caso un entero cuando 
-        # no reconcoe algun rostro
-#        if crop_img.all()==0:
-#            tamanioCara = (0,0,0)
-#        else:
-#            tamanioCara = np.shape(crop_img)
-#        cv2.imshow('Video original Gris', gray)
-        cv2.imshow('Video', frame)
-#        cv2.imshow('Video corregido', Clahe_Gamma)
-        
-        """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
-        PERSONA FRENTE A LA CAMAR"""
+#
+#video_capture = cv2.VideoCapture(0)
+## Ajuste de ancho de espacio de visualizacion de camara
+##video_capture.set(3,800)
+## Ajuste de alto de espacion de visualizacion de camara
+##video_capture.set(4,600)
+##Ajustar frames por segundo
+#video_capture.set(5,10)
+#if video_capture.isOpened():
+#    print("Inicializacion de camara exitosa")
+#    print("Comienza captura de video")
+#    while True:
 #            
-#        if tamanioCara[0] >int(resizeW*0.7):
-#            # ajust de tamaño de rostros
-#            crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-##            cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuario)+"_"+str(numeroImagen)+".png", crop_img)
-##            numeroImagen += 1
-#            
-#        if numeroImagen >=80:
-#            if numeroUsuario >= nUsuarios:
-#                break
-#            else:            
-#                print("********Termino de adquisisción de usuario"+str(numeroUsuario))
-#                time.sleep(6)
-#                print("********Empieza usuario "+str(numeroUsuario))
-#                numeroUsuario+=1
-#                numeroImagen=1
+#        _, frame = video_capture.read()
+##        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 #    
 #        
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-#        print("numeroImagen")
-#        print(numeroImagen)
-        
-    #    print(tamanioCara[0])
-    
-#        print(video_capture.get(5))
-else:
-    print("No se pudo conectar con la camara")
-    
-   
-print("---------------Termino de adquisisción de rostros----------------")
+##        CorreccionGamma = ajusteGamma(gray,1.8)
+##        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+##        Clahe_Gamma = clahe.apply(CorreccionGamma)
+#        
+##        gris,crop_img, frame = detect(Clahe_Gamma, frame)
+#        # Para evitar que devuelve basura en este caso un entero cuando 
+#        # no reconcoe algun rostro
+##        if crop_img.all()==0:
+##            tamanioCara = (0,0,0)
+##        else:
+##            tamanioCara = np.shape(crop_img)
+##        cv2.imshow('Video original Gris', gray)
+#        cv2.imshow('Video', frame)
+##        cv2.imshow('Video corregido', Clahe_Gamma)
+#        
+#        """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
+#        PERSONA FRENTE A LA CAMAR"""
+##            
+##        if tamanioCara[0] >int(resizeW*0.7):
+##            # ajust de tamaño de rostros
+##            crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+###            cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuario)+"_"+str(numeroImagen)+".png", crop_img)
+###            numeroImagen += 1
+##            
+##        if numeroImagen >=80:
+##            if numeroUsuario >= nUsuarios:
+##                break
+##            else:            
+##                print("********Termino de adquisisción de usuario"+str(numeroUsuario))
+##                time.sleep(6)
+##                print("********Empieza usuario "+str(numeroUsuario))
+##                numeroUsuario+=1
+##                numeroImagen=1
+##    
+##        
+#        if cv2.waitKey(1) & 0xFF == ord('q'):
+#            break
+##        print("numeroImagen")
+##        print(numeroImagen)
+#        
+#    #    print(tamanioCara[0])
+#    
+##        print(video_capture.get(5))
+#else:
+#    print("No se pudo conectar con la camara")
+#    
+#   
+#print("---------------Termino de adquisisción de rostros----------------")
 
 """Verificacion de imagenes extraidas, se comparara """        
 #def verificacion(carpeta):
@@ -138,7 +138,39 @@ print("---------------Termino de adquisisción de rostros----------------")
 #    img = cv2.imread('your_image.jpg',0)
 #    height, width = img.shape[:2]
 
+"""PRueba con raspberry camera"""
 
 
-video_capture.release()
-cv2.destroyAllWindows()
+# import the necessary packages
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import cv2
+ 
+# initialize the camera and grab a reference to the raw camera capture
+camera = PiCamera()
+camera.resolution = (640, 480)
+camera.framerate = 32
+rawCapture = PiRGBArray(camera, size=(640, 480))
+ 
+# allow the camera to warmup
+time.sleep(0.1)
+ 
+# capture frames from the camera
+for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+	# grab the raw NumPy array representing the image, then initialize the timestamp
+	# and occupied/unoccupied text
+	image = frame.array
+ 
+	# show the frame
+	cv2.imshow("Frame", image)
+	key = cv2.waitKey(1) & 0xFF
+ 
+	# clear the stream in preparation for the next frame
+	rawCapture.truncate(0)
+ 
+	# if the `q` key was pressed, break from the loop
+	if key == ord("q"):
+		break
+
+#video_capture.release()
+#cv2.destroyAllWindows()
