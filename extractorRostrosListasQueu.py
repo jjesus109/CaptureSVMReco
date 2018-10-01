@@ -106,6 +106,8 @@ if video_capture.isOpened():
             crop_img = cv2.resize(crop_img,(resizeW,resizeH))
             cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuario)+"_"+str(numeroImagen)+".png", crop_img)
             numeroImagen += 1
+            print("numero de imagen")
+            print(numeroImagen)
             
 #        print("VectorDim")
 #        print(vectorDim)
