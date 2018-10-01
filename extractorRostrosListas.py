@@ -14,10 +14,10 @@ smile_cascade = cv2.CascadeClassifier('haarcascade_smile.xml')
 
 
 
-NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
+#NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
 #NombreCarpetaTraining =NombreCarpetaPrueba + "/training_set"
 #NombreCarpetaTest =NombreCarpetaPrueba + "/test_set"
-pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+#pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 #pathlib.Path(NombreCarpetaTraining).mkdir(parents=True, exist_ok=True)
 #pathlib.Path(NombreCarpetaTest).mkdir(parents=True, exist_ok=True)
 #for i in range(numeroClases):
@@ -66,13 +66,13 @@ def ajusteGamma(imagen,gamma=1.0):
     return cv2.LUT(imagen,table)
 
 
-video_capture = cv2.VideoCapture(2)
+video_capture = cv2.VideoCapture(1)
 # Ajuste de ancho de espacio de visualizacion de camara
-video_capture.set(3,800)
+#video_capture.set(3,800)
 # Ajuste de alto de espacion de visualizacion de camara
-video_capture.set(4,600)
+#video_capture.set(4,600)
 #Ajustar frames por segundo
-video_capture.set(5,10)
+#video_capture.set(5,10)
 if video_capture.isOpened():
     print("Inicializacion de camara exitosa")
     print("Comienza captura de video")
@@ -117,8 +117,8 @@ if video_capture.isOpened():
 #                numeroImagen=1
 #    
 #        
-#        if cv2.waitKey(1) & 0xFF == ord('q'):
-#            break
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 #        print("numeroImagen")
 #        print(numeroImagen)
         
