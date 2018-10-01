@@ -38,7 +38,7 @@ def detect(inputQueue, outputQueue):
 #        crop_img=np.array([0,0,0])
         
         if not inputQueue.empty():
-            print("si esta en el detect")
+#            print("si esta en el detect")
             gray = inputQueue.get()
             faces = face_cascade.detectMultiScale(gray, 1.3, 5)    
             
@@ -94,10 +94,10 @@ if video_capture.isOpened():
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
         Clahe_Gamma = clahe.apply(CorreccionGamma)
         if inputQueue.empty():
-            print("Dentro del inputEmpty")
+#            print("Dentro del inputEmpty")
             inputQueue.put(Clahe_Gamma)
         if not outputQueue.empty():
-            print("Dentro del outputEMpty")
+#            print("Dentro del outputEMpty")
             vectorDim = outputQueue.get()
         if vectorDim !=[0,0,0,0]:
             medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
@@ -107,8 +107,8 @@ if video_capture.isOpened():
             cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuario)+"_"+str(numeroImagen)+".png", crop_img)
             numeroImagen += 1
             
-        print("VectorDim")
-        print(vectorDim)
+#        print("VectorDim")
+#        print(vectorDim)
 #        gris,crop_img, frame = detect(Clahe_Gamma, frame)
         # Para evitar que devuelve basura en este caso un entero cuando 
         # no reconcoe algun rostro
