@@ -157,14 +157,14 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 	# grab the raw NumPy array representing the image, then initialize the timestamp
 	# and occupied/unoccupied text
     image = frame.array
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     
     CorreccionGamma = ajusteGamma(gray,1.8)
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
     Clahe_Gamma = clahe.apply(CorreccionGamma)
     
-    gris,crop_img, frame = detect(Clahe_Gamma, frame)
+    gris,crop_img, frame = detect(Clahe_Gamma, image)
     # Para evitar que devuelve basura en este caso un entero cuando 
     # no reconcoe algun rostro
 #        if crop_img.all()==0:
