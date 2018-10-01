@@ -173,7 +173,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 #            tamanioCara = np.shape(crop_img)
 #        cv2.imshow('Video original Gris', gray)
 #        cv2.imshow('Video', frame)
-    cv2.imshow('Video corregido', Clahe_Gamma)
+    cv2.imshow('Video corregido', frame)
  
 	# show the frame
 #	cv2.imshow("Frame", image)
