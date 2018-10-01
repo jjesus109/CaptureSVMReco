@@ -79,14 +79,14 @@ if video_capture.isOpened():
     while True:
             
         _, frame = video_capture.read()
-#        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
         
-#        CorreccionGamma = ajusteGamma(gray,1.8)
-#        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-#        Clahe_Gamma = clahe.apply(CorreccionGamma)
+        CorreccionGamma = ajusteGamma(gray,1.8)
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+        Clahe_Gamma = clahe.apply(CorreccionGamma)
         
-#        gris,crop_img, frame = detect(Clahe_Gamma, frame)
+        gris,crop_img, frame = detect(Clahe_Gamma, frame)
         # Para evitar que devuelve basura en este caso un entero cuando 
         # no reconcoe algun rostro
 #        if crop_img.all()==0:
@@ -94,8 +94,8 @@ if video_capture.isOpened():
 #        else:
 #            tamanioCara = np.shape(crop_img)
 #        cv2.imshow('Video original Gris', gray)
-        cv2.imshow('Video', frame)
-#        cv2.imshow('Video corregido', Clahe_Gamma)
+#        cv2.imshow('Video', frame)
+        cv2.imshow('Video corregido', Clahe_Gamma)
         
         """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
         PERSONA FRENTE A LA CAMAR"""
@@ -132,11 +132,7 @@ else:
 print("---------------Termino de adquisisción de rostros----------------")
 
 """Verificacion de imagenes extraidas, se comparara """        
-#def verificacion(carpeta):
-#    """falta modificar"""
-#    carpetaConImagen = carpeta 
-#    img = cv2.imread('your_image.jpg',0)
-#    height, width = img.shape[:2]
+
 
 """PRueba con raspberry camera"""
 
