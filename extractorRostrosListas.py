@@ -72,7 +72,7 @@ video_capture = cv2.VideoCapture(0)
 # Ajuste de alto de espacion de visualizacion de camara
 #video_capture.set(4,600)
 #Ajustar frames por segundo
-video_capture.set(5,15)
+video_capture.set(5,10)
 if video_capture.isOpened():
     print("Inicializacion de camara exitosa")
     print("Comienza captura de video")
