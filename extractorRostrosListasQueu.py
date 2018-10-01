@@ -17,8 +17,8 @@ smile_cascade = cv2.CascadeClassifier('haarcascade_smile.xml')
 
 
 
-NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
-pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+NombreCarpetaPrueba = "/home/pi/Desktop/pp1"
+#pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 
 nUsuarios=1
 numeroImagen = 1
@@ -71,7 +71,7 @@ def ajusteGamma(imagen,gamma=1.0):
     return cv2.LUT(imagen,table)
 
 
-video_capture = cv2.VideoCapture(1)
+video_capture = cv2.VideoCapture(0)
 # Ajuste de ancho de espacio de visualizacion de camara
 #video_capture.set(3,800)
 # Ajuste de alto de espacion de visualizacion de camara
