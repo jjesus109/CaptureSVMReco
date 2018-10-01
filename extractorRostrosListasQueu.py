@@ -108,7 +108,8 @@ if video_capture.isOpened():
             print("Dentro del outputEMpty")
             vectorDim = outputQueue.get()
         if vectorDim !=[0,0,0,0]:
-            cv2.rectangle(frame, (vectorDim[0], vectorDim[1]), (vectorDim[2], vectorDim[3]), (255, 0, 0), 2)
+            medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
+            cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
         print("VectorDim")
         print(vectorDim)
 #        gris,crop_img, frame = detect(Clahe_Gamma, frame)
