@@ -69,8 +69,8 @@ def obtenerRostros():
                 print("Nombres usuarios")
                 print(nombreUsuarios)
 #            numeroUsuariosDeteccion = len(usuarios)
-            for j in range(len(nombreUsuarios)):
-                deteccion_correcta, videoCapture= cr.capturaCamara(j+1,NombreCarpetaPrueba,len(nombreUsuarios))
+#            for j in range(len(nombreUsuarios)):
+            deteccion_correcta, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,len(nombreUsuarios))
             if deteccion_correcta == False:
                 print("Error al capturar los rostros")
                 errorCaptura = True

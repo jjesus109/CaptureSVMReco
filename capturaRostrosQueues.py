@@ -32,7 +32,7 @@ def ajusteGamma(imagen,gamma=1.0):
 
 
 # se pasa el label del usuario desde el script principal
-def capturaCamara(numeroUsuario,NombreCarpetaPrueba,numeroUsuarios):
+def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
     # Configuración de queues        
     inputQueue = Queue(maxsize=2)
     outputQueue = Queue(maxsize=2)
