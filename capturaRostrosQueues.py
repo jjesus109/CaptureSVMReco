@@ -59,8 +59,6 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
                 
             _, frame = video_capture.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        
-            
             CorreccionGamma = ajusteGamma(gray,1.8)
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
             Clahe_Gamma = clahe.apply(CorreccionGamma)
@@ -79,8 +77,10 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
                 # no reconcoe algun rostro
                 if crop_img.all()==0:
                     tamanioCara = (0,0,0)
+                    print("tamaño de cara pequeño")
                 else:
                     tamanioCara = np.shape(crop_img)
+                    print("se hace el crop")
                 
                 """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
                 PERSONA FRENTE A LA CAMAR"""
@@ -109,11 +109,12 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
         print("No se pudo conectar con la camara")
         # NO se pudo conectar con camara
         conexionCamara = False
-    video_capture.release()
-    cv2.destroyAllWindows()
     #termino de proceso y de queue
     p.terminate()
     time.sleep(0.1)
     inputQueue.close()
     outputQueue.close()
+    video_capture.release()
+    cv2.destroyAllWindows()
+    
     return conexionCamara,video_capture
