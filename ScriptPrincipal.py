@@ -7,7 +7,7 @@ print(__doc__)
 import pyrebase
 import time
 import pathlib
-import capturaRostros as cr
+import capturaRostrosQueues as cr
 import svm_pca_final as svm
 import cv2
 #import
