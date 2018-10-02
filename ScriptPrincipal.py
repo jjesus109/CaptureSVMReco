@@ -48,7 +48,9 @@ def obtenerRostros():
         # validacion para saber en que momento inicia la catura de los usuarios 
         # que tendran el acceso por reconocimiento 
         try:
-            comenzarCaptura = db.child("Prueba/empezarReco").get()
+            comenzarCaptura = db.child("Facial/Activacion").get()
+            print("comenzarcaptura")
+            print(comenzarCaptura.val())
         except:
             print("Favor de conectar a internet")
         if comenzarCaptura.val()  == "True":

@@ -6,20 +6,7 @@ Reconocedor de caras por SVM y PCA
 """
 print(__doc__)
 
-from time import time
-import matplotlib.pyplot as pl
-import numpy as np
-import os
-import cv2  
-from sklearn.cross_validation import train_test_split
-from sklearn.grid_search import GridSearchCV
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
-from sklearn.decomposition import RandomizedPCA
-from sklearn.svm import SVC
 
-import itertools
-from skimage.feature import local_binary_pattern
 
 datosAug =[]
 labelsAug =[]
@@ -31,6 +18,18 @@ labelsAug =[]
 #n_points = 8
 #nro = 0
 def SVM(carpeta,target_names):
+    from time import time
+    import matplotlib.pyplot as pl
+    import numpy as np
+    import os
+    import cv2  
+    from sklearn.cross_validation import train_test_split
+    from sklearn.grid_search import GridSearchCV
+    from sklearn.metrics import classification_report
+    from sklearn.metrics import confusion_matrix
+    from sklearn.decomposition import RandomizedPCA
+    from sklearn.svm import SVC
+    from skimage.feature import local_binary_pattern
     t0 = time()
     folders = os.listdir(carpeta)
     for im in folders:

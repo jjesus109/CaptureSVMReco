@@ -19,14 +19,8 @@ def detect(inputQueue, outputQueue):
                 medidasY1 = int(y+(h*0.95))
                 vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
                 outputQueue.put(vectorDim)
-# Configuración de queues        
-inputQueue = Queue(maxsize=2)
-outputQueue = Queue(maxsize=2)
-vectorDim = [0,0,0,0]
-print("[INFO] starting process...")
-p = Process(target=detect, args=(inputQueue, outputQueue,))
-p.daemon = True
-p.start()
+
+
 # Funcion de ajuste Gamma
 def ajusteGamma(imagen,gamma=1.0):
     invGamma =  1.0 / gamma
@@ -38,6 +32,14 @@ def ajusteGamma(imagen,gamma=1.0):
 
 # se pasa el label del usuario desde el script principal
 def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
+    # Configuración de queues        
+    inputQueue = Queue(maxsize=2)
+    outputQueue = Queue(maxsize=2)
+    vectorDim = [0,0,0,0]
+    print("[INFO] starting process...")
+    p = Process(target=detect, args=(inputQueue, outputQueue,))
+    p.daemon = True
+    p.start()
     tamanioCara =  (0,0,0)
     resizeW = 96
     resizeH = 130
