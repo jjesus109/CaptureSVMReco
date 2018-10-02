@@ -53,7 +53,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
 #    video_capture.set(5,25)
     numeroImagen = 1
     numeroUsuarioActual=1
-    print("La captura de rostros del usuario"+str(numeroUsuarioActual))
+    print("La captura de rostros del usuario "+str(numeroUsuarioActual))
     for i in range(5):
         print("Inicia en " +str(5-i))
         time.sleep(1)
@@ -110,15 +110,15 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
                 numeroImagen=0
                 
-            if numeroUsuarioActual>=numeroUsuarios:
-                break
-            else:
-                numeroUsuarioActual += 1
-                print("La captura de rostros del usuario"+str(numeroUsuarioActual))
-                for i in range(5):
-                    print("Inicia en " +str(5-i))
-                    time.sleep(1)
-            
+                if numeroUsuarioActual>numeroUsuarios:
+                    break
+                else:
+                    numeroUsuarioActual += 1
+                    print("La captura de rostros del usuario"+str(numeroUsuarioActual))
+                    for i in range(5):
+                        print("Inicia en " +str(5-i))
+                        time.sleep(1)
+                
 
         # Conexion extiosa con Camara
         conexionCamara = True 
