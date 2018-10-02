@@ -32,7 +32,7 @@ def ajusteGamma(imagen,gamma=1.0):
 
 
 # se pasa el label del usuario desde el script principal
-def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
+def capturaCamara(numeroUsuario,NombreCarpetaPrueba,numeroUsuarios):
     # Configuración de queues        
     inputQueue = Queue(maxsize=2)
     outputQueue = Queue(maxsize=2)
@@ -52,6 +52,11 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
     #Ajustar frames por segundo
 #    video_capture.set(5,25)
     numeroImagen = 1
+    numeroUsuarioActual=1
+    print("La captura de rostros del usuario"+str(numeroUsuarioActual))
+    for i in range(5):
+        print("Inicia en " +str(5-i))
+        time.sleep(1)
     if video_capture.isOpened():
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
@@ -96,9 +101,17 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
 #            cv2.imshow('Video corregido', Clahe_Gamma)
             
             # Solo se deje un usuario por que se realizará por usuario    
-            if numeroImagen >=80:
+            if numeroImagen >80:
+                print("La captura de rostros del usuario"+str(numeroUsuarios))
+                for i in range(5):
+                    print("Inicia en " +str(5-i))
+                    time.sleep(1)
                 print("********Termino de adquisisción de usuario"+str(numeroUsuario))
-                break
+                numeroImagen=0
+                if numeroUsuarioActual>=numeroUsuarios:
+                    break
+                else:
+                    numeroUsuarioActual += 1
             
             print("numeroImagen")
             print(numeroImagen)
