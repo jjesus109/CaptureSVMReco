@@ -89,7 +89,7 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
                     numeroImagen += 1
             
 #            cv2.imshow('Video original Gris', gray)
-#            cv2.imshow('Video', frame)
+            cv2.imshow('Video', frame)
 #            cv2.imshow('Video corregido', Clahe_Gamma)
             
             # Solo se deje un usuario por que se realizará por usuario    
