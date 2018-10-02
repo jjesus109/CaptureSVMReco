@@ -44,7 +44,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
     tamanioCara =  (0,0,0)
     resizeW = 96
     resizeH = 130
-    video_capture = cv2.VideoCapture(0)
+    
     # Ajuste de ancho de espacio de visualizacion de camara
 #    video_capture.set(3,800)
     # Ajuste de alto de espacion de visualizacion de camara
@@ -57,6 +57,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
     for i in range(5):
         print("Inicia en " +str(5-i))
         time.sleep(1)
+    video_capture = cv2.VideoCapture(0)
     if video_capture.isOpened():
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
@@ -102,6 +103,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
 #            cv2.imshow('Video corregido', Clahe_Gamma)
             #
             # Solo se deje un usuario por que se realizará por usuario    
+            print("numeroImagen")
+            print(numeroImagen)
             if numeroImagen >80:
                 
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
@@ -116,8 +119,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
                     print("Inicia en " +str(5-i))
                     time.sleep(1)
             
-            print("numeroImagen")
-            print(numeroImagen)
+
         # Conexion extiosa con Camara
         conexionCamara = True 
     
