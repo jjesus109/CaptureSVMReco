@@ -93,7 +93,7 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba,numeroUsuarios):
                 if tamanioCara[0] >int(resizeW*0.7):
                     # ajust de tamaño de rostros
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-                    cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuario)+"_"+str(numeroImagen)+".png", crop_img)
+                    cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".png", crop_img)
                     numeroImagen += 1
             
 #            cv2.imshow('Video original Gris', gray)
@@ -102,16 +102,18 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba,numeroUsuarios):
             
             # Solo se deje un usuario por que se realizará por usuario    
             if numeroImagen >80:
-                print("La captura de rostros del usuario"+str(numeroUsuarios))
+                
+                print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
+                numeroImagen=0
+                
+            if numeroUsuarioActual>=numeroUsuarios:
+                break
+            else:
+                numeroUsuarioActual += 1
+                print("La captura de rostros del usuario"+str(numeroUsuarioActual))
                 for i in range(5):
                     print("Inicia en " +str(5-i))
                     time.sleep(1)
-                print("********Termino de adquisisción de usuario"+str(numeroUsuario))
-                numeroImagen=0
-                if numeroUsuarioActual>=numeroUsuarios:
-                    break
-                else:
-                    numeroUsuarioActual += 1
             
             print("numeroImagen")
             print(numeroImagen)
