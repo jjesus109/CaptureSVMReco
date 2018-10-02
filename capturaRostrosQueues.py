@@ -63,6 +63,7 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba,numeroUsuarios):
         while True:
                 
             _, frame = video_capture.read()
+#
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             CorreccionGamma = ajusteGamma(gray,1.8)
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
@@ -99,7 +100,7 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba,numeroUsuarios):
 #            cv2.imshow('Video original Gris', gray)
 #            cv2.imshow('Video', frame)
 #            cv2.imshow('Video corregido', Clahe_Gamma)
-            
+            #
             # Solo se deje un usuario por que se realizará por usuario    
             if numeroImagen >80:
                 
@@ -125,11 +126,12 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba,numeroUsuarios):
         # NO se pudo conectar con camara
         conexionCamara = False
     #termino de proceso y de queue
+    
+    video_capture.release()
     p.terminate()
     time.sleep(0.1)
     inputQueue.close()
     outputQueue.close()
-    video_capture.release()
 #    cv2.destroyAllWindows()
     
     return conexionCamara,video_capture
