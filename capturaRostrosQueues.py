@@ -47,7 +47,7 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
     # Ajuste de alto de espacion de visualizacion de camara
 #    video_capture.set(4,600)
     #Ajustar frames por segundo
-    video_capture.set(5,25)
+#    video_capture.set(5,25)
     numeroImagen = 1
     if video_capture.isOpened():
         print("Inicializacion de camara exitosa")
