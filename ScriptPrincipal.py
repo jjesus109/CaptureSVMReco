@@ -38,6 +38,7 @@ def obtenerRostros():
 #    NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
     NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
     pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+    nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
     conexionExitosa,firebase,db, valores = conectarFirebase()
@@ -53,7 +54,7 @@ def obtenerRostros():
         if comenzarCaptura.val()  == "True":
             
             usuarios = list(valores.val())
-            nombreUsuarios = []
+            
             indexReconocimiento = []
             for i in range(len(usuarios)):
                 # extraccion de variable para identificara  usuarios para reconocer
