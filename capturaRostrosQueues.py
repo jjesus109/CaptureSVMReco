@@ -102,6 +102,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
 #            cv2.imshow('Video', frame)
 #            cv2.imshow('Video corregido', Clahe_Gamma)
             #
+            
             # Solo se deje un usuario por que se realizará por usuario    
             print("numeroImagen")
             print(numeroImagen)
@@ -110,7 +111,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
                 numeroImagen=0
                 
-                if numeroUsuarioActual>numeroUsuarios:
+                if numeroUsuarioActual>=numeroUsuarios:
                     break
                 else:
                     numeroUsuarioActual += 1
