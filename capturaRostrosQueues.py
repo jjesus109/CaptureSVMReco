@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 from multiprocessing import Process
 from multiprocessing import Queue
+import time
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 def detect(inputQueue, outputQueue):
@@ -43,7 +44,7 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
     tamanioCara =  (0,0,0)
     resizeW = 96
     resizeH = 130
-    video_capture = cv2.VideoCapture(0)
+    video_capture = cv2.VideoCapture(1)
     # Ajuste de ancho de espacio de visualizacion de camara
 #    video_capture.set(3,800)
     # Ajuste de alto de espacion de visualizacion de camara
@@ -110,4 +111,9 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
         conexionCamara = False
     video_capture.release()
     cv2.destroyAllWindows()
+    #termino de proceso y de queue
+    p.terminate()
+    time.sleep(0.1)
+    inputQueue.close()
+    outputQueue.close()
     return conexionCamara,video_capture
