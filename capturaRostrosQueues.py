@@ -92,7 +92,7 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
                     numeroImagen += 1
             
 #            cv2.imshow('Video original Gris', gray)
-            cv2.imshow('Video', frame)
+#            cv2.imshow('Video', frame)
 #            cv2.imshow('Video corregido', Clahe_Gamma)
             
             # Solo se deje un usuario por que se realizará por usuario    
@@ -115,6 +115,6 @@ def capturaCamara(numeroUsuario,NombreCarpetaPrueba):
     inputQueue.close()
     outputQueue.close()
     video_capture.release()
-    cv2.destroyAllWindows()
+#    cv2.destroyAllWindows()
     
     return conexionCamara,video_capture
