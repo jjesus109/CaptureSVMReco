@@ -13,8 +13,6 @@ datos = pickle.load(tomaDatos)
 clf = datos["modelo"]
 pca = datos["pca"]
 target_names =datos["target_names"]
-print("Estos son los target names")
-print(target_names)
 
 
 #from skimage.feature import local_binary_pattern
@@ -94,6 +92,9 @@ def mayorFrecuencia(dk2):
 
 
 def reconocimiento(db):
+    print("Estos son los target names")
+    print(target_names)
+
     video_capture = cv2.VideoCapture(0)
     nombre="sin reconocer"
     resizeW = 96
