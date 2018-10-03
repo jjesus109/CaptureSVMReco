@@ -161,12 +161,12 @@ def reconocimiento(db):
                         print("ya reconocio a:")
                         print(nombre)
                         cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-                        db.child("Facial/RostroValidado").push("True")
-                        db.child("Facial/NombreRostro").push(nombre)
+                        db.child("Facial/RostroValidado").update("True")
+                        db.child("Facial/NombreRostro").update(nombre)
                         break
                     else:
                         print("aun no")
-                        db.child("Facial/RostroValidado").push("False")
+                        db.child("Facial/RostroValidado").update("False")
                     
         
             cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
