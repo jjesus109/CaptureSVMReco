@@ -121,7 +121,7 @@ import recog_queues as rL
 #data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
 while True:
     print("En el While de recog")
-    sensor = db.child("Facial/RostroValidado").get()
+    sensor = db.child("Facial/Activacion").get()
     """Leer datos del senosor de presencia"""
     """cuando detecte presencia"""
     print("Vallor de sensor"+str(sensor.val()))
