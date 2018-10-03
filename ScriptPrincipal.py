@@ -126,7 +126,7 @@ while True:
     """cuando detecte presencia"""
     print("Vallor de sensor"+str(sensor.val()))
     if sensor.val()=="True":
-        rL.detectar(db)
+        rL.reconocimiento(db)
     time.sleep(0.5)
     
 ##    if cv2.waitKey(1) & 0xFF == ord('q'):
