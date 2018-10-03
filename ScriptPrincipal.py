@@ -18,6 +18,7 @@ def conectarFirebase():
     firebase = 0
     db = 0
     valores = 0
+    entrenamiento = "False"
     config = {
           "apiKey": "4yqY4AS24CGMfIFrNnaDVZYU4ITPl9XmE7mXmsCc",
           "authDomain": "casa-34c19.firebaseapp.com",
@@ -30,9 +31,10 @@ def conectarFirebase():
         db = firebase.database()
         # Para validara que si  se conecto se obtiene los datos de la los usuarios
         valores = db.child("Users").get()    
+        entrenamiento = db.child("Facial/EntrenamientoHecho").get()    
     except:
-        return False, firebase, db, valores
-    return conexionExitosa, firebase, db, valores
+        return False, firebase, db, valores,entrenamiento.val()
+    return conexionExitosa, firebase, db, valores, entrenamiento
 
 def obtenerRostros():
 #    NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
@@ -41,7 +43,7 @@ def obtenerRostros():
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
-    conexionExitosa,firebase,db, valores = conectarFirebase()
+    conexionExitosa,firebase,db, valores,_ = conectarFirebase()
     if conexionExitosa ==False:
         print("Favor de conectar a internet")
     else:
@@ -90,21 +92,42 @@ def obtenerRostros():
 
 while True:
 #def main():
-    errorObtencion = True
-    errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
-##    except:
-##        print("Fallo en metodo de obtencion de rostros")
-    if errorObtencion ==False:
-##        try:
-            clf, pca  = svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
-            print("Termino modelo")
-            break
+    conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
+    if entrenamiento=="False":
+        try:
+            errorObtencion = True
+            errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
+        except:
+            print("Fallo en metodo de obtencion de rostros")
+        if errorObtencion ==False:
+            try:
+                svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
+                print("Termino modelo")
+                print("Coninua con identifcacion de rostros")
+                db.child("Facial/EntrenamientoHecho").push("True")  
+                break
+    
+            except:
+                print("Fallo modelo")
+                print("reintentando")
+    else:
+        break
 
-##        except:
-##            print("Fallo modelo")
-##            print("reintentando")
+print("Inicia reconocimiento de rostros")
+conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
+import reconocimientoSVM_Livetomas as rL
+
+#import pickle
+#data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
+while True:
+    sensor=False
+    """Leer datos del senosor de presencia"""
+    """cuando detecte presencia"""
+    if sensor==True:
+        rL.detectar(db)
+    
 ##    if cv2.waitKey(1) & 0xFF == ord('q'):
-    break
+#    break
         
         
         

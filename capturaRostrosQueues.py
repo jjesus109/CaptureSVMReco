@@ -72,10 +72,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
             Clahe_Gamma = clahe.apply(CorreccionGamma)
             if inputQueue.empty():
-    #            print("Dentro del inputEmpty")
                 inputQueue.put(Clahe_Gamma)
             if not outputQueue.empty():
-    #            print("Dentro del outputEMpty")
                 vectorDim = outputQueue.get()
             if vectorDim !=[0,0,0,0]:
                 medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
