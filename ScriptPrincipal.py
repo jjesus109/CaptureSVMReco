@@ -120,10 +120,10 @@ import recog_queues as rL
 #import pickle
 #data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
 while True:
-    sensor=False
+    sensor = db.child("Facial/RostroValidado").get()
     """Leer datos del senosor de presencia"""
     """cuando detecte presencia"""
-    if sensor==True:
+    if sensor.val()=="True":
         rL.detectar(db)
     
 ##    if cv2.waitKey(1) & 0xFF == ord('q'):

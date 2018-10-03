@@ -1,4 +1,4 @@
-# Importing the libraries
+    # Importing the libraries
 import cv2
 import numpy as np   
 
@@ -147,7 +147,7 @@ def reconocimiento(db):
                 listaImagenes = []
                 print("ya reconocio")
                 cv2.putText(canvas, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-                db.child(ruta).push(nombre)
+#                db.child("Facial/NombreRostro").push(nombre)
             else:
                 print("aun no")
                 
