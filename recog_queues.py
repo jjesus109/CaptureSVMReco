@@ -30,6 +30,7 @@ def detect(inputQueue, outputQueue):
         if not inputQueue.empty():
             gray = inputQueue.get()
             faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+            print("Aqui en faces")
             for (x, y, w, h) in faces:
                 
                 medidasX1 = int(x*1.15)
@@ -39,6 +40,7 @@ def detect(inputQueue, outputQueue):
                 vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
 #                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
                 outputQueue.put(vectorDim)
+                
 
 
 def ajusteGamma(imagen,gamma=1.0):
