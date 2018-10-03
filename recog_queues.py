@@ -13,6 +13,8 @@ datos = pickle.load(tomaDatos)
 clf = datos["modelo"]
 pca = datos["pca"]
 target_names =datos["target_names"]
+print("Estos son los target names")
+print(target_names)
 
 
 # Defining a function that will do the detections
