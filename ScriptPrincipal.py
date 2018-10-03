@@ -115,7 +115,7 @@ while True:
 
 print("Inicia reconocimiento de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
-import reconocimientoSVM_Livetomas as rL
+import recog_queues as rL
 
 #import pickle
 #data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
