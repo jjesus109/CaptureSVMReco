@@ -33,8 +33,8 @@ def detect(inputQueue, outputQueue):
             print("Aqui en faces")
             for (x, y, w, h) in faces:
                 
-                medidasX1 = int(x*1.15)
-                medidasX2 = int(x+(w*0.85))
+                medidasX1 = int(x*1.135)
+                medidasX2 = int(x+(w*0.82))
                 medidasY2 = int(y*1.2)
                 medidasY1 = int(y+(h*0.95))
                 vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
