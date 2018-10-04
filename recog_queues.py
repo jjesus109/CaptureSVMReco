@@ -197,15 +197,19 @@ def reconocimiento(db):
 #                continue
 #            inputQueue.task_done()
         while not outputQueue.empty():
-            outputQueue.close()
-            outputQueue.join_thread()
+            outputQueue.put_nowait()
             time.sleep(0.1)
+        outputQueue.close()
+        outputQueue.join_thread()
+            
         print("Se termino el q2")
 #        inputQueue.put(None)
         while not inputQueue.empty():
-            inputQueue.close()
-            inputQueue.join_thread()
+            inputQueue.put_nowait()
             time.sleep(0.1)
+        inputQueue.close()
+        inputQueue.join_thread()
+            
         print("Se termino el queue1")
 
         
