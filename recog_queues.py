@@ -35,8 +35,7 @@ def detect(inputQueue, outputQueue):
                 vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
 #                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
                 outputQueue.put(vectorDim)
-                outputQueue.join_thread()
-
+                
 
 def ajusteGamma(imagen,gamma=1.0):
     invGamma =  1.0 / gamma
@@ -119,7 +118,6 @@ def reconocimiento(db):
             
             if inputQueue.empty():
                 inputQueue.put(Clahe_Gamma)
-                inputQueue.join_thread()
             if not outputQueue.empty():
                 vectorDim = outputQueue.get()
             if vectorDim !=[0,0,0,0]:
@@ -185,13 +183,26 @@ def reconocimiento(db):
         time.sleep(0.1)
         print("Se termino el proceso")
 #        outputQueue.put(None)
-        outputQueue.close()
-        outputQueue.join_thread()
+        while not outputQueue.empty():
+            try:
+                outputQueue.get(False)
+            except:
+                continue
+            outputQueue.task_done()
+        print("Se termino el queue1")
+        while not inputQueue.empty():
+            try:
+                inputQueue.get(False)
+            except:
+                continue
+            inputQueue.task_done()
+#        outputQueue.close()
+#        outputQueue.join_thread()
         time.sleep(0.1)
         print("Se termino el q2")
-        inputQueue.close()
-        inputQueue.join_thread()
-        print("Se termino el queue1")
+#        inputQueue.close()
+#        inputQueue.join_thread()
+        
         
 
         
