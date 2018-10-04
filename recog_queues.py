@@ -91,97 +91,97 @@ def mayorFrecuencia(dk2):
      return target, max(valores)
 
 
-#def reconocimiento(db):
-print("Estos son los target names")
-print(target_names)
-
-video_capture = cv2.VideoCapture(0)
-nombre="sin reconocer"
-resizeW = 96
-resizeH = 130
-listaImagenes = []
-numeroappend=0
-inputQueue = Queue(maxsize=2)
-outputQueue = Queue(maxsize=2)
-vectorDim = [0,0,0,0]
-print("[INFO] starting process...")
-p = Process(target=detect, args=(inputQueue, outputQueue,))
-p.daemon = True
-p.start()
-if video_capture.isOpened():
-    while True:
-        _, frame = video_capture.read()
+def reconocimiento(db):
+    print("Estos son los target names")
+    print(target_names)
     
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        CorreccionGamma = ajusteGamma(gray,1.8)
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-        Clahe_Gamma = clahe.apply(CorreccionGamma)
+    video_capture = cv2.VideoCapture(0)
+    nombre="sin reconocer"
+    resizeW = 96
+    resizeH = 130
+    listaImagenes = []
+    numeroappend=0
+    inputQueue = Queue(maxsize=2)
+    outputQueue = Queue(maxsize=2)
+    vectorDim = [0,0,0,0]
+    print("[INFO] starting process...")
+    p = Process(target=detect, args=(inputQueue, outputQueue,))
+    p.daemon = True
+    p.start()
+    if video_capture.isOpened():
+        while True:
+            _, frame = video_capture.read()
         
-        if inputQueue.empty():
-            inputQueue.put(Clahe_Gamma)
-        if not outputQueue.empty():
-            vectorDim = outputQueue.get()
-        if vectorDim !=[0,0,0,0]:
-            medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
-            cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
-            crop_img = Clahe_Gamma[medidasY2:medidasY1, medidasX1:medidasX2]
-            tamanioCara = np.shape(crop_img)
-            if tamanioCara[0] >int(resizeW*0.7):
-                crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-                imagenFlatten = crop_img.ravel()
-                imagenLista = imagenFlatten.tolist()
-                listaImagenes.append(imagenLista)
-                if len(listaImagenes)==10:
-                    matrizImagenes= np.asarray(listaImagenes)
-                    prueba_pca = pca.transform(matrizImagenes)
-                    probabilidades = clf.predict_proba(prueba_pca)
-    #                matriz = probabilidades
-    #                matrizlista = probabilidades.tolist()
-                    
-                    repeticiones,probas = obtenerModa(probabilidades,probabilidades.tolist())
-                    print("reps")
-                    print(repeticiones)
-                    print("proba")
-                    print(probas)
-                    # calcula la categoria mas repetida
-                    target_probable, frecuencia = mayorFrecuencia(repeticiones)
-                    print("target")
-                    print(target_probable)
-                    print("frw")
-                    print(frecuencia)
-                    if target_probable == -1:
-                            nombre= "Desconocido"    
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            CorreccionGamma = ajusteGamma(gray,1.8)
+            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+            Clahe_Gamma = clahe.apply(CorreccionGamma)
+            
+            if inputQueue.empty():
+                inputQueue.put(Clahe_Gamma)
+            if not outputQueue.empty():
+                vectorDim = outputQueue.get()
+            if vectorDim !=[0,0,0,0]:
+                medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
+                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
+                crop_img = Clahe_Gamma[medidasY2:medidasY1, medidasX1:medidasX2]
+                tamanioCara = np.shape(crop_img)
+                if tamanioCara[0] >int(resizeW*0.7):
+                    crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+                    imagenFlatten = crop_img.ravel()
+                    imagenLista = imagenFlatten.tolist()
+                    listaImagenes.append(imagenLista)
+                    if len(listaImagenes)==10:
+                        matrizImagenes= np.asarray(listaImagenes)
+                        prueba_pca = pca.transform(matrizImagenes)
+                        probabilidades = clf.predict_proba(prueba_pca)
+        #                matriz = probabilidades
+        #                matrizlista = probabilidades.tolist()
+                        
+                        repeticiones,probas = obtenerModa(probabilidades,probabilidades.tolist())
+                        print("reps")
+                        print(repeticiones)
+                        print("proba")
+                        print(probas)
+                        # calcula la categoria mas repetida
+                        target_probable, frecuencia = mayorFrecuencia(repeticiones)
+                        print("target")
+                        print(target_probable)
+                        print("frw")
+                        print(frecuencia)
+                        if target_probable == -1:
+                                nombre= "Desconocido"    
+                        else:
+                            probabilidadSumada = probas[target_probable]
+                            probabilidadFinal = probabilidadSumada/frecuencia
+                            nombreUsuario = target_names[target_probable]
+                            nombre = nombreUsuario+":"+str(probabilidadFinal*100    )
+                       
+                        listaImagenes = []
+                        print("ya reconocio a:")
+                        print(nombre)
+                        cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+                        db.child("Facial").update({"RostroValidado":"True"})
+                        db.child("Facial").update({"NombreRostro":nombre})
+                        break
                     else:
-                        probabilidadSumada = probas[target_probable]
-                        probabilidadFinal = probabilidadSumada/frecuencia
-                        nombreUsuario = target_names[target_probable]
-                        nombre = nombreUsuario+":"+str(probabilidadFinal*100    )
-                   
-                    listaImagenes = []
-                    print("ya reconocio a:")
-                    print(nombre)
-                    cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-                    db.child("Facial").update({"RostroValidado":"True"})
-                    db.child("Facial").update({"NombreRostro":nombre})
-                    break
-                else:
-                    print("aun no")
-                    db.child("Facial").update({"RostroValidado":"False"})
-                
+                        print("aun no")
+                        db.child("Facial").update({"RostroValidado":"False"})
+                    
+        
+            cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            numeroappend += 1
+            cv2.imshow('Video', frame)
+        ##    cv2.imshow('Video correccion', Clahe_Gamma)
+        
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+               break
     
-        cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-        numeroappend += 1
-        cv2.imshow('Video', frame)
-    ##    cv2.imshow('Video correccion', Clahe_Gamma)
-    
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-           break
-
-    video_capture.release()
-    cv2.destroyAllWindows()
-    p.terminate()
-    time.sleep(0.1)
-    inputQueue.close()
-    outputQueue.close()
-#exit()
-#quit()
+        video_capture.release()
+        cv2.destroyAllWindows()
+        p.terminate()
+        time.sleep(0.1)
+        inputQueue.close()
+        outputQueue.close()
+    #exit()
+    #quit()
