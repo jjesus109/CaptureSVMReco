@@ -43,7 +43,7 @@ def obtenerRostros():
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
-    conexionExitosa,firebase,db, valores, = conectarFirebase()
+    conexionExitosa,firebase,db, valores,_ = conectarFirebase()
     if conexionExitosa ==False:
         print("Favor de conectar a internet")
     else:
@@ -94,11 +94,11 @@ while True:
 #def main():
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
     if entrenamiento=="False":
-#        try:
-        errorObtencion = True
-        errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
-#        except:
-        print("Fallo en metodo de obtencion de rostros")
+        try:
+            errorObtencion = True
+            errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
+        except:
+            print("Fallo en metodo de obtencion de rostros")
         if errorObtencion ==False:
             try:
                 svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
