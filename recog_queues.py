@@ -182,10 +182,10 @@ def reconocimiento(db):
         p.terminate()
         time.sleep(0.1)
 #        with inputQueue.mutex:
-        inputQueue.clear()
+        inputQueue.put(None)
 #        inputQueue.close()
 #        with inputQueue.mutex:
-        outputQueue.clear()
+        outputQueue.put(None)
 #        outputQueue.close()
     #exit()
     #quit()
