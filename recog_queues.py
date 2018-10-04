@@ -105,11 +105,12 @@ def reconocimiento(db):
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
     p = Process(target=detect, args=(inputQueue, outputQueue,))
+    
+#    print( p.exitcode == -signal.SIGTERM)
+#    p.daemon = True
+    p.start()
     print("Se termino el proceso????")
     print(p.is_alive())
-#    print( p.exitcode == -signal.SIGTERM)
-    p.daemon = True
-    p.start()
     if video_capture.isOpened():
         while True:
             _, frame = video_capture.read()
@@ -183,8 +184,9 @@ def reconocimiento(db):
         cv2.destroyAllWindows()
         
         p.terminate()
-        p.join()
         time.sleep(0.1)
+        p.join()
+        
         print("Se termino el proceso")
         print(p.is_alive())
 #        print( p.exitcode == -signal.SIGTERM)
