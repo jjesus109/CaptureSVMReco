@@ -1,7 +1,7 @@
 # Importing the libraries
 import cv2
 import numpy as np   
-from multiprocessing import Process
+from multiprocessing import Process, signal
 from multiprocessing import Queue
 import time
 
@@ -100,11 +100,14 @@ def reconocimiento(db):
     resizeH = 130
     listaImagenes = []
     numeroappend=0
-    inputQueue = Queue(maxsize=3)
-    outputQueue = Queue(maxsize=3)
+    inputQueue = Queue(maxsize=1)
+    outputQueue = Queue(maxsize=1)
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
     p = Process(target=detect, args=(inputQueue, outputQueue,))
+    print("Se termino el proceso????")
+    print(p.is_alive())
+    print( p.exitcode == -signal.SIGTERM)
     p.daemon = True
     p.start()
     if video_capture.isOpened():
@@ -182,6 +185,8 @@ def reconocimiento(db):
         p.terminate()
         time.sleep(0.1)
         print("Se termino el proceso")
+        print(p.is_alive())
+        print( p.exitcode == -signal.SIGTERM)
 #        outputQueue.put(None)
 #        while not outputQueue.empty():
 #            try:
@@ -212,6 +217,8 @@ def reconocimiento(db):
             
         print("Se termino el queue1")
 
-        
+        print("Se termino el proceso")
+        print(p.is_alive())
+        print( p.exitcode == -signal.SIGTERM)
         
     
