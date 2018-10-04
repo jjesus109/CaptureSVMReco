@@ -182,7 +182,7 @@ def reconocimiento(db):
         p.terminate()
         time.sleep(0.1)
         print("Se termino el proceso")
-        outputQueue.put(None)
+#        outputQueue.put(None)
 #        while not outputQueue.empty():
 #            try:
 #                outputQueue.get(False)
@@ -196,14 +196,16 @@ def reconocimiento(db):
 #            except:
 #                continue
 #            inputQueue.task_done()
-        outputQueue.close()
-        outputQueue.join_thread()
-        time.sleep(0.1)
+        while not outputQueue.empty():
+            outputQueue.close()
+            outputQueue.join_thread()
+            time.sleep(0.1)
         print("Se termino el q2")
-        inputQueue.put(None)
-        inputQueue.close()
-        inputQueue.join_thread()
-        time.sleep(0.1)
+#        inputQueue.put(None)
+        while not inputQueue.empty():
+            inputQueue.close()
+            inputQueue.join_thread()
+            time.sleep(0.1)
         print("Se termino el queue1")
 
         
