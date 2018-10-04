@@ -35,6 +35,8 @@ def detect(inputQueue, outputQueue):
                 vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
 #                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
                 outputQueue.put(vectorDim)
+                outputQueue.close()
+                outputQueue.join_thread()
                 
 
 
@@ -119,6 +121,8 @@ def reconocimiento(db):
             
             if inputQueue.empty():
                 inputQueue.put(Clahe_Gamma)
+                inputQueue.close()
+                inputQueue.join_thread()
             if not outputQueue.empty():
                 vectorDim = outputQueue.get()
             if vectorDim !=[0,0,0,0]:
