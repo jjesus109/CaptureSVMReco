@@ -122,13 +122,13 @@ pir = MotionSensor(4) # Numero de pin de raspberry
 #data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
 while True:
 #    pir.when_motion = rL.reconocimiento(db)
-    print("En el While de recog")
-    sensor = db.child("Facial/Activacion").get()
-    """Leer datos del senosor de presencia"""
+#    print("En el While de recog")
+#    sensor = db.child("Facial/Activacion").get()
+#    """Leer datos del senosor de presencia"""
     """cuando detecte presencia"""
-    print("Vallor de sensor"+str(sensor.val()))
-#    if pir.motion_detected:
-    if sensor.val()=="True":
+#    print("Vallor de sensor"+str(sensor.val()))
+    if pir.motion_detected:
+#    if sensor.val()=="True":
         rL.reconocimiento(db)
     time.sleep(0.5)
  
