@@ -101,8 +101,8 @@ def reconocimiento(db):
     resizeH = 130
     listaImagenes = []
     numeroappend=0
-    inputQueue = Queue(maxsize=2)
-    outputQueue = Queue(maxsize=2)
+    inputQueue = Queue(maxsize=1)
+    outputQueue = Queue(maxsize=1)
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
     p = Process(target=detect, args=(inputQueue, outputQueue,))
