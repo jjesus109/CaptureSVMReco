@@ -181,11 +181,11 @@ def reconocimiento(db):
         cv2.destroyAllWindows()
         p.terminate()
         time.sleep(0.1)
-        with inputQueue.mutex:
-            inputQueue.queue.clear()
+#        with inputQueue.mutex:
+        inputQueue.queue.clear()
 #        inputQueue.close()
-        with inputQueue.mutex:
-            outputQueue.queue.clear()
+#        with inputQueue.mutex:
+        outputQueue.queue.clear()
 #        outputQueue.close()
     #exit()
     #quit()
