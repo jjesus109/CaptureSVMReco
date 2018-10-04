@@ -96,6 +96,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
                     # ajust de tamaño de rostros
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                     cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".png", crop_img)
+                    time.sleep(0.1)
                     numeroImagen += 1
             
 #            cv2.imshow('Video original Gris', gray)
