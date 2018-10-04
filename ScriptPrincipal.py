@@ -94,11 +94,11 @@ while True:
 #def main():
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
     if entrenamiento=="False":
-        try:
-            errorObtencion = True
-            errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
-        except:
-            print("Fallo en metodo de obtencion de rostros")
+#        try:
+        errorObtencion = True
+        errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
+#        except:
+        print("Fallo en metodo de obtencion de rostros")
         if errorObtencion ==False:
             try:
                 svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
