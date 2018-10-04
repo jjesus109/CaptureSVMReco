@@ -1,5 +1,5 @@
 #!/bin/bash
-#source /home/pi/.virtualenvs/cv/bin/activate
+source /home/pi/.virtualenvs/cv/bin/activate
 cd /home/pi/Desktop/P2/CaptureSVMReco
 git pull
 #modificacion en mi compu
