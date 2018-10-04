@@ -129,8 +129,11 @@ while True:
 #    print("Vallor de sensor"+str(sensor.val()))
     if pir.motion_detected:
 #    if sensor.val()=="True":
+        print("Entre en el valor del pir")
         rL.reconocimiento(db)
+        print("Sale del reconocimiento")
     time.sleep(0.5)
+    print("Ya espero")
  
 
     
