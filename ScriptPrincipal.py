@@ -33,8 +33,8 @@ def conectarFirebase():
         valores = db.child("Users").get()    
         entrenamiento = db.child("Facial/EntrenamientoHecho").get()    
     except:
-        return False, firebase, db, valores,entrenamiento.val()
-    return conexionExitosa, firebase, db, valores, entrenamiento
+        return False, firebase, db, valores,entrenamiento
+    return conexionExitosa, firebase, db, valores, entrenamiento.val()
 
 def obtenerRostros():
 #    NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
@@ -93,7 +93,7 @@ def obtenerRostros():
 while True:
 #def main():
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
-    if entrenamiento.val()=="False":
+    if entrenamiento=="False":
         try:
             errorObtencion = True
             errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
@@ -104,7 +104,7 @@ while True:
                 svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
                 print("Termino modelo")
                 print("Coninua con identifcacion de rostros")
-                db.child("Facial/EntrenamientoHecho").push("True")  
+                db.child("Facial").update({"EntrenamientoHecho":"True"})  
                 break
     
             except:
