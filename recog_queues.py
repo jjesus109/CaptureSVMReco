@@ -101,8 +101,8 @@ def reconocimiento(db):
     resizeH = 130
     listaImagenes = []
     numeroappend=0
-    inputQueue = Queue(maxsize=2)
-    outputQueue = Queue(maxsize=2)
+    inputQueue = Queue(maxsize=3)
+    outputQueue = Queue(maxsize=3)
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
     p = Process(target=detect, args=(inputQueue, outputQueue,))
@@ -179,13 +179,20 @@ def reconocimiento(db):
         print("Salio del while")
         video_capture.release()
         cv2.destroyAllWindows()
-        outputQueue.put(None)
+        
+        p.terminate()
+        time.sleep(0.1)
+        print("Se termino el proceso")
+#        outputQueue.put(None)
+        outputQueue.close()
+        outputQueue.join_thread()
+        time.sleep(0.1)
         print("Se termino el q2")
-        inputQueue.put(None)
+        inputQueue.close()
+        inputQueue.join_thread()
         print("Se termino el queue1")
         
-        time.sleep(0.1)
-        p.terminate()
-        print("Se termino el proceso")
+
+        
         
     
