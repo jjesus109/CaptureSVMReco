@@ -183,6 +183,7 @@ def reconocimiento(db):
         cv2.destroyAllWindows()
         
         p.terminate()
+        p.join()
         time.sleep(0.1)
         print("Se termino el proceso")
         print(p.is_alive())
