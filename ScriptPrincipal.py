@@ -93,7 +93,7 @@ def obtenerRostros():
 while True:
 #def main():
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
-    if entrenamiento=="False":
+    if entrenamiento.val()=="False":
         try:
             errorObtencion = True
             errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
