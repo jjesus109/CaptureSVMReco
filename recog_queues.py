@@ -176,16 +176,19 @@ def reconocimiento(db):
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
-    
+        print("SAlio del while")
         video_capture.release()
         cv2.destroyAllWindows()
         p.terminate()
+        print("Se termino el proceso")
         time.sleep(0.1)
-#        with inputQueue.mutex:
+        #        with inputQueue.mutex:
         inputQueue.put(None)
-#        inputQueue.close()
-#        with inputQueue.mutex:
+        print("Se puso en blanco el queue")
+        #        inputQueue.close()
+        #        with inputQueue.mutex:
         outputQueue.put(None)
-#        outputQueue.close()
+        print("Se puso en blanco el queue2")
+        #        outputQueue.close()
     #exit()
     #quit()
