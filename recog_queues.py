@@ -197,7 +197,7 @@ def reconocimiento(db):
 #                continue
 #            inputQueue.task_done()
         while not outputQueue.empty():
-            outputQueue.put_nowait(False)
+            outputQueue.put_nowait(True)
             time.sleep(0.1)
         outputQueue.close()
         outputQueue.join_thread()
@@ -205,7 +205,7 @@ def reconocimiento(db):
         print("Se termino el q2")
 #        inputQueue.put(None)
         while not inputQueue.empty():
-            inputQueue.put_nowait(False)
+            inputQueue.put_nowait(True)
             time.sleep(0.1)
         inputQueue.close()
         inputQueue.join_thread()
