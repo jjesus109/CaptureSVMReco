@@ -43,7 +43,7 @@ def obtenerRostros():
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
-    conexionExitosa,firebase,db, valores,_ = conectarFirebase()
+    conexionExitosa,firebase,db, valores, = conectarFirebase()
     if conexionExitosa ==False:
         print("Favor de conectar a internet")
     else:
