@@ -303,43 +303,43 @@ def reconocimiento(db):
         
         p.terminate()
         time.sleep(0.1)
-        p.join()
-        
-        print("Se termino el proceso")
-        print(p.is_alive())
-#        print( p.exitcode == -signal.SIGTERM)
-#        outputQueue.put(None)
+#        p.join()
+#        
+#        print("Se termino el proceso")
+#        print(p.is_alive())
+##        print( p.exitcode == -signal.SIGTERM)
+##        outputQueue.put(None)
+##        while not outputQueue.empty():
+##            try:
+##                outputQueue.get(False)
+##            except:
+##                continue
+##            outputQueue.task_done()
+##        print("Se termino el queue1")
+##        while not inputQueue.empty():
+##            try:
+##                inputQueue.get(False)
+##            except:
+##                continue
+##            inputQueue.task_done()
 #        while not outputQueue.empty():
-#            try:
-#                outputQueue.get(False)
-#            except:
-#                continue
-#            outputQueue.task_done()
-#        print("Se termino el queue1")
+#            outputQueue.get(False)
+#            time.sleep(0.1)
+#        outputQueue.close()
+#        outputQueue.join_thread()
+#            
+#        print("Se termino el q2")
+##        inputQueue.put(None)
 #        while not inputQueue.empty():
-#            try:
-#                inputQueue.get(False)
-#            except:
-#                continue
-#            inputQueue.task_done()
-        while not outputQueue.empty():
-            outputQueue.get(False)
-            time.sleep(0.1)
-        outputQueue.close()
-        outputQueue.join_thread()
-            
-        print("Se termino el q2")
-#        inputQueue.put(None)
-        while not inputQueue.empty():
-            inputQueue.get(False)
-            time.sleep(0.1)
-        inputQueue.close()
-        inputQueue.join_thread()
-            
-        print("Se termino el queue1")
-
-        print("Se termino el proceso")
-        print(p.is_alive())
+#            inputQueue.get(False)
+#            time.sleep(0.1)
+#        inputQueue.close()
+#        inputQueue.join_thread()
+#            
+#        print("Se termino el queue1")
+#
+#        print("Se termino el proceso")
+#        print(p.is_alive())
 #        print( p.exitcode == -signal.SIGTERM)
         
     
