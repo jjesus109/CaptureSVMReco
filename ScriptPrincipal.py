@@ -222,8 +222,9 @@ def reconocimiento(db,llamada):
         inputQueue = Queue(maxsize=1)
         outputQueue = Queue(maxsize=1)
         p = Process(target=detect, args=(inputQueue, outputQueue,))
-        p.start()
         p.daemon = True
+        p.start()
+        
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
     
