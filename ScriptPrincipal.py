@@ -208,11 +208,11 @@ def mayorFrecuencia(dk2):
      return target, max(valores)
 
 
-def reconocimiento(db,llamada):
+def reconocimiento(db,llamada,indexCamara):
     print("Estos son los target names")
     print(target_names)
     
-    video_capture = cv2.VideoCapture(0)
+    video_capture = cv2.VideoCapture(indexCamara)
     nombre="sin reconocer"
     resizeW = 96
     resizeH = 130
@@ -231,8 +231,8 @@ def reconocimiento(db,llamada):
     
     
 #    print( p.exitcode == -signal.SIGTERM)
-    
-    
+    conexionCamara = True
+    conexionCamara = video_capture.isOpened()
     print("Se comunico con camara:" +str(video_capture.isOpened()))
     if video_capture.isOpened():
         while True:
@@ -310,6 +310,7 @@ def reconocimiento(db,llamada):
     print("Salio del while")
     video_capture.release()
     cv2.destroyAllWindows()
+    return conexionCamara
 #    p.terminate()
 #    time.sleep(0.1)
 #        p.join()
@@ -362,6 +363,7 @@ pir = MotionSensor(4) # Numero de pin de raspberry
 #data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
 #ya llamo a process
 llamada = False
+indexCamara=0
 while True:
 #    pir.when_motion = rL.reconocimiento(db)
 #    print("En el While de recog")
@@ -373,7 +375,12 @@ while True:
     if pir.motion_detected:
 #    if sensor.val()=="True":
         print("Entre en el valor del pir")
-        reconocimiento(db,llamada)
+        conexionCamara = reconocimiento(db,llamada,indexCamara)
+        if conexionCamara== False:
+            indexCamara += 1
+            print("Index actual = " str(indexCamara))
+            if indexCamara>=3:
+                indexCamara=0
         llamada= True
         print("Sale del reconocimiento")
     time.sleep(0.5)
