@@ -208,7 +208,7 @@ def mayorFrecuencia(dk2):
      return target, max(valores)
 
 
-def reconocimiento(db):
+def reconocimiento(db,llamada):
     print("Estos son los target names")
     print(target_names)
     
@@ -218,15 +218,18 @@ def reconocimiento(db):
     resizeH = 130
     listaImagenes = []
     numeroappend=0
-    inputQueue = Queue(maxsize=1)
-    outputQueue = Queue(maxsize=1)
+    if llamada == False:
+        inputQueue = Queue(maxsize=1)
+        outputQueue = Queue(maxsize=1)
+        p = Process(target=detect, args=(inputQueue, outputQueue,))
+        p.start()
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
-    p = Process(target=detect, args=(inputQueue, outputQueue,))
+    
     
 #    print( p.exitcode == -signal.SIGTERM)
 #    p.daemon = True
-    p.start()
+    
     print("Se termino el proceso????")
     print(p.is_alive())
     if video_capture.isOpened():
@@ -301,8 +304,8 @@ def reconocimiento(db):
         video_capture.release()
         cv2.destroyAllWindows()
         
-        p.terminate()
-        time.sleep(0.1)
+#        p.terminate()
+#        time.sleep(0.1)
 #        p.join()
 #        
 #        print("Se termino el proceso")
@@ -346,22 +349,25 @@ def reconocimiento(db):
 
 print("Inicia reconocimiento de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
-import recog_queues as rL
+#import recog_queues as rL
 from gpiozero import MotionSensor
 pir = MotionSensor(4) # Numero de pin de raspberry
 #import pickle
 #data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
+#ya llamo a process
+llamada = False
 while True:
 #    pir.when_motion = rL.reconocimiento(db)
 #    print("En el While de recog")
 #    sensor = db.child("Facial/Activacion").get()
 #    """Leer datos del senosor de presencia"""
+    
     """cuando detecte presencia"""
 #    print("Vallor de sensor"+str(sensor.val()))
     if pir.motion_detected:
 #    if sensor.val()=="True":
         print("Entre en el valor del pir")
-        reconocimiento(db)
+        reconocimiento(db,llamada)
         print("Sale del reconocimiento")
     time.sleep(0.5)
     print("Ya espero")
