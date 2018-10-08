@@ -378,7 +378,7 @@ while True:
         conexionCamara = reconocimiento(db,llamada,indexCamara)
         if conexionCamara== False:
             indexCamara += 1
-            print("Index actual = " str(indexCamara))
+            print("Index actual = " + str(indexCamara))
             if indexCamara>=3:
                 indexCamara=0
         llamada= True
