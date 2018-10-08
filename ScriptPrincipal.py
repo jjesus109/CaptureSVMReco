@@ -287,6 +287,8 @@ def reconocimiento(db,llamada):
                         cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                         db.child("Facial").update({"RostroValidado":"True"})
                         db.child("Facial").update({"NombreRostro":nombre})
+                        video_capture.release()
+                        cv2.destroyAllWindows()
                         break
                     else:
                         print("aun no")
@@ -299,10 +301,12 @@ def reconocimiento(db,llamada):
         ##    cv2.imshow('Video correccion', Clahe_Gamma)
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
+               
+               video_capture.release()
+               cv2.destroyAllWindows()
                break
         print("Salio del while")
-        video_capture.release()
-        cv2.destroyAllWindows()
+        
         
 #        p.terminate()
 #        time.sleep(0.1)
