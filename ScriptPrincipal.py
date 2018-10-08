@@ -224,7 +224,8 @@ def reconocimiento(db,llamada):
         p = Process(target=detect, args=(inputQueue, outputQueue,))
         p.daemon = True
         p.start()
-        
+        print("Esta vivo el proceso??")
+        print(p.is_alive())
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
     
@@ -232,8 +233,7 @@ def reconocimiento(db,llamada):
 #    print( p.exitcode == -signal.SIGTERM)
     
     
-    print("Esta vivo el proceso??")
-    print(p.is_alive())
+
     if video_capture.isOpened():
         while True:
             _, frame = video_capture.read()
@@ -310,8 +310,8 @@ def reconocimiento(db,llamada):
     print("Salio del while")
     video_capture.release()
     cv2.destroyAllWindows()
-    p.terminate()
-    time.sleep(0.1)
+#    p.terminate()
+#    time.sleep(0.1)
 #        p.join()
 #        
 #        print("Se termino el proceso")
