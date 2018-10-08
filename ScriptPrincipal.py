@@ -303,7 +303,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
        
-    p.join()    
+#    p.join()    
     print("Salio del while")
     video_capture.release()
     cv2.destroyAllWindows()
@@ -375,7 +375,7 @@ while True:
         print("Index actual = " + str(indexCamara))
         conexionCamara, p, inputQueue, outputQueue, vd = reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
         vd.release()
-        if conexionCamara== False:
+                if conexionCamara== False:
             indexCamara += 1
             
             if indexCamara>=3:
