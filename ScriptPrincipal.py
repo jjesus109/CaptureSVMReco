@@ -232,12 +232,12 @@ def reconocimiento(db,llamada):
     
     print("Se termino el proceso????")
     print(p.is_alive())
-    if video_capture.isOpened():
+    if .isOpened():
         while True:
             _, frame = video_capture.read()
         
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            CorreccionGamma = ajusteGamma(gray,1.8)
+            CorreccionGamma =video_capture ajusteGamma(gray,1.8)
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
             Clahe_Gamma = clahe.apply(CorreccionGamma)
             
@@ -287,8 +287,6 @@ def reconocimiento(db,llamada):
                         cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                         db.child("Facial").update({"RostroValidado":"True"})
                         db.child("Facial").update({"NombreRostro":nombre})
-                        video_capture.release()
-                        cv2.destroyAllWindows()
                         break
                     else:
                         print("aun no")
@@ -301,15 +299,16 @@ def reconocimiento(db,llamada):
         ##    cv2.imshow('Video correccion', Clahe_Gamma)
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
-               
-               video_capture.release()
-               cv2.destroyAllWindows()
                break
-        print("Salio del while")
-        
-        
-        p.terminate()
-        time.sleep(0.1)
+    print("Salio del while")
+    else:   
+                
+        video_capture.release()
+        cv2.destroyAllWindows()
+    video_capture.release()
+    cv2.destroyAllWindows()
+    p.terminate()
+    time.sleep(0.1)
 #        p.join()
 #        
 #        print("Se termino el proceso")
