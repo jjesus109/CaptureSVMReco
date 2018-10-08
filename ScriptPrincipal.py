@@ -292,6 +292,9 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
                         break
                     else:
                         print("aun no")
+                        print("Width :"+str(video_capture.get(3)))
+                        print("Height :"+str(video_capture.get(4)))
+                        print("FPS reales"+str(video_capture.get(7)))
                         db.child("Facial").update({"RostroValidado":"False"})
                     
         
