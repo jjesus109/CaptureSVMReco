@@ -232,12 +232,12 @@ def reconocimiento(db,llamada):
     
     print("Se termino el proceso????")
     print(p.is_alive())
-    if .isOpened():
+    if video_capture.isOpened():
         while True:
             _, frame = video_capture.read()
         
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            CorreccionGamma =video_capture ajusteGamma(gray,1.8)
+            CorreccionGamma = ajusteGamma(gray,1.8)
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
             Clahe_Gamma = clahe.apply(CorreccionGamma)
             
