@@ -308,8 +308,8 @@ def reconocimiento(db,llamada):
         print("Salio del while")
         
         
-#        p.terminate()
-#        time.sleep(0.1)
+        p.terminate()
+        time.sleep(0.1)
 #        p.join()
 #        
 #        print("Se termino el proceso")
