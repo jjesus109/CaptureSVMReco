@@ -233,7 +233,7 @@ def reconocimiento(db,llamada):
 #    print( p.exitcode == -signal.SIGTERM)
     
     
-
+    print("Se comunico con camara:" +str(video_capture.isOpened()))
     if video_capture.isOpened():
         while True:
             _, frame = video_capture.read()
