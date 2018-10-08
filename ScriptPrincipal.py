@@ -300,11 +300,12 @@ def reconocimiento(db,llamada):
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
-    print("Salio del while")
+       
     else:   
                 
         video_capture.release()
         cv2.destroyAllWindows()
+    print("Salio del while")
     video_capture.release()
     cv2.destroyAllWindows()
     p.terminate()
