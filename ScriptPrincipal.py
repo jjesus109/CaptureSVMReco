@@ -223,14 +223,15 @@ def reconocimiento(db,llamada):
         outputQueue = Queue(maxsize=1)
         p = Process(target=detect, args=(inputQueue, outputQueue,))
         p.start()
+        p.daemon = True
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
     
     
 #    print( p.exitcode == -signal.SIGTERM)
-#    p.daemon = True
     
-    print("Se termino el proceso????")
+    
+    print("Esta vivo el proceso??")
     print(p.is_alive())
     if video_capture.isOpened():
         while True:
@@ -372,6 +373,7 @@ while True:
 #    if sensor.val()=="True":
         print("Entre en el valor del pir")
         reconocimiento(db,llamada)
+        llamada= True
         print("Sale del reconocimiento")
     time.sleep(0.5)
     print("Ya espero")
