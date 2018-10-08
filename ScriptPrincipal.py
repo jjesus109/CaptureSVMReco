@@ -303,14 +303,14 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
        
-    
+    p.join()    
     print("Salio del while")
     video_capture.release()
     cv2.destroyAllWindows()
-    return conexionCamara, p, inputQueue, outputQueue
+    return conexionCamara, p, inputQueue, outputQueue,video_capture 
 #    p.terminate()
 #    time.sleep(0.1)
-#        p.join()
+
 #        
 #        print("Se termino el proceso")
 #        print(p.is_alive())
@@ -373,7 +373,8 @@ while True:
     if pir.motion_detected:
 #    if sensor.val()=="True":
         print("Index actual = " + str(indexCamara))
-        conexionCamara, p, inputQueue, outputQueue = reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
+        conexionCamara, p, inputQueue, outputQueue, vd = reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
+        vd.release()
         if conexionCamara== False:
             indexCamara += 1
             
