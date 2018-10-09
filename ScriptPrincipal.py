@@ -233,8 +233,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
 #    print( p.exitcode == -signal.SIGTERM)
     conexionCamara = True
     conexionCamara = video_capture.isOpened()
-    video_capture.set(3 ,240)
-    video_capture.set(4, 360)
+    video_capture.set(3 ,375)
+    video_capture.set(4, 500)
     print("Se comunico con camara:" +str(video_capture.isOpened()))
     if video_capture.isOpened():
         while True:
@@ -302,11 +302,11 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
         
             cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
             numeroappend += 1
-#            cv2.imshow('Video', frame)
+            cv2.imshow('Video', frame)
         ##    cv2.imshow('Video correccion', Clahe_Gamma)
         
-#            if cv2.waitKey(1) & 0xFF == ord('q'):
-#               break
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+               break
        
 #    p.join()    
     print("Salio del while")
