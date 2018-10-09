@@ -366,7 +366,7 @@ pir = MotionSensor(4) # Numero de pin de raspberry
 #ya llamo a process
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
-indexCamara=1
+indexCamara=0
 while True:
 #    pir.when_motion = rL.reconocimiento(db)
 #    print("En el While de recog")
