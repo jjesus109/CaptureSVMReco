@@ -233,8 +233,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
 #    print( p.exitcode == -signal.SIGTERM)
     conexionCamara = True
     conexionCamara = video_capture.isOpened()
-    video_capture.set(3 ,375)
-    video_capture.set(4, 500)
+    video_capture.set(3 ,240)
+    video_capture.set(4, 360)
     print("Se comunico con camara:" +str(video_capture.isOpened()))
     if video_capture.isOpened():
         while True:
