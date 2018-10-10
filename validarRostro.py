@@ -46,14 +46,14 @@ def detect(gray,frame):
 ##    else:
 #        #dejarla
 
-Rimagen = "D:/Documentos HDD/11/TT2/caraP.jpg"
-#Rimagen = "D:/Documentos HDD/11/TT2/2018_October_10_22_02_17/3_30.png"
-imagen=cv2.imread(Rimagen)
-gris = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
-#    gris = cv2.cvtColor(image,cv2.)
-gris,crop_img = detect(gris,imagen)
-# no reconcoe algun rostro
-if crop_img.all()==0:
-#borrar la imagen
-    os.remove(Rimagen)
-cv2.imshow("11",imagen)
+#Rimagen = "D:/Documentos HDD/11/TT2/caraP.jpg"
+##Rimagen = "D:/Documentos HDD/11/TT2/2018_October_10_22_02_17/3_30.png"
+#imagen=cv2.imread(Rimagen)
+#gris = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
+##    gris = cv2.cvtColor(image,cv2.)
+#gris,crop_img = detect(gris,imagen)
+## no reconcoe algun rostro
+#if crop_img.all()==0:
+##borrar la imagen
+#    os.remove(Rimagen)
+#cv2.imshow("11",imagen)
