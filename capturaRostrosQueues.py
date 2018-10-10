@@ -18,7 +18,7 @@ def detect(inputQueue, outputQueue):
                 medidasX2 = int(x+(w*0.82))
                 medidasY2 = int(y*1.2)
                 medidasY1 = int(y+(h*0.95))
-                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
+                vectorDim = [x,y+h,x+w,y] 
                 outputQueue.put(vectorDim)
 
 
