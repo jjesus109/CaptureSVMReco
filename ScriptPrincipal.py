@@ -152,7 +152,7 @@ def detect(inputQueue, outputQueue):
 #                medidasY1 = int(y+(h*0.95))
 ##                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
 #                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
-                 vectorDim = [x,y+h,x+w,y] 
+                vectorDim = [x,y+h,x+w,y] 
                 outputQueue.put(vectorDim)
                 
 
