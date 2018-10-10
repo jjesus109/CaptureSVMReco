@@ -94,7 +94,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
                 
                 if tamanioCara[0] >int(resizeW*0.7):
                     # ajust de tamaño de rostros
-                    crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+                    crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
                     cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".png", crop_img)
                     time.sleep(0.1)
                     numeroImagen += 1
