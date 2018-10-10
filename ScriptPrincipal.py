@@ -37,9 +37,7 @@ def conectarFirebase():
     return conexionExitosa, firebase, db, valores, entrenamiento.val()
 
 def obtenerRostros():
-#    NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-    NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
-    pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
@@ -87,16 +85,18 @@ def obtenerRostros():
             print("Aun no se inicia la captura de rostros")
             errorCaptura = True
             
-    return errorCaptura,NombreCarpetaPrueba, nombreUsuarios
+    return errorCaptura, nombreUsuarios
 
-
+#NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
+NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
+pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 while True:
 #def main():
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
     if entrenamiento=="False":
         try:
             errorObtencion = True
-            errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
+            errorObtencion, nombreUsuarios = obtenerRostros()
         except:
             print("Fallo en metodo de obtencion de rostros")
         if errorObtencion ==False:
@@ -146,12 +146,13 @@ def detect(inputQueue, outputQueue):
 #            print("Aqui en faces")
             for (x, y, w, h) in faces:
                 
-                medidasX1 = int(x*1.135)
-                medidasX2 = int(x+(w*0.82))
-                medidasY2 = int(y*1.2)
-                medidasY1 = int(y+(h*0.95))
-                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
+#                medidasX1 = int(x*1.135)
+#                medidasX2 = int(x+(w*0.82))
+#                medidasY2 = int(y*1.2)
+#                medidasY1 = int(y+(h*0.95))
+##                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
 #                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
+                vectorDim = [x,y,x+w,y+h] 
                 outputQueue.put(vectorDim)
                 
 

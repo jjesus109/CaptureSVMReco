@@ -14,11 +14,11 @@ def detect(inputQueue, outputQueue):
             gray = inputQueue.get()
             faces = face_cascade.detectMultiScale(gray, 1.3, 5)
             for (x, y, w, h) in faces:
-                medidasX1 = int(x*1.135)
-                medidasX2 = int(x+(w*0.82))
-                medidasY2 = int(y*1.2)
-                medidasY1 = int(y+(h*0.95))
-                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
+#                medidasX1 = int(x*1.135)
+#                medidasX2 = int(x+(w*0.82))
+#                medidasY2 = int(y*1.2)
+#                medidasY1 = int(y+(h*0.95))
+                vectorDim = [x,y,x+w,y+h] 
                 outputQueue.put(vectorDim)
 
 

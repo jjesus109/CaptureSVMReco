@@ -28,15 +28,16 @@ def detect(inputQueue, outputQueue):
 #            print("Aqui en faces")
             for (x, y, w, h) in faces:
                 
-                medidasX1 = int(x*1.135)
-                medidasX2 = int(x+(w*0.82))
-                medidasY2 = int(y*1.2)
-                medidasY1 = int(y+(h*0.95))
-                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
+#                medidasX1 = int(x*1.135)
+#                medidasX2 = int(x+(w*0.82))
+#                medidasY2 = int(y*1.2)
+#                medidasY1 = int(y+(h*0.95))
+##                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
 #                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
+                vectorDim = [x,y,x+w,y+h] 
                 outputQueue.put(vectorDim)
                 
-
+                
 def ajusteGamma(imagen,gamma=1.0):
     invGamma =  1.0 / gamma
     table = np.array([((i/255.0)**invGamma)*255
