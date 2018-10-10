@@ -90,27 +90,33 @@ def mayorFrecuencia(dk2):
      return target, max(valores)
 
 
-def reconocimiento(db):
-    print("Estos son los target names")
-    print(target_names)
+def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
+ print(target_names)
     
-    video_capture = cv2.VideoCapture(0)
+    video_capture = cv2.VideoCapture(indexCamara)
     nombre="sin reconocer"
     resizeW = 96
     resizeH = 130
     listaImagenes = []
     numeroappend=0
-    inputQueue = Queue(maxsize=1)
-    outputQueue = Queue(maxsize=1)
+    if llamada == False:
+        inputQueue = Queue(maxsize=1)
+        outputQueue = Queue(maxsize=1)
+        p = Process(target=detect, args=(inputQueue, outputQueue,))
+        p.daemon = True
+        p.start()
+        print("Esta vivo el proceso??")
+        print(p.is_alive())
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
-    p = Process(target=detect, args=(inputQueue, outputQueue,))
+    
     
 #    print( p.exitcode == -signal.SIGTERM)
-#    p.daemon = True
-    p.start()
-    print("Se termino el proceso????")
-    print(p.is_alive())
+    conexionCamara = True
+    conexionCamara = video_capture.isOpened()
+    video_capture.set(3 ,312)
+    video_capture.set(4, 512)
+    print("Se comunico con camara:" +str(video_capture.isOpened()))
     if video_capture.isOpened():
         while True:
             _, frame = video_capture.read()
@@ -169,6 +175,9 @@ def reconocimiento(db):
                         break
                     else:
                         print("aun no")
+                        print("Width :"+str(video_capture.get(3)))
+                        print("Height :"+str(video_capture.get(4)))
+                        print("FPS reales"+str(video_capture.get(7)))
                         db.child("Facial").update({"RostroValidado":"False"})
                     
         
@@ -179,49 +188,9 @@ def reconocimiento(db):
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
-        print("Salio del while")
-        video_capture.release()
-        cv2.destroyAllWindows()
-        
-        p.terminate()
-        time.sleep(0.1)
-        p.join()
-        
-        print("Se termino el proceso")
-        print(p.is_alive())
-#        print( p.exitcode == -signal.SIGTERM)
-#        outputQueue.put(None)
-#        while not outputQueue.empty():
-#            try:
-#                outputQueue.get(False)
-#            except:
-#                continue
-#            outputQueue.task_done()
-#        print("Se termino el queue1")
-#        while not inputQueue.empty():
-#            try:
-#                inputQueue.get(False)
-#            except:
-#                continue
-#            inputQueue.task_done()
-        while not outputQueue.empty():
-            outputQueue.get(False)
-            time.sleep(0.1)
-        outputQueue.close()
-        outputQueue.join_thread()
-            
-        print("Se termino el q2")
-#        inputQueue.put(None)
-        while not inputQueue.empty():
-            inputQueue.get(False)
-            time.sleep(0.1)
-        inputQueue.close()
-        inputQueue.join_thread()
-            
-        print("Se termino el queue1")
-
-        print("Se termino el proceso")
-        print(p.is_alive())
-#        print( p.exitcode == -signal.SIGTERM)
-        
-    
+       
+#    p.join()    
+    print("Salio del while")
+    video_capture.release()
+    cv2.destroyAllWindows()
+    return conexionCamara, p, inputQueue, outputQueue,video_capture 

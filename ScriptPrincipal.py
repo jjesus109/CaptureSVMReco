@@ -294,9 +294,9 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
                         break
                     else:
                         print("aun no")
-                        print("Width :"+str(video_capture.get(3)))
-                        print("Height :"+str(video_capture.get(4)))
-                        print("FPS reales"+str(video_capture.get(7)))
+#                        print("Width :"+str(video_capture.get(3)))
+#                        print("Height :"+str(video_capture.get(4)))
+
                         db.child("Facial").update({"RostroValidado":"False"})
                     
         
@@ -305,60 +305,20 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
             cv2.imshow('Video', frame)
         ##    cv2.imshow('Video correccion', Clahe_Gamma)
         
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-               break
+#            if cv2.waitKey(1) & 0xFF == ord('q'):
+#               break
        
 #    p.join()    
     print("Salio del while")
     video_capture.release()
     cv2.destroyAllWindows()
     return conexionCamara, p, inputQueue, outputQueue,video_capture 
-#    p.terminate()
-#    time.sleep(0.1)
 
-#        
-#        print("Se termino el proceso")
-#        print(p.is_alive())
-##        print( p.exitcode == -signal.SIGTERM)
-##        outputQueue.put(None)
-##        while not outputQueue.empty():
-##            try:
-##                outputQueue.get(False)
-##            except:
-##                continue
-##            outputQueue.task_done()
-##        print("Se termino el queue1")
-##        while not inputQueue.empty():
-##            try:
-##                inputQueue.get(False)
-##            except:
-##                continue
-##            inputQueue.task_done()
-#        while not outputQueue.empty():
-#            outputQueue.get(False)
-#            time.sleep(0.1)
-#        outputQueue.close()
-#        outputQueue.join_thread()
-#            
-#        print("Se termino el q2")
-##        inputQueue.put(None)
-#        while not inputQueue.empty():
-#            inputQueue.get(False)
-#            time.sleep(0.1)
-#        inputQueue.close()
-#        inputQueue.join_thread()
-#            
-#        print("Se termino el queue1")
-#
-#        print("Se termino el proceso")
-#        print(p.is_alive())
-#        print( p.exitcode == -signal.SIGTERM)
-        
     
 
 print("Inicia reconocimiento de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
-#import recog_queues as rL
+import recog_queues as rL
 from gpiozero import MotionSensor
 pir = MotionSensor(4) # Numero de pin de raspberry
 #import pickle
@@ -378,7 +338,7 @@ while True:
     if pir.motion_detected:
 #    if sensor.val()=="True":
         print("Index actual = " + str(indexCamara))
-        conexionCamara, p, inputQueue, outputQueue, vd = reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
+        conexionCamara, p, inputQueue, outputQueue, vd = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
         vd.release()
         if conexionCamara== False:
             indexCamara += 1
