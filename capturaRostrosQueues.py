@@ -120,7 +120,11 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
                     for i in range(5):
                         print("Inicia en " +str(5-i))
                         time.sleep(1)
-                
+                    # PAra limpiar lo que se le quedo en memoria
+                    inputQueue.put(np.array([[[0],[0],[0]],[[0],[0],[0]],[[0],[0],[0]]]))
+                    inputQueue.get()
+                    outputQueue.put(np.array([[[0],[0],[0]],[[0],[0],[0]],[[0],[0],[0]]]))
+                    outputQueue.get()
 
         # Conexion extiosa con Camara
         conexionCamara = True 
