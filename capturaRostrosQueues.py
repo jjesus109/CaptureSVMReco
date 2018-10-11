@@ -51,7 +51,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     tamanioCara =  (0,0,0)
     resizeW = 96
     resizeH = 130
-    
+    numeroMuestrasRostros=160
     # Ajuste de ancho de espacio de visualizacion de camara
 #    video_capture.set(3,800)
     # Ajuste de alto de espacion de visualizacion de camara
@@ -109,7 +109,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             # Solo se deje un usuario por que se realizará por usuario    
             print("numeroImagen")
             print(numeroImagen)
-            if numeroImagen >80:
+            if numeroImagen >numeroMuestrasRostros:
                 
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
                 break
