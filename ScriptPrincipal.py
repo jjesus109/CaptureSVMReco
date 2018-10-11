@@ -50,7 +50,7 @@ def obtenerRostros():
         # validacion para saber en que momento inicia la catura de los usuarios 
         # que tendran el acceso por reconocimiento 
         try:
-            comenzarCaptura = db.child("Facial/Activacion").get()
+            comenzarCaptura = db.child("Facial/IniciarCaptura").get()
             print("comenzarcaptura")
             print(comenzarCaptura.val())
         except:
@@ -80,13 +80,13 @@ def obtenerRostros():
             NombresEtiquetas={}
             numeroUsuarios=1
             while numeroUsuarios<4:
-                deteccionActivada = db.child("Facial/Activacion2").get()
+                deteccionActivada = db.child("Facial/Activacion").get()
                 if deteccionActivada.val()=="True":
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
                     deteccionActivadaUsuario = deteccionActivadaUsuario.val()
                     deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue)
                     numeroUsuarios+=1
-                    db.child("Facial").update({"Activacion2":"False"})
+                    db.child("Facial").update({"Activacion":"False"})
                     NombresEtiquetas.update({str(numeroUsuarios):deteccionActivadaUsuario})
                     print("Usuario capturado: "+deteccionActivadaUsuario)
                     print(NombresEtiquetas)
