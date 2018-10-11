@@ -8,7 +8,7 @@ import time
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 import pickle
 
-tomaDatos = open("/home/pi/Desktop/P2/archivo_modelo_LBP.pickle", "rb")
+tomaDatos = open("/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/", "rb")
 datos = pickle.load(tomaDatos)
 clf = datos["modelo"]
 pca = datos["pca"]
