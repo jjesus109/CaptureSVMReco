@@ -88,7 +88,8 @@ def obtenerRostros():
                     numeroUsuarios+=1
                     db.child("Facial").update({"Activacion2":"False"})
                     NombresEtiquetas.update({str(numeroUsuarios):deteccionActivadaUsuario})
-                    
+                    print("Usuario capturado: "+deteccionActivadaUsuario)
+                    print(NombresEtiquetas)
                 llamada=True
             if deteccion_correcta == False:
                 print("Error al capturar los rostros")
