@@ -1,7 +1,7 @@
 #!/bin/bash
 source /home/pi/.virtualenvs/cv/bin/activate
 cd /home/pi/Desktop/P2/CaptureSVMReco
-git pull
+git pull origin master --allow-unrelated-histories
 #modificacion en mi compu
 python ScriptPrincipal.py
 
