@@ -172,7 +172,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
                         print(nombre)
                         cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                         db.child("Facial").update({"RostroValidado":"True"})
-                        db.child("Facial").update({"NombreRostro":nombre})
+                        db.child("Facial").update({"NombreRostroReconocido":nombre})
                         break
                     else:
                         print("aun no")

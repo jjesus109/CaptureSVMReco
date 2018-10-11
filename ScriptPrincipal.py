@@ -54,29 +54,14 @@ def obtenerRostros():
             print("Favor de conectar a internet")
         if comenzarCaptura.val()  == "True":
             
-#            usuarios = list(valores.val())
-#            
-#            indexReconocimiento = []
-#            for i in range(len(usuarios)):
-#                # extraccion de variable para identificara  usuarios para reconocer
-#                respuesta = db.child("Users/"+str(usuarios[i])+"/reconocimiento").get() 
-#                # identifacion de nombre de usuarios para obtener su nombre
-#                Nusuarios = db.child("Users/"+str(usuarios[i])+"/name").get() 
-#                if respuesta.val() == "True":
-#                    indexReconocimiento.append(i)
-#                    nombreUsuarios.append(Nusuarios.val())
-#                print("Nombres usuarios")
-#                print(nombreUsuarios)
-##            numeroUsuariosDeteccion = len(usuarios)
-##            for j in range(len(nombreUsuarios)):
-#            print("Estes es el numero de usuarios:")
-#            print(len(nombreUsuarios))
             p, inputQueue, outputQueue = 0 ,0 ,0
             llamada=False
 #            for i in range(len(nombreUsuarios)):
             NombresEtiquetas={}
             numeroUsuarios=1
-            while numeroUsuarios<4:
+            numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
+            numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
+            while numeroUsuarios<numeroUsuariosAEntrenar:
                 deteccionActivada = db.child("Facial/Activacion").get()
                 if deteccionActivada.val()=="True":
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
@@ -88,6 +73,13 @@ def obtenerRostros():
                     print("Usuario capturado: "+deteccionActivadaUsuario)
                     print(NombresEtiquetas)
                 llamada=True
+            diccionarioUsuarios ={}
+            keys = list(diccionarioUsuarios.keys())
+            keys.sort()
+            targetnames = []
+            for i in keys:
+                targetnames.append(diccionarioUsuarios[i])
+                nombreUsuarios = targetnames
             if deteccion_correcta == False:
                 print("Error al capturar los rostros")
                 errorCaptura = True
@@ -99,46 +91,48 @@ def obtenerRostros():
             print("Aun no se inicia la captura de rostros")
             errorCaptura = True
             
+            
     return errorCaptura,NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas
 
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-#NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
-"""
-NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
+NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
+
+#NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
 pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
-#import validarRostro as vR
+import validarRostro as vR
 while True:
-    diccionarioUsuarios = {'3': 'Edson', '1': 'qwert', '2': 'Raul'}
-    keys = list(diccionarioUsuarios.keys())
-    keys.sort()
-    targetnames = []
-    for i in keys:
-        targetnames.append(diccionarioUsuarios[i])
-        nombreUsuarios = targetnames
-#    NombresEtiquetas = 0
-#    conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
-#    if entrenamiento=="False":
-#        try:
-#            errorObtencion = True
-#            errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
-#        except:
-#            print("Fallo en metodo de obtencion de rostros")
-#        if errorObtencion ==False:
-#            try:
-#    vR.filtrar(NombreCarpetaPrueba)
-    svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
-    print("Termino modelo")
-    print("Coninua con identifcacion de rostros")
-#    db.child("Facial").update({"EntrenamientoHecho":"True"})  
-    break
+#    diccionarioUsuarios = {'3': 'Edson', '1': 'qwert', '2': 'Raul'}
+#    keys = list(diccionarioUsuarios.keys())
+#    keys.sort()
+#    targetnames = []
+#    for i in keys:
+#        targetnames.append(diccionarioUsuarios[i])
+#        nombreUsuarios = targetnames
+
+    NombresEtiquetas = 0
+    conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
+    if entrenamiento=="False":
+        try:
+            errorObtencion = True
+            errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
+        except:
+            print("Fallo en metodo de obtencion de rostros")
+        if errorObtencion ==False:
+            try:
+                vR.filtrar(NombreCarpetaPrueba)
+                svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
+                print("Termino modelo")
+                print("Coninua con identifcacion de rostros")
+                db.child("Facial").update({"EntrenamientoHecho":"True"})  
+                break
     
-#            except:
-#                print("Fallo modelo")
-#                print("reintentando")
-#    else:
-#        break
+            except:
+                print("Fallo modelo")
+                print("reintentando")
+    else:
+        break
     
-"""
+
 """
 Metodos para reconocimiento
 """

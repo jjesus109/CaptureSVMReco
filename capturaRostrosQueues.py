@@ -51,7 +51,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     tamanioCara =  (0,0,0)
     resizeW = 96
     resizeH = 130
-    numeroMuestrasRostros=80
+    numeroMuestrasRostros=160
     # Ajuste de ancho de espacio de visualizacion de camara
 #    video_capture.set(3,800)
     # Ajuste de alto de espacion de visualizacion de camara
