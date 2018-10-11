@@ -57,23 +57,23 @@ def obtenerRostros():
             print("Favor de conectar a internet")
         if comenzarCaptura.val()  == "True":
             
-            usuarios = list(valores.val())
-            
-            indexReconocimiento = []
-            for i in range(len(usuarios)):
-                # extraccion de variable para identificara  usuarios para reconocer
-                respuesta = db.child("Users/"+str(usuarios[i])+"/reconocimiento").get() 
-                # identifacion de nombre de usuarios para obtener su nombre
-                Nusuarios = db.child("Users/"+str(usuarios[i])+"/name").get() 
-                if respuesta.val() == "True":
-                    indexReconocimiento.append(i)
-                    nombreUsuarios.append(Nusuarios.val())
-                print("Nombres usuarios")
-                print(nombreUsuarios)
-#            numeroUsuariosDeteccion = len(usuarios)
-#            for j in range(len(nombreUsuarios)):
-            print("Estes es el numero de usuarios:")
-            print(len(nombreUsuarios))
+#            usuarios = list(valores.val())
+#            
+#            indexReconocimiento = []
+#            for i in range(len(usuarios)):
+#                # extraccion de variable para identificara  usuarios para reconocer
+#                respuesta = db.child("Users/"+str(usuarios[i])+"/reconocimiento").get() 
+#                # identifacion de nombre de usuarios para obtener su nombre
+#                Nusuarios = db.child("Users/"+str(usuarios[i])+"/name").get() 
+#                if respuesta.val() == "True":
+#                    indexReconocimiento.append(i)
+#                    nombreUsuarios.append(Nusuarios.val())
+#                print("Nombres usuarios")
+#                print(nombreUsuarios)
+##            numeroUsuariosDeteccion = len(usuarios)
+##            for j in range(len(nombreUsuarios)):
+#            print("Estes es el numero de usuarios:")
+#            print(len(nombreUsuarios))
             p, inputQueue, outputQueue = 0 ,0 ,0
             llamada=False
 #            for i in range(len(nombreUsuarios)):
