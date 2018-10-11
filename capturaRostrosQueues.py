@@ -51,7 +51,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     tamanioCara =  (0,0,0)
     resizeW = 96
     resizeH = 130
-    numeroMuestrasRostros=160
+    numeroMuestrasRostros=80
     # Ajuste de ancho de espacio de visualizacion de camara
 #    video_capture.set(3,800)
     # Ajuste de alto de espacion de visualizacion de camara
@@ -90,10 +90,10 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                 # no reconcoe algun rostro
                 if crop_img.all()==0:
                     tamanioCara = (0,0,0)
-                    print("tamaño de cara pequeño")
+#                    print("tamaño de cara pequeño")
                 else:
                     tamanioCara = np.shape(crop_img)
-                    print("se hace el crop")
+#                    print("se hace el crop")
                 
                 """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
                 PERSONA FRENTE A LA CAMAR"""
@@ -107,7 +107,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             
             
             # Solo se deje un usuario por que se realizará por usuario    
-            print("numeroImagen")
+#            print("numeroImagen")
             print(numeroImagen)
             if numeroImagen >numeroMuestrasRostros:
                 

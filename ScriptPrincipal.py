@@ -116,16 +116,16 @@ while True:
         except:
             print("Fallo en metodo de obtencion de rostros")
         if errorObtencion ==False:
-            try:
-                svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
-                print("Termino modelo")
-                print("Coninua con identifcacion de rostros")
-                db.child("Facial").update({"EntrenamientoHecho":"True"})  
-                break
+#            try:
+            svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
+            print("Termino modelo")
+            print("Coninua con identifcacion de rostros")
+            db.child("Facial").update({"EntrenamientoHecho":"True"})  
+            break
     
-            except:
-                print("Fallo modelo")
-                print("reintentando")
+#            except:
+#                print("Fallo modelo")
+#                print("reintentando")
     else:
         break
 """
