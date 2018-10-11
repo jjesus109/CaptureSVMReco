@@ -76,8 +76,19 @@ def obtenerRostros():
             print(len(nombreUsuarios))
             p, inputQueue, outputQueue = 0 ,0 ,0
             llamada=False
-            for i in range(len(nombreUsuarios)):
-                deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,len(nombreUsuarios),llamada,p, inputQueue, outputQueue)
+#            for i in range(len(nombreUsuarios)):
+            NombresEtiquetas={}
+            numeroUsuarios=1
+            while numeroUsuarios<4:
+                deteccionActivada = db.child("Facial/Activacion2").get()
+                if deteccionActivada.val()=="True":
+                    deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
+                    deteccionActivadaUsuario = deteccionActivadaUsuario.val()
+                    deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,i,llamada,p, inputQueue, outputQueue)
+                    numeroUsuarios+=1
+                    db.child("Facial").update({"Activacion2":"False"})
+                    NombresEtiquetas.update({str(numeroUsuarios):deteccionActivadaUsuario})
+                    
                 llamada=True
             if deteccion_correcta == False:
                 print("Error al capturar los rostros")
@@ -90,16 +101,17 @@ def obtenerRostros():
             print("Aun no se inicia la captura de rostros")
             errorCaptura = True
             
-    return errorCaptura,NombreCarpetaPrueba, nombreUsuarios
+    return errorCaptura,NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas
 
 
 while True:
 #def main():
+    NombresEtiquetas = 0
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
     if entrenamiento=="False":
         try:
             errorObtencion = True
-            errorObtencion, NombreCarpetaPrueba, nombreUsuarios = obtenerRostros()
+            errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
         except:
             print("Fallo en metodo de obtencion de rostros")
         if errorObtencion ==False:
@@ -287,7 +299,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
                             probabilidadFinal = probabilidadSumada/frecuencia
                             nombreUsuario = target_names[target_probable]
                             nombre = nombreUsuario+":"+str(probabilidadFinal*100    )
-                       
+                        nombre = NombresEtiquetas.get(str(target_probable),"Desconocido")
                         listaImagenes = []
                         print("ya reconocio a:")
                         print(nombre)
