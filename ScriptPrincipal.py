@@ -37,9 +37,6 @@ def conectarFirebase():
     return conexionExitosa, firebase, db, valores, entrenamiento.val()
 
 def obtenerRostros():
-#    NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-    NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
-    pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
@@ -104,7 +101,9 @@ def obtenerRostros():
             
     return errorCaptura,NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas
 
-
+#NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
+NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
+pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 while True:
 
     NombresEtiquetas = 0
