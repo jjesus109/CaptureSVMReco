@@ -52,7 +52,7 @@ def SVM(carpeta,target_names):
 #    resizeW = 96
 #    resizeH = 130
     n_samples =datosRostrosA.shape[0]
-    
+    print("Shape de rostrosA"+str(datosRostrosA.shape))
     np.random.seed(20)
     
     # for machine learning we use the data directly (as relative pixel
