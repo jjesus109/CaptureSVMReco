@@ -85,9 +85,9 @@ def obtenerRostros():
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
                     deteccionActivadaUsuario = deteccionActivadaUsuario.val()
                     deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue)
+                    NombresEtiquetas.update({str(numeroUsuarios):deteccionActivadaUsuario})
                     numeroUsuarios+=1
                     db.child("Facial").update({"Activacion":"False"})
-                    NombresEtiquetas.update({str(numeroUsuarios):deteccionActivadaUsuario})
                     print("Usuario capturado: "+deteccionActivadaUsuario)
                     print(NombresEtiquetas)
                 llamada=True
