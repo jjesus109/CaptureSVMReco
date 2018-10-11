@@ -12,7 +12,6 @@ import svm_pca_final as svm
 import cv2
 #import
 
-
 # conexion a firebase
 def conectarFirebase():
     conexionExitosa=True
@@ -75,8 +74,11 @@ def obtenerRostros():
 #            for j in range(len(nombreUsuarios)):
             print("Estes es el numero de usuarios:")
             print(len(nombreUsuarios))
-            
-            deteccion_correcta, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,len(nombreUsuarios))
+            p, inputQueue, outputQueue = 0 ,0 ,0
+            llamada=False
+            for i in range(len(nombreUsuarios)):
+                deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,len(nombreUsuarios),llamada,p, inputQueue, outputQueue)
+                llamada=True
             if deteccion_correcta == False:
                 print("Error al capturar los rostros")
                 errorCaptura = True

@@ -8,7 +8,7 @@ from multiprocessing import Queue
 import time
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-def detect(inputQueue, outputQueue):
+def _detect_(inputQueue, outputQueue):
     while True:
         if not inputQueue.empty():
             gray = inputQueue.get()
@@ -32,17 +32,22 @@ def ajusteGamma(imagen,gamma=1.0):
 
 
 # se pasa el label del usuario desde el script principal
-def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
+def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue ):
     print("estos son el len")
     print(numeroUsuarios)
     # Configuración de queues        
-    inputQueue = Queue(maxsize=2)
-    outputQueue = Queue(maxsize=2)
+
     vectorDim = [0,0,0,0]
     print("[INFO] starting process...")
-    p = Process(target=detect, args=(inputQueue, outputQueue,))
-    p.daemon = True
-    p.start()
+    if llamada == False:
+        inputQueue = Queue(maxsize=1)
+        outputQueue = Queue(maxsize=1)
+        p = Process(target=_detect_, args=(inputQueue, outputQueue,))
+        p.daemon = True
+        p.start()
+        print("Esta vivo el proceso??")
+        print(p.is_alive())
+    
     tamanioCara =  (0,0,0)
     resizeW = 96
     resizeH = 130
@@ -54,7 +59,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
     #Ajustar frames por segundo
 #    video_capture.set(5,25)
     numeroImagen = 1
-    numeroUsuarioActual=1
+#    numeroUsuarioActual= 1
+    numeroUsuarioActual = numeroUsuarios 
     print("La captura de rostros del usuario "+str(numeroUsuarioActual))
     for i in range(5):
         print("Inicia en " +str(5-i))
@@ -99,10 +105,6 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
                     time.sleep(0.1)
                     numeroImagen += 1
             
-#            cv2.imshow('Video original Gris', gray)
-#            cv2.imshow('Video', frame)
-#            cv2.imshow('Video corregido', Clahe_Gamma)
-            #
             
             # Solo se deje un usuario por que se realizará por usuario    
             print("numeroImagen")
@@ -110,21 +112,22 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
             if numeroImagen >80:
                 
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
-                numeroImagen=0
-                
-                if numeroUsuarioActual>=numeroUsuarios:
-                    break
-                else:
-                    numeroUsuarioActual += 1
-                    print("La captura de rostros del usuario"+str(numeroUsuarioActual))
-                    for i in range(5):
-                        print("Inicia en " +str(5-i))
-                        time.sleep(1)
+                break
+#                numeroImagen=0
+#                
+#                if numeroUsuarioActual>=numeroUsuarios:
+#                    break
+#                else:
+#                    numeroUsuarioActual += 1
+#                    print("La captura de rostros del usuario"+str(numeroUsuarioActual))
+#                    for i in range(5):
+#                        print("Inicia en " +str(5-i))
+#                        time.sleep(1)
                     # PAra limpiar lo que se le quedo en memoria
-                    inputQueue.put(np.array([[[0],[0],[0]],[[0],[0],[0]],[[0],[0],[0]]]))
-                    inputQueue.get()
-                    outputQueue.put(np.array([[[0],[0],[0]],[[0],[0],[0]],[[0],[0],[0]]]))
-                    outputQueue.get()
+#                    inputQueue.put(np.array([[[0],[0],[0]],[[0],[0],[0]],[[0],[0],[0]]]))
+#                    inputQueue.get()
+#                    outputQueue.put(np.array([[[0],[0],[0]],[[0],[0],[0]],[[0],[0],[0]]]))
+#                    outputQueue.get()
 
         # Conexion extiosa con Camara
         conexionCamara = True 
@@ -136,10 +139,9 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios):
     #termino de proceso y de queue
     
     video_capture.release()
-    p.terminate()
+#    p.terminate()
     time.sleep(0.1)
-    inputQueue.close()
-    outputQueue.close()
+
 #    cv2.destroyAllWindows()
     
-    return conexionCamara,video_capture
+    return conexionCamara,p, inputQueue, outputQueue,video_capture 
