@@ -124,7 +124,7 @@ while True:
 #            print("Fallo en metodo de obtencion de rostros")
 #        if errorObtencion ==False:
 #            try:
-    vR.filtrar()
+    vR.filtrar(NombreCarpetaPrueba)
     svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
     print("Termino modelo")
     print("Coninua con identifcacion de rostros")
