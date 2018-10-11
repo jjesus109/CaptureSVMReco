@@ -105,7 +105,7 @@ def obtenerRostros():
 #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
 NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
 pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
-import validarRostro as vR
+#import validarRostro as vR
 while True:
     diccionarioUsuarios = {'3': 'Edson', '1': 'qwert', '2': 'Raul'}
     keys = list(diccionarioUsuarios.keys())
@@ -124,7 +124,7 @@ while True:
 #            print("Fallo en metodo de obtencion de rostros")
 #        if errorObtencion ==False:
 #            try:
-    vR.filtrar(NombreCarpetaPrueba)
+#    vR.filtrar(NombreCarpetaPrueba)
     svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
     print("Termino modelo")
     print("Coninua con identifcacion de rostros")
