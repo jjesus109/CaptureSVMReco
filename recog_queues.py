@@ -92,7 +92,7 @@ def mayorFrecuencia(dk2):
 
 
 def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
- print(target_names)
+    print(target_names)
     
     video_capture = cv2.VideoCapture(indexCamara)
     nombre="sin reconocer"
