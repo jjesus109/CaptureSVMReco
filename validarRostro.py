@@ -1,10 +1,11 @@
+"""
+Metodos para redimensisonar los rostros capturados y enfocarlos en el area de
+interes que es el rostros eliminando el posible ruido de los mismos
+"""
+
 import cv2
 import os
-#from time import time
 import numpy as np
-#import matplotlib.pyplot as plt
-
-#print("total time: ", time()-t0)
 
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -29,11 +30,7 @@ def detect(gray):
 def filtrar(carpeta):
     resizeW = 96
     resizeH = 130
-#    datosAug =[]
-#    labelsAug =[]
-#    t0 = time()
-    #carpeta = "D:/Documentos HDD/11/TT2/CarasRuido/"
-#    t0 = time()
+
     folders = os.listdir(carpeta)
     for im in folders:
 #        label =int(im[0])

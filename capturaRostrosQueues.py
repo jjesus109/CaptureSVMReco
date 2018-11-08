@@ -113,22 +113,6 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                 
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
                 break
-#                numeroImagen=0
-#                
-#                if numeroUsuarioActual>=numeroUsuarios:
-#                    break
-#                else:
-#                    numeroUsuarioActual += 1
-#                    print("La captura de rostros del usuario"+str(numeroUsuarioActual))
-#                    for i in range(5):
-#                        print("Inicia en " +str(5-i))
-#                        time.sleep(1)
-                    # PAra limpiar lo que se le quedo en memoria
-#                    inputQueue.put(np.array([[[0],[0],[0]],[[0],[0],[0]],[[0],[0],[0]]]))
-#                    inputQueue.get()
-#                    outputQueue.put(np.array([[[0],[0],[0]],[[0],[0],[0]],[[0],[0],[0]]]))
-#                    outputQueue.get()
-
         # Conexion extiosa con Camara
         conexionCamara = True 
     
@@ -139,9 +123,5 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     #termino de proceso y de queue
     
     video_capture.release()
-#    p.terminate()
-    time.sleep(0.1)
-
-#    cv2.destroyAllWindows()
-    
+    time.sleep(0.1)   
     return conexionCamara,p, inputQueue, outputQueue,video_capture 
