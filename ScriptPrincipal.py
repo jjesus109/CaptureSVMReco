@@ -136,8 +136,9 @@ while True:
 print("Inicia reconocimiento de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
 #import recog_queues as rL
-from gpiozero import MotionSensor
+from gpiozero import MotionSensor, LED
 pir = MotionSensor(4) # Numero de pin de raspberry
+ledes = LED(17)
 #import pickle
 #data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
 #ya llamo a process
@@ -148,7 +149,8 @@ while True:
 
 #    """Leer datos del senosor de presencia"""
     if pir.motion_detected:
-
+        print("encender leds")
+        ledes.on()
         print("Index actual = " + str(indexCamara))
 #        conexionCamara, p, inputQueue, outputQueue, vd = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
 #        vd.release()
