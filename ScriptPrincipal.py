@@ -161,8 +161,9 @@ while True:
 #                indexCamara=0
         llamada= True
         print("Sale del reconocimiento")
-        ledes.off()
+        
     time.sleep(0.5)
+    ledes.off()
     print("Ya espero")
  
 
