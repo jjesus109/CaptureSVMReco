@@ -135,7 +135,7 @@ while True:
 
 print("Inicia reconocimiento de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
-import recog_queues as rL
+#import recog_queues as rL
 from gpiozero import MotionSensor
 pir = MotionSensor(4) # Numero de pin de raspberry
 #import pickle
