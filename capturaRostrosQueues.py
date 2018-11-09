@@ -30,9 +30,10 @@ def ajusteGamma(imagen,gamma=1.0):
     return cv2.LUT(imagen,table)
 
 
-
+from gpiozero import LED
+ledes = LED(17)
 # se pasa el label del usuario desde el script principal
-def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue ):
+def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue,indexCamara ):
     print("estos son el len")
     print(numeroUsuarios)
     # Configuración de queues        
@@ -65,8 +66,9 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     for i in range(5):
         print("Inicia en " +str(5-i))
         time.sleep(1)
-    video_capture = cv2.VideoCapture(0)
+    video_capture = cv2.VideoCapture(indexCamara)
     if video_capture.isOpened():
+        ledes.on()
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
         while True:
@@ -112,6 +114,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             if numeroImagen >numeroMuestrasRostros:
                 
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
+                ledes.off()
                 break
         # Conexion extiosa con Camara
         conexionCamara = True 

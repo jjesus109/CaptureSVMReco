@@ -41,6 +41,7 @@ def conectarFirebase():
     return conexionExitosa, firebase, db, valores, entrenamiento.val()
 
 def obtenerRostros():
+    indexCamara = 0
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
@@ -70,12 +71,19 @@ def obtenerRostros():
                 if deteccionActivada.val()=="True":
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
                     deteccionActivadaUsuario = deteccionActivadaUsuario.val()
-                    deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue)
-                    NombresEtiquetas.update({str(numeroUsuarios):deteccionActivadaUsuario})
-                    numeroUsuarios+=1
-                    db.child("Facial").update({"Activacion":"False"})
-                    print("Usuario capturado: "+deteccionActivadaUsuario)
-                    print(NombresEtiquetas)
+                    deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
+                    if deteccion_correcta==False:
+                        indexCamara += 1
+                        
+                        if indexCamara>=3:
+                            indexCamara=0
+                    
+                    else:
+                        NombresEtiquetas.update({str(numeroUsuarios):deteccionActivadaUsuario})
+                        numeroUsuarios+=1
+                        db.child("Facial").update({"Activacion":"False"})
+                        print("Usuario capturado: "+deteccionActivadaUsuario)
+                        print(NombresEtiquetas)
                 llamada=True
             diccionarioUsuarios ={}
             keys = list(diccionarioUsuarios.keys())
@@ -99,10 +107,10 @@ def obtenerRostros():
     return errorCaptura,NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas
 
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/" + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')+"/"
+NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
 
 #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
-pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+#pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 import validarRostro as vR
 while True:
 #    diccionarioUsuarios = {'3': 'Edson', '1': 'qwert', '2': 'Raul'}
@@ -139,10 +147,12 @@ while True:
 
 print("Inicia reconocimiento de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
+
 import recog_queues as rL
 from gpiozero import MotionSensor, LED
+
 pir = MotionSensor(4) # Numero de pin de raspberry
-ledes = LED(17)
+
 #import pickle
 #data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
 #ya llamo a process
@@ -153,8 +163,7 @@ while True:
 
 #    """Leer datos del senosor de presencia"""
     if pir.motion_detected:
-        print("encender leds")
-        ledes.on()
+        
         print("Index actual = " + str(indexCamara))
         conexionCamara, p, inputQueue, outputQueue, vd = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
         vd.release()
@@ -163,11 +172,15 @@ while True:
             
             if indexCamara>=3:
                 indexCamara=0
+        else:
+            print("conexion camara extiosa")
+            print("encender leds")
+            
         llamada= True
         print("Sale del reconocimiento")
         
     time.sleep(0.5)
-    ledes.off()
+    
     print("Ya espero")
  
 
