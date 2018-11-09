@@ -135,7 +135,7 @@ while True:
 
 print("Inicia reconocimiento de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
-#import recog_queues as rL
+import recog_queues as rL
 from gpiozero import MotionSensor, LED
 pir = MotionSensor(4) # Numero de pin de raspberry
 ledes = LED(17)
@@ -152,13 +152,13 @@ while True:
         print("encender leds")
         ledes.on()
         print("Index actual = " + str(indexCamara))
-#        conexionCamara, p, inputQueue, outputQueue, vd = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
-#        vd.release()
-#        if conexionCamara== False:
-#            indexCamara += 1
-#            
-#            if indexCamara>=3:
-#                indexCamara=0
+        conexionCamara, p, inputQueue, outputQueue, vd = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
+        vd.release()
+        if conexionCamara== False:
+            indexCamara += 1
+            
+            if indexCamara>=3:
+                indexCamara=0
         llamada= True
         print("Sale del reconocimiento")
         
