@@ -20,10 +20,14 @@ def conectarFirebase():
     valores = 0
     entrenamiento = "False"
     config = {
-          "apiKey": "4yqY4AS24CGMfIFrNnaDVZYU4ITPl9XmE7mXmsCc",
-          "authDomain": "casa-34c19.firebaseapp.com",
-          "databaseURL": "https://casa-34c19.firebaseio.com",
-          "storageBucket": "casa-34c19.appspot.com",
+#          "apiKey": "4yqY4AS24CGMfIFrNnaDVZYU4ITPl9XmE7mXmsCc",
+#          "authDomain": "casa-34c19.firebaseapp.com",
+#          "databaseURL": "https://casa-34c19.firebaseio.com",
+#          "storageBucket": "casa-34c19.appspot.com",
+          "apiKey": "tASIqdHPCcl9RrZ139kwoAMWjS68WMaQ62z9Hosr",
+          "authDomain": "casa-90566.firebaseapp.com",
+          "databaseURL": "https://casa-90566.firebaseio.com",
+          "storageBucket": "casa-90566.appspot.com",    
     #          "serviceAccount":  "base-rostros-firebase-adminsdk-2w8tl-1940b517ba.json"
           }
     try:
