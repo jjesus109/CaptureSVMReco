@@ -48,7 +48,7 @@ from gpiozero import LED
 ledes = LED(17)
 
 def obtenerRostros():
-    indexCamara = -1
+    indexCamara = 1
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
@@ -90,6 +90,7 @@ def obtenerRostros():
 #                    ledes.on()
                     deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
                     videoCapture.release()
+                    video_capture=0|
                     if deteccion_correcta== False:
                         
                         indexCamara += 1
