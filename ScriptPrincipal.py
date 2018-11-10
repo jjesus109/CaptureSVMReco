@@ -71,11 +71,10 @@ def obtenerRostros():
                 if deteccionActivada.val()=="True":
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
                     deteccionActivadaUsuario = deteccionActivadaUsuario.val()
-                    deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
+                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
                     videoCapture.release()
                     if deteccion_correcta==False:
-                        indexCamara += 1
-                        
+                        indexCamara += 1                        
                         if indexCamara>=3:
                             indexCamara=0
                     
