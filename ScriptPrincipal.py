@@ -44,7 +44,7 @@ def conectarFirebase():
 #ledes = LED(17)
 
 def obtenerRostros():
-    
+    indexCamara = 0
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
@@ -81,12 +81,18 @@ def obtenerRostros():
                         print("Inicia en " +str(3-i))
                         time.sleep(1)
                     print("enciendo los ledes")
+
 #                    ledes.on()
 #                    video_capture = cv2.VideoCapture(0)
 #                    print("sSe conecto la camara?")
 #                    print(video_capture.isOpened())
-                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue)
-#                    videoCapture.release()
+                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
+                    videoCapture.release()
+                    if deteccion_correcta== False:
+                        indexCamara += 1
+                        
+                        if indexCamara>=3:
+                            indexCamara=0
 #                    print("se libero la camara?")
 #                    print(videoCapture.isOpened())
 #                    ledes.off()
