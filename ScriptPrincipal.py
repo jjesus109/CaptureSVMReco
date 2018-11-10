@@ -146,7 +146,7 @@ while True:
             
         if errorObtencion ==False:
 #            try:
-                
+            print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
             vR.filtrar(NombreCarpetaPrueba)
 #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
