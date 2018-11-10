@@ -30,6 +30,8 @@ def SVM(carpeta,target_names):
     from sklearn.decomposition import PCA
     from sklearn.svm import SVC
 #    from skimage.feature import local_binary_pattern
+    resizeW = 96
+    resizeH = 130
     t0 = time()
     folders = os.listdir(carpeta)
     for im in folders:
@@ -37,6 +39,9 @@ def SVM(carpeta,target_names):
         Rimagen = carpeta+"/"+im
         imagen=cv2.imread(Rimagen)
         image = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
+        tamanio = np.shape(image)
+        if tamanio[0]==130:
+            image = cv2.resize(image,(resizeW,resizeH))
 #        lbp = local_binary_pattern(image, n_points, radius, 'default')
 #        im_flat = lbp.ravel() 
         im_flat = image.ravel() 
