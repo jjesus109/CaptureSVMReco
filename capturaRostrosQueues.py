@@ -111,6 +111,6 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     time.sleep(0.1)   
 
     video_capture.release()
-    cv2.destroyAllWindows()v
+    cv2.destroyAllWindows()
         
     return conexionCamara,p, inputQueue, outputQueue,video_capture 
