@@ -131,7 +131,7 @@ def SVM(carpeta,target_names):
 
     import pickle
     datos = {"modelo":clf, "pca": pca, "target_names": target_names}
-    data = open(carpeta+"/archivo_modelo_LBP.pickle",'wb')
+    data = open("archivo_modelo_LBP.pickle",'wb')
     pickle.dump(datos, data)
     
  

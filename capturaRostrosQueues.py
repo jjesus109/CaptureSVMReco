@@ -32,16 +32,16 @@ def ajusteGamma(imagen,gamma=1.0):
 
 
 # se pasa el label del usuario desde el script principal
-def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue, indexCamara,video_capture ):
+def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue, indexCamara ):
 
-    if video_capture==0:
-        video_capture = cv2.VideoCapture(indexCamara)
+#    if video_capture==0:
+    video_capture = cv2.VideoCapture(indexCamara)
     # Configuración de queues        
     
     resizeW = 96
     vectorDim = [0,0,0,0]
     tamanioCara =  (0,0,0)
-    numeroMuestrasRostros=160
+    numeroMuestrasRostros=30
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
     print("valor llamada : "+ str(llamada))
@@ -109,7 +109,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         # Conexion extiosa con Camara
         time.sleep(0.1)   
         conexionCamara = True 
-#        video_capture.release()
+        video_capture.release()
         cv2.destroyAllWindows()
         return conexionCamara,p, inputQueue, outputQueue,video_capture 
     else:

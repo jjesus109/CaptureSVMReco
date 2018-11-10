@@ -11,7 +11,11 @@ import capturaRostrosQueues as cr
 import svm_pca_final as svm
 import cv2
 # Activacion variable para saber cuando esta activado el sensor
+#NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
 
+NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
+#NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
+pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 # conexion a firebase
 def conectarFirebase():
     conexionExitosa=True
@@ -84,8 +88,8 @@ def obtenerRostros():
                     print("enciendo los ledes")
 
 #                    ledes.on()
-                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,videoCapture)
-                    
+                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
+                    videoCapture.release()
                     if deteccion_correcta== False:
                         indexCamara += 1
                         
@@ -123,11 +127,7 @@ def obtenerRostros():
             
     return errorCaptura,NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas
 
-#NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
 
-NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-#NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
-pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 import validarRostro as vR
 
 while True:
@@ -144,7 +144,7 @@ while True:
 #            try:
                 
             vR.filtrar(NombreCarpetaPrueba)
-            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
+#            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
             print("Termino modelo")
             print("Coninua con identifcacion de rostros")
