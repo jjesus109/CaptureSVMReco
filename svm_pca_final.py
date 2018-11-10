@@ -57,7 +57,7 @@ def SVM(carpeta,target_names):
     
     # for machine learning we use the data directly (as relative pixel
     # position info is ignored by this model)
-    n_features = datosRostrosA.shape[1]
+    n_features = datosRostrosA.shape[0]
     # the label to predict is the id of the person
     
 #    target_names = ["Javier", "Luperta","Jesus"]
