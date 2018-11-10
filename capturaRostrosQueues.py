@@ -105,6 +105,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         # Conexion extiosa con Camara
         time.sleep(0.1)   
         conexionCamara = True 
+        video_capture.release()
         return conexionCamara,p, inputQueue, outputQueue,video_capture 
     else:
         print("No se pudo conectar con la camara")
@@ -112,4 +113,5 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         # NO se pudo conectar con camara
         conexionCamara = False
         #termino de proceso y de queue
+        video_capture.release()
         return conexionCamara,p, inputQueue, outputQueue,video_capture 
