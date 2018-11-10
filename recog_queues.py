@@ -122,7 +122,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
     video_capture.set(4, 512)
     print("Se comunico con camara:" +str(video_capture.isOpened()))
     if video_capture.isOpened():
-        ledes.on()
+        ledes.value = 0.6
         while True:
             _, frame = video_capture.read()
         

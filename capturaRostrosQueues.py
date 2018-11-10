@@ -69,7 +69,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     video_capture = cv2.VideoCapture(indexCamara)
     if video_capture.isOpened():
 #        ledes.on()
-        ledes.value = 0.5
+        ledes.value = 0.6
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
         while True:
@@ -115,7 +115,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             if numeroImagen >numeroMuestrasRostros:
                 
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
-                ledes.off()
+                ledes.value = 0
                 break
         # Conexion extiosa con Camara
         conexionCamara = True 
