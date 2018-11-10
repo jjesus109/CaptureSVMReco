@@ -53,20 +53,22 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     resizeW = 96
     resizeH = 130
     numeroMuestrasRostros=160
-    # Ajuste de ancho de espacio de visualizacion de camara
-#    video_capture.set(3,800)
-    # Ajuste de alto de espacion de visualizacion de camara
-#    video_capture.set(4,600)
-    #Ajustar frames por segundo
-#    video_capture.set(5,25)
+
     numeroImagen = 1
 #    numeroUsuarioActual= 1
     numeroUsuarioActual = numeroUsuarios 
     print("La captura de rostros del usuario "+str(numeroUsuarioActual))
-    for i in range(5):
+    for i in range(3):
         print("Inicia en " +str(5-i))
         time.sleep(1)
+        
     video_capture = cv2.VideoCapture(indexCamara)
+    # Ajuste de ancho de espacio de visualizacion de camara
+    video_capture.set(3,640)
+    # Ajuste de alto de espacion de visualizacion de camara
+    video_capture.set(4,480)
+    #Ajustar frames por segundo
+    video_capture.set(5,10)
     if video_capture.isOpened():
         ledes.on()
         
