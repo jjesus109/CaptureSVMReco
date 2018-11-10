@@ -28,8 +28,8 @@ def detect(gray):
     return gray, crop_img
 #
 def filtrar(carpeta):
-    resizeW = 96
-    resizeH = 130
+#    resizeW = 96
+#    resizeH = 130
     numeros = ["1_1.","1_2.","1_3.","1_4.","1_5.","1_6.","1_7.","1_8.","1_9.",
                "2_1.","2_2.","2_3.","2_4.","2_5.","2_6.","2_7.","2_8.","2_9.",
                "3_1.","3_2.","3_3.","3_4.","3_5.","3_6.","3_7.","3_8.","3_9."]
@@ -38,24 +38,24 @@ def filtrar(carpeta):
         numeroImagen =im[0:4]
         Rimagen = carpeta+"/"+im
 #        print(Rimagen)
-        imagen=cv2.imread(Rimagen)
-        gris = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
+#        imagen=cv2.imread(Rimagen)
+#        gris = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
     #    gris = cv2.cvtColor(image,cv2.)
-        gris,crop_img = detect(gris)
+#        gris,crop_img = detect(gris)
         # no reconcoe algun rostro
         if numeroImagen in numeros :
             os.remove(Rimagen)
             
-        
-        elif crop_img.all()==0:
-            #borrar la imagen
-            os.remove(Rimagen)
-        else:
-             tamanioCara = np.shape(crop_img)
-             if tamanioCara[0] >int(resizeW*0.7):
-    #        crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-                 crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-                 cv2.imwrite(Rimagen, crop_img)
+#        
+#        elif crop_img.all()==0:
+#            #borrar la imagen
+#            os.remove(Rimagen)
+#        else:
+#             tamanioCara = np.shape(crop_img)
+#             if tamanioCara[0] >int(resizeW*0.7):
+#    #        crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+#                 crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+#                 cv2.imwrite(Rimagen, crop_img)
         
     #        time.sleep(0.1)
 #    print()

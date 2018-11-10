@@ -88,7 +88,7 @@ def obtenerRostros():
                         time.sleep(1)
                     print("enciendo los ledes")
                     
-#                    ledes.on()
+                    ledes.on()
                     deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,video_capture)
 #                    videoCapture.release()
 #                    videoCapture=0
@@ -98,7 +98,7 @@ def obtenerRostros():
 #                        
 #                        if indexCamara>=3:
 #                            indexCamara=0
-#                    ledes.off()
+                    ledes.off()
                     if deteccion_correcta==True:
                         
                         NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
@@ -180,10 +180,12 @@ while True:
 
 #    """Leer datos del senosor de presencia"""
     if pir.motion_detected:
-        
+    
         print("Index actual = " + str(indexCamara))
+        ledes.on()
         conexionCamara, p, inputQueue, outputQueue, vd = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
         vd.release()
+        ledes.off()
         if conexionCamara== False:
             indexCamara += 1
             

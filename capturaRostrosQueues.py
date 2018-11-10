@@ -18,7 +18,12 @@ def _detect_(inputQueue, outputQueue):
 #                medidasX2 = int(x+(w*0.82))
 #                medidasY2 = int(y*1.2)
 #                medidasY1 = int(y+(h*0.95))
-                vectorDim = [x,y+h,x+w,y] 
+                medidasX1 = int(x*1.4)
+                medidasX2 = int(x+(w*0.9))
+                medidasY2 = int(y*1.25)
+                medidasY1 = int(y+(h*0.98))
+#                vectorDim = [x,y+h,x+w,y] 
+                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
                 outputQueue.put(vectorDim)
 
 # Funcion de ajuste Gamma
@@ -42,7 +47,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     resizeW = 96
     vectorDim = [0,0,0,0]
     tamanioCara =  (0,0,0)
-    numeroMuestrasRostros=180
+    numeroMuestrasRostros=85
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
     print("valor llamada : "+ str(llamada))
@@ -90,9 +95,9 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                 """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
                 PERSONA FRENTE A LA CAMAR"""
                 
-                if tamanioCara[0] >int(resizeW*0.7):
+                if tamanioCara[0] >int(resizeW*0.8):
                     # ajust de tamaño de rostros
-#                    crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
+                    crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
                     cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".png", crop_img)
                     time.sleep(0.1)
                     numeroImagen += 1
