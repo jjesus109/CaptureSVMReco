@@ -30,10 +30,9 @@ def ajusteGamma(imagen,gamma=1.0):
     return cv2.LUT(imagen,table)
 
 
-from gpiozero import PWMLED
-ledes = PWMLED(17)
+
 # se pasa el label del usuario desde el script principal
-def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue,indexCamara ):
+def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue,indexCamara, ledes ):
     print("estos son el len")
     print(numeroUsuarios)
     # Configuración de queues        

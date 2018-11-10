@@ -40,7 +40,7 @@ def conectarFirebase():
         return False, firebase, db, valores,entrenamiento
     return conexionExitosa, firebase, db, valores, entrenamiento.val()
 
-def obtenerRostros():
+def obtenerRostros(ledes):
     indexCamara = 0
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
@@ -71,7 +71,7 @@ def obtenerRostros():
                 if deteccionActivada.val()=="True":
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
                     deteccionActivadaUsuario = deteccionActivadaUsuario.val()
-                    deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
+                    deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,ledes)
                     if deteccion_correcta==False:
                         indexCamara += 1
                         
@@ -129,7 +129,7 @@ while True:
     if entrenamiento=="False":
         try:
             errorObtencion = True
-            errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
+            errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros(ledes)
         except:
             print("Fallo en metodo de obtencion de rostros")
             ledes.value = 0
@@ -171,7 +171,7 @@ while True:
     if pir.motion_detected:
         
         print("Index actual = " + str(indexCamara))
-        conexionCamara, p, inputQueue, outputQueue, vd = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
+        conexionCamara, p, inputQueue, outputQueue, vd = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,ledes)
         vd.release()
         if conexionCamara== False:
             indexCamara += 1

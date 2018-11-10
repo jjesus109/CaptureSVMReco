@@ -87,9 +87,9 @@ def mayorFrecuencia(dk2):
      return target, max(valores)
 
 
-from gpiozero import LED
-ledes = LED(17)
-def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
+#from gpiozero import LED
+#ledes = LED(17)
+def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, ledes):
     tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
     datos = pickle.load(tomaDatos)
     clf = datos["modelo"]
