@@ -30,7 +30,8 @@ def ajusteGamma(imagen,gamma=1.0):
     return cv2.LUT(imagen,table)
 
 
-
+from gpiozero import LED
+ledes = LED(17)
 # se pasa el label del usuario desde el script principal
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue,indexCamara ):
     print("estos son el len")
