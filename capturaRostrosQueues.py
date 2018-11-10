@@ -33,7 +33,7 @@ def ajusteGamma(imagen,gamma=1.0):
 from gpiozero import LED
 ledes = LED(17)
 # se pasa el label del usuario desde el script principal
-def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue,indexCamara ):
+def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue ):
     print("estos son el len")
     print(numeroUsuarios)
     # Configuración de queues        
@@ -59,10 +59,10 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     numeroUsuarioActual = numeroUsuarios 
     print("La captura de rostros del usuario "+str(numeroUsuarioActual))
     for i in range(3):
-        print("Inicia en " +str(5-i))
+        print("Inicia en " +str(3-i))
         time.sleep(1)
         
-    video_capture = cv2.VideoCapture(indexCamara)
+    video_capture = cv2.VideoCapture(0)
     # Ajuste de ancho de espacio de visualizacion de camara
     video_capture.set(3,640)
     # Ajuste de alto de espacion de visualizacion de camara
@@ -70,10 +70,12 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     #Ajustar frames por segundo
     video_capture.set(5,10)
     if video_capture.isOpened():
-        ledes.on()
+        
         
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
+        ledes.on()
+        
 #        ledes.value = 0.6  
         while True:
                   
