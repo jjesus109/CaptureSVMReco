@@ -87,9 +87,9 @@ def mayorFrecuencia(dk2):
      return target, max(valores)
 
 
-#from gpiozero import LED
-#ledes = LED(17)
-def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, ledes):
+from gpiozero import LED
+ledes = LED(17)
+def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
     tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
     datos = pickle.load(tomaDatos)
     clf = datos["modelo"]
@@ -122,7 +122,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, ledes):
     video_capture.set(4, 512)
     print("Se comunico con camara:" +str(video_capture.isOpened()))
     if video_capture.isOpened():
-        ledes.value = 0.6
+        ledes.on()
         while True:
             _, frame = video_capture.read()
         
