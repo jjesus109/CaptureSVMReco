@@ -44,6 +44,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     numeroMuestrasRostros=160
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
+    print("valor llamada : "+ str(llamada))
     if llamada == False:
         inputQueue = Queue(maxsize=1)
         outputQueue = Queue(maxsize=1)

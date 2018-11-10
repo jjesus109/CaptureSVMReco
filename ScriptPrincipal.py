@@ -64,14 +64,14 @@ def obtenerRostros():
             print("Favor de conectar a internet")
         if comenzarCaptura.val()  == "True":
             
-            p, inputQueue, outputQueue = 0 ,0 ,0
-            llamada=False
+            p, inputQueue, outputQueue = 0 ,0 ,0            
             videoCapture=0
 #            for i in range(len(nombreUsuarios)):
             NombresEtiquetas={}
             numeroUsuarios=1
             numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
             numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
+            llamada=False
             while numeroUsuarios<numeroUsuariosAEntrenar+1:
                 deteccionActivada = db.child("Facial/Activacion").get()
                 if deteccionActivada.val()=="True":
