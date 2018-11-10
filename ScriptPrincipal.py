@@ -108,13 +108,14 @@ def obtenerRostros():
                         print(NombresEtiquetas)
                     llamada=True
             diccionarioUsuarios ={}
-            keys = list(diccionarioUsuarios.keys())
+            keys = list(NombresEtiquetas.keys())
             keys.sort()
             targetnames = []
             for i in keys:
                 
                 targetnames.append(diccionarioUsuarios[i])
-                nombreUsuarios = targetnames
+            print("Estos son los los target names")
+            print(targetnames)
             if deteccion_correcta == False:
                 print("Error al capturar los rostros")
                 errorCaptura = True
@@ -129,7 +130,7 @@ def obtenerRostros():
             errorCaptura = True
             
             
-    return errorCaptura,NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas
+    return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas
 
 
 import validarRostro as vR
