@@ -58,8 +58,8 @@ def obtenerRostros():
             comenzarCaptura = db.child("Facial/IniciarCaptura").get()
             print("comenzarcaptura")
             print(comenzarCaptura.val())
-            print("enciendo los ledes")
-            ledes.on()
+            
+
         except:
             print("Favor de conectar a internet")
         if comenzarCaptura.val()  == "True":
@@ -80,9 +80,10 @@ def obtenerRostros():
                     for i in range(3):
                         print("Inicia en " +str(3-i))
                         time.sleep(1)
-#                    ledes.on()
+                    print("enciendo los ledes")
+                    ledes.on()
                     deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue)
-                    videoCapture.release()
+#                    videoCapture.release()
                     ledes.off()
                     if deteccion_correcta==True:
                         NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
