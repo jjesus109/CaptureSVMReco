@@ -72,6 +72,7 @@ def obtenerRostros(ledes):
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
                     deteccionActivadaUsuario = deteccionActivadaUsuario.val()
                     deteccion_correcta,p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,ledes)
+                    videoCapture.release()
                     if deteccion_correcta==False:
                         indexCamara += 1
                         
