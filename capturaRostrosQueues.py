@@ -113,9 +113,6 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         return conexionCamara,p, inputQueue, outputQueue,video_capture 
     else:
         print("No se pudo conectar con la camara")
-#        video_capture.release
         # NO se pudo conectar con camara
         conexionCamara = False
-        #termino de proceso y de queue
-#        video_capture.release()
         return conexionCamara,p, inputQueue, outputQueue,video_capture 
