@@ -114,9 +114,7 @@ NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strfti
 #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
 pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 import validarRostro as vR
-from gpiozero import PWMLED
-ledes = PWMLED(17)
-ledes.value = 0.0
+
 while True:
 #    diccionarioUsuarios = {'3': 'Edson', '1': 'qwert', '2': 'Raul'}
 #    keys = list(diccionarioUsuarios.keys())
@@ -157,7 +155,7 @@ print("Inicia reconocimiento de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
 
 import recog_queues as rL
-from gpiozero import MotionSensor, LED
+from gpiozero import MotionSensor
 
 pir = MotionSensor(4) # Numero de pin de raspberry
 
