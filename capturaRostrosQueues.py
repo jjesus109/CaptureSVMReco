@@ -53,8 +53,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         print("Esta vivo el proceso??")
         print(p.is_alive())
     
-    video_capture.set(3 ,312)
-    video_capture.set(4, 512)
+#    video_capture.set(3 ,312)
+#    video_capture.set(4, 512)
     
     if video_capture.isOpened():
         print("Inicializacion de camara exitosa")
