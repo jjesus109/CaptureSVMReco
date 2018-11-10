@@ -36,12 +36,13 @@ def filtrar(carpeta):
     for im in folders:
 #        label =int(im[0])
         Rimagen = carpeta+im
+#        print(Rimagen)
         imagen=cv2.imread(Rimagen)
         gris = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
     #    gris = cv2.cvtColor(image,cv2.)
         gris,crop_img = detect(gris)
         # no reconcoe algun rostro
-        if n<4:
+        if n<10:
             os.remove(Rimagen)
         n += 1
         if crop_img.all()==0:
