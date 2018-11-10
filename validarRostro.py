@@ -35,7 +35,7 @@ def filtrar(carpeta):
     n = 0
     for im in folders:
 #        label =int(im[0])
-        Rimagen = carpeta+im
+        Rimagen = carpeta+"/"+im
 #        print(Rimagen)
         imagen=cv2.imread(Rimagen)
         gris = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
