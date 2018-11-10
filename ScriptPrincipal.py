@@ -113,6 +113,8 @@ NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strfti
 #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
 pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 import validarRostro as vR
+from gpiozero import PWMLED
+ledes = PWMLED(17)
 while True:
 #    diccionarioUsuarios = {'3': 'Edson', '1': 'qwert', '2': 'Raul'}
 #    keys = list(diccionarioUsuarios.keys())
@@ -130,6 +132,7 @@ while True:
             errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
         except:
             print("Fallo en metodo de obtencion de rostros")
+            ledes.value = 0
         if errorObtencion ==False:
             try:
                 

@@ -69,11 +69,11 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     video_capture = cv2.VideoCapture(indexCamara)
     if video_capture.isOpened():
 #        ledes.on()
-        ledes.value = 0.6
+        
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
         while True:
-                
+            ledes.value = 0.6        
             _, frame = video_capture.read()
 #
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
