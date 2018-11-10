@@ -44,7 +44,9 @@ def filtrar(carpeta):
         # no reconcoe algun rostro
         if n<10:
             os.remove(Rimagen)
-        n += 1
+        n = n + 1
+        if n==10:
+            n=0
         if crop_img.all()==0:
             #borrar la imagen
             os.remove(Rimagen)
