@@ -52,7 +52,7 @@ def filtrar(carpeta):
                 os.remove(Rimagen)
             else:
                  tamanioCara = np.shape(crop_img)
-                 if tamanioCara[0] > resizeW:
+                 if tamanioCara[0] >int(resizeW*0.83):
         #        crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                      crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                      cv2.imwrite(Rimagen, crop_img)
