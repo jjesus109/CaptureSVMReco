@@ -34,7 +34,6 @@ def filtrar(carpeta):
                "2_1.","2_2.","2_3.","2_4.","2_5.","2_6.","2_7.","2_8.","2_9.",
                "3_1.","3_2.","3_3.","3_4.","3_5.","3_6.","3_7.","3_8.","3_9."]
     folders = os.listdir(carpeta)
-    n = 0
     for im in folders:
         numeroImagen =int(im[0:4])
         Rimagen = carpeta+"/"+im
