@@ -40,8 +40,9 @@ def SVM(carpeta,target_names):
         imagen=cv2.imread(Rimagen)
         image = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
         tamanio = np.shape(image)
-        if tamanio[0]==130:
+        if tamanio[0]!=130:
             image = cv2.resize(image,(resizeW,resizeH))
+#            os.
 #        lbp = local_binary_pattern(image, n_points, radius, 'default')
 #        im_flat = lbp.ravel() 
         im_flat = image.ravel() 
