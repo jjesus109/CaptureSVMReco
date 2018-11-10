@@ -88,23 +88,23 @@ def obtenerRostros():
                     print("enciendo los ledes")
 
 #                    ledes.on()
-                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara, videoCapture)
+                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
                     videoCapture.release()
                     if deteccion_correcta== False:
-                        llamada=True
+                        
                         indexCamara += 1
                         
                         if indexCamara>=3:
                             indexCamara=0
 #                    ledes.off()
                     elif deteccion_correcta==True:
-                        llamada=True
+                        
                         NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
                         numeroUsuarios+=1
                         db.child("Facial").update({"Activacion":"False"})
                         print("Usuario capturado: "+deteccionActivadaUsuario)
                         print(NombresEtiquetas)
-                
+                    llamada=True
             diccionarioUsuarios ={}
             keys = list(diccionarioUsuarios.keys())
             keys.sort()

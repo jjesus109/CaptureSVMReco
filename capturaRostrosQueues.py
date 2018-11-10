@@ -32,12 +32,11 @@ def ajusteGamma(imagen,gamma=1.0):
 
 
 # se pasa el label del usuario desde el script principal
-def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue, indexCamara, video_capture ):
+def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue, indexCamara ):
 
-    if video_capture==0:
-        video_capture = cv2.VideoCapture(indexCamara)
-    else:
-        video_capture.open(indexCamara)
+    video_capture = cv2.VideoCapture(indexCamara)
+#    else:
+#        video_capture.open(indexCamara)
     # Configuración de queues        
     
     resizeW = 96
@@ -58,7 +57,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     
 #    video_capture.set(3 ,312)
 #    video_capture.set(4, 512)
-    
+    conexionCamara = True
+    conexionCamara = video_capture.isOpened()
     if video_capture.isOpened():
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
@@ -108,14 +108,9 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                 
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
                 break
-        # Conexion extiosa con Camara
-        time.sleep(0.1)   
-        conexionCamara = True 
-        video_capture.release()
-        cv2.destroyAllWindows()
-        return conexionCamara,p, inputQueue, outputQueue,video_capture 
-    else:
-        print("No se pudo conectar con la camara")
-        # NO se pudo conectar con camara
-        conexionCamara = False
-        return conexionCamara,p, inputQueue, outputQueue,video_capture 
+    time.sleep(0.1)   
+
+    video_capture.release()
+    cv2.destroyAllWindows()v
+        
+    return conexionCamara,p, inputQueue, outputQueue,video_capture 
