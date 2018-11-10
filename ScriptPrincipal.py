@@ -66,6 +66,7 @@ def obtenerRostros():
             
             p, inputQueue, outputQueue = 0 ,0 ,0
             llamada=False
+            videoCapture=0
 #            for i in range(len(nombreUsuarios)):
             NombresEtiquetas={}
             numeroUsuarios=1
@@ -86,8 +87,8 @@ def obtenerRostros():
 #                    video_capture = cv2.VideoCapture(0)
 #                    print("sSe conecto la camara?")
 #                    print(video_capture.isOpened())
-                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
-                    videoCapture.release()
+                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,videoCapture)
+                    
                     if deteccion_correcta== False:
                         indexCamara += 1
                         
@@ -109,15 +110,17 @@ def obtenerRostros():
             keys.sort()
             targetnames = []
             for i in keys:
+                
                 targetnames.append(diccionarioUsuarios[i])
                 nombreUsuarios = targetnames
             if deteccion_correcta == False:
                 print("Error al capturar los rostros")
                 errorCaptura = True
-#                videoCapture.release()
+                videoCapture.release()
+
             else:
                 errorCaptura = False
-#                videoCapture.release()
+                videoCapture.release()
                 print("Termino captura de rostros exitosament")
         else:
             print("Aun no se inicia la captura de rostros")
