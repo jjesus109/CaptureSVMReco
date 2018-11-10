@@ -44,10 +44,9 @@ def filtrar(carpeta):
         # no reconcoe algun rostro
         if n<10:
             os.remove(Rimagen)
-        n = n + 1
-        if n==10:
-            n=0
-        if crop_img.all()==0:
+        
+        
+        elif crop_img.all()==0:
             #borrar la imagen
             os.remove(Rimagen)
         else:
@@ -56,6 +55,9 @@ def filtrar(carpeta):
     #        crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                  crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                  cv2.imwrite(Rimagen, crop_img)
+        n = n + 1
+        if n==10:
+            n=0
     #        time.sleep(0.1)
 #    print()
             #obtenerPuroRostro
