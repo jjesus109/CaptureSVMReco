@@ -35,7 +35,7 @@ def ajusteGamma(imagen,gamma=1.0):
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue,video_capture ):
 
 
-    video_capture = cv2.VideoCapture(0)
+    video_capture = cv2.VideoCapture(1)
     # Configuración de queues        
     
     resizeW = 96
