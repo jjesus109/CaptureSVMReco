@@ -60,7 +60,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     numeroMuestrasRostros=160
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
-    
+    video_capture.set(3 ,312)
+    video_capture.set(4, 512)
 #    video_capture = cv2.VideoCapture(0)
     if video_capture.isOpened():
             

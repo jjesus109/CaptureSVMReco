@@ -97,6 +97,7 @@ def obtenerRostros():
                         print("Usuario capturado: "+deteccionActivadaUsuario)
                         print(NombresEtiquetas)
                 llamada=True
+                ledes.off()
             diccionarioUsuarios ={}
             keys = list(diccionarioUsuarios.keys())
             keys.sort()
