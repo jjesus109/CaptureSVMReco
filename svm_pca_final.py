@@ -34,7 +34,7 @@ def SVM(carpeta,target_names):
     folders = os.listdir(carpeta)
     for im in folders:
         label =int(im[0])
-        Rimagen = carpeta+im
+        Rimagen = carpeta+"/"+im
         imagen=cv2.imread(Rimagen)
         image = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
 #        lbp = local_binary_pattern(image, n_points, radius, 'default')
