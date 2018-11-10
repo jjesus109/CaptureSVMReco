@@ -14,10 +14,10 @@ def _detect_(inputQueue, outputQueue):
             gray = inputQueue.get()
             faces = face_cascade.detectMultiScale(gray, 1.3, 5)
             for (x, y, w, h) in faces:
-                medidasX1 = int(x*1.135)
-                medidasX2 = int(x+(w*0.82))
-                medidasY2 = int(y*1.2)
-                medidasY1 = int(y+(h*0.95))
+#                medidasX1 = int(x*1.135)
+#                medidasX2 = int(x+(w*0.82))
+#                medidasY2 = int(y*1.2)
+#                medidasY1 = int(y+(h*0.95))
                 vectorDim = [x,y+h,x+w,y] 
                 outputQueue.put(vectorDim)
 
@@ -35,18 +35,15 @@ def ajusteGamma(imagen,gamma=1.0):
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue,video_capture ):
 
 
-    
-    # Ajuste de ancho de espacio de visualizacion de camara
-#    video_capture.set(3,640)
-    # Ajuste de alto de espacion de visualizacion de camara
-#    video_capture.set(4,480)
-    #Ajustar frames por segundo
-#    video_capture.set(5,10)
-    
-    
+    video_capture = cv2.VideoCapture(0)
     # Configuración de queues        
-    vectorDim = [0,0,0,0]
+    
     resizeW = 96
+    vectorDim = [0,0,0,0]
+    tamanioCara =  (0,0,0)
+    numeroMuestrasRostros=160
+    numeroImagen = 1
+    numeroUsuarioActual = numeroUsuarios         
     if llamada == False:
         inputQueue = Queue(maxsize=1)
         outputQueue = Queue(maxsize=1)
@@ -56,25 +53,14 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         print("Esta vivo el proceso??")
         print(p.is_alive())
     
-    tamanioCara =  (0,0,0)
-    numeroMuestrasRostros=160
-    numeroImagen = 1
-    numeroUsuarioActual = numeroUsuarios         
     video_capture.set(3 ,312)
     video_capture.set(4, 512)
-#    video_capture = cv2.VideoCapture(0)
+    
     if video_capture.isOpened():
-            
-        
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
-        
-        
-    #        ledes.value = 0.6  
         while True:
-                  
             _, frame = video_capture.read()
-    #
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             CorreccionGamma = ajusteGamma(gray,1.8)
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
