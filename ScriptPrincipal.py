@@ -132,7 +132,7 @@ while True:
             errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
         except:
             print("Fallo en metodo de obtencion de rostros")
-            ledes.value = 0
+            
         if errorObtencion ==False:
             try:
                 
