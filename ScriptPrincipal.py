@@ -90,7 +90,7 @@ def obtenerRostros():
 #                    ledes.on()
                     deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara)
                     videoCapture.release()
-                    video_capture=0
+                    videoCapture=0
                     if deteccion_correcta== False:
                         
                         indexCamara += 1
