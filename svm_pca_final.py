@@ -23,7 +23,7 @@ def SVM(carpeta,target_names):
     import numpy as np
     import os
     import cv2  
-    from sklearn.cross_validation import train_test_split
+    from sklearn.model_selection import train_test_split
     from sklearn.grid_search import GridSearchCV
     from sklearn.metrics import classification_report
     from sklearn.metrics import confusion_matrix
