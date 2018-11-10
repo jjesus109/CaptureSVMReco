@@ -131,11 +131,11 @@ while True:
     NombresEtiquetas = 0
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
     if entrenamiento=="False":
-        try:
-            errorObtencion = True
-            errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
-        except:
-            print("Fallo en metodo de obtencion de rostros")
+#        try:
+        errorObtencion = True
+        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
+#        except:
+#            print("Fallo en metodo de obtencion de rostros")
             
         if errorObtencion ==False:
             try:
