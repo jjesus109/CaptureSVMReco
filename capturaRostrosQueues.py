@@ -32,7 +32,7 @@ def ajusteGamma(imagen,gamma=1.0):
 
 
 # se pasa el label del usuario desde el script principal
-def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue ):
+def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue,video_capture ):
 
 
     
@@ -61,7 +61,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
     
-    video_capture = cv2.VideoCapture(0)
+#    video_capture = cv2.VideoCapture(0)
     if video_capture.isOpened():
             
         
@@ -121,7 +121,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         return conexionCamara,p, inputQueue, outputQueue,video_capture 
     else:
         print("No se pudo conectar con la camara")
-        video_capture.release
+#        video_capture.release
         # NO se pudo conectar con camara
         conexionCamara = False
         #termino de proceso y de queue

@@ -9,7 +9,7 @@ import time
 import pathlib
 import capturaRostrosQueues as cr
 import svm_pca_final as svm
-
+import cv2
 # Activacion variable para saber cuando esta activado el sensor
 
 # conexion a firebase
@@ -82,8 +82,11 @@ def obtenerRostros():
                         time.sleep(1)
                     print("enciendo los ledes")
                     ledes.on()
-                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue)
-                    videoCapture.release
+                    video_capture = cv2.VideoCapture(0)
+                    print("sSe conecto la camara?")
+                    print(video_capture.isOpened())
+                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture)
+                    videoCapture.release()
                     print("se libero la camara?")
                     print(videoCapture.isOpened())
                     ledes.off()
