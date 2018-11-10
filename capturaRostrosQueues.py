@@ -128,6 +128,6 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         conexionCamara = False
     #termino de proceso y de queue
     
-    video_capture.release()
+#    video_capture.release()
     time.sleep(0.1)   
     return conexionCamara,p, inputQueue, outputQueue,video_capture 
