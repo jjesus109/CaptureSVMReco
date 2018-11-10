@@ -30,10 +30,20 @@ def ajusteGamma(imagen,gamma=1.0):
     return cv2.LUT(imagen,table)
 
 
-from gpiozero import LED
-ledes = LED(17)
+
 # se pasa el label del usuario desde el script principal
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue ):
+
+
+    video_capture = cv2.VideoCapture(0)
+    # Ajuste de ancho de espacio de visualizacion de camara
+#    video_capture.set(3,640)
+    # Ajuste de alto de espacion de visualizacion de camara
+#    video_capture.set(4,480)
+    #Ajustar frames por segundo
+#    video_capture.set(5,10)
+    
+    
     # Configuración de queues        
     vectorDim = [0,0,0,0]
     
@@ -46,27 +56,10 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         print("Esta vivo el proceso??")
         print(p.is_alive())
     print("se prenden los ledes")
-    ledes.on()
     tamanioCara =  (0,0,0)
-#    resizeW = 96
-#    resizeH = 130
     numeroMuestrasRostros=160
-
     numeroImagen = 1
-#    numeroUsuarioActual= 1
-    numeroUsuarioActual = numeroUsuarios 
-    print("La captura de rostros del usuario "+str(numeroUsuarioActual))
-    for i in range(3):
-        print("Inicia en " +str(3-i))
-        time.sleep(1)
-        
-    video_capture = cv2.VideoCapture(0)
-    # Ajuste de ancho de espacio de visualizacion de camara
-    video_capture.set(3,640)
-    # Ajuste de alto de espacion de visualizacion de camara
-    video_capture.set(4,480)
-    #Ajustar frames por segundo
-    video_capture.set(5,10)
+    numeroUsuarioActual = numeroUsuarios         
     if video_capture.isOpened():
         
         
@@ -119,8 +112,6 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             if numeroImagen >numeroMuestrasRostros:
                 
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
-#                ledes.value = 0
-                ledes.off()
                 break
         # Conexion extiosa con Camara
         conexionCamara = True 
