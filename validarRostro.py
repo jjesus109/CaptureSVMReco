@@ -35,7 +35,7 @@ def filtrar(carpeta):
                "3_1.","3_2.","3_3.","3_4.","3_5.","3_6.","3_7.","3_8.","3_9."]
     folders = os.listdir(carpeta)
     for im in folders:
-        numeroImagen =int(im[0:4])
+        numeroImagen =im[0:4]
         Rimagen = carpeta+"/"+im
 #        print(Rimagen)
         imagen=cv2.imread(Rimagen)
