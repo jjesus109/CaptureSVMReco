@@ -98,6 +98,9 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             # Solo se deje un usuario por que se realizará por usuario    
     #            print("numeroImagen")
             print(numeroImagen)
+            cv2.imshow('Video', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+               break
             if numeroImagen >numeroMuestrasRostros:
                 
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
@@ -106,6 +109,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         time.sleep(0.1)   
         conexionCamara = True 
         video_capture.release()
+        cv2.destroyAllWindows()
         return conexionCamara,p, inputQueue, outputQueue,video_capture 
     else:
         print("No se pudo conectar con la camara")
