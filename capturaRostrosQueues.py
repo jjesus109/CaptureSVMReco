@@ -34,12 +34,9 @@ from gpiozero import LED
 ledes = LED(17)
 # se pasa el label del usuario desde el script principal
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue ):
-    print("estos son el len")
-    print(numeroUsuarios)
     # Configuración de queues        
-
     vectorDim = [0,0,0,0]
-    print("[INFO] starting process...")
+    
     if llamada == False:
         inputQueue = Queue(maxsize=1)
         outputQueue = Queue(maxsize=1)
@@ -48,10 +45,11 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         p.start()
         print("Esta vivo el proceso??")
         print(p.is_alive())
-    
+    print("se prenden los ledes")
+    ledes.on()
     tamanioCara =  (0,0,0)
-    resizeW = 96
-    resizeH = 130
+#    resizeW = 96
+#    resizeH = 130
     numeroMuestrasRostros=160
 
     numeroImagen = 1
@@ -74,7 +72,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
-        ledes.on()
+        
         
 #        ledes.value = 0.6  
         while True:
