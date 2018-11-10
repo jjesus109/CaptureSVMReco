@@ -72,7 +72,7 @@ def obtenerRostros():
             numeroUsuarios=1
             numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
             numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
-            while numeroUsuarios<numeroUsuariosAEntrenar:
+            while numeroUsuarios<numeroUsuariosAEntrenar+1:
                 deteccionActivada = db.child("Facial/Activacion").get()
                 if deteccionActivada.val()=="True":
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
@@ -141,19 +141,19 @@ while True:
 #            print("Fallo en metodo de obtencion de rostros")
             
         if errorObtencion ==False:
-            try:
+#            try:
                 
-                vR.filtrar(NombreCarpetaPrueba)
-                NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
-                svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
-                print("Termino modelo")
-                print("Coninua con identifcacion de rostros")
-                db.child("Facial").update({"EntrenamientoHecho":"True"})  
-                break
-    
-            except:
-                print("Fallo modelo")
-                print("reintentando")
+            vR.filtrar(NombreCarpetaPrueba)
+            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
+            svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
+            print("Termino modelo")
+            print("Coninua con identifcacion de rostros")
+            db.child("Facial").update({"EntrenamientoHecho":"True"})  
+            break
+
+#            except:
+#                print("Fallo modelo")
+#                print("reintentando")
     else:
         break
     
