@@ -6,12 +6,12 @@ Created on Tue Oct  9 19:27:45 2018
 """
 import cv2
 import numpy as np
-
 def ajusteGamma(imagen,gamma=1.0):
     invGamma =  1.0 / gamma
     table = np.array([((i/255.0)**invGamma)*255
         for i in np.arange(0,256)]).astype("uint8")
     return cv2.LUT(imagen,table)
+
 valorGamma=1.2
 valorGammaAlto=False
 EncontroUsuario=False
