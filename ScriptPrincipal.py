@@ -115,6 +115,7 @@ pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 import validarRostro as vR
 from gpiozero import PWMLED
 ledes = PWMLED(17)
+ledes.value = 0.0
 while True:
 #    diccionarioUsuarios = {'3': 'Edson', '1': 'qwert', '2': 'Raul'}
 #    keys = list(diccionarioUsuarios.keys())
