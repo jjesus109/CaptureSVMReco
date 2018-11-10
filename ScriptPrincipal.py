@@ -84,6 +84,8 @@ def obtenerRostros():
                     ledes.on()
                     deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue)
                     videoCapture.release
+                    print("se libero la camara?")
+                    print(videoCapture.isOpened())
                     ledes.off()
                     if deteccion_correcta==True:
                         NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
