@@ -83,7 +83,7 @@ def obtenerRostros():
                     print("enciendo los ledes")
                     ledes.on()
                     deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue)
-#                    videoCapture.release()
+                    videoCapture.release
                     ledes.off()
                     if deteccion_correcta==True:
                         NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
@@ -102,10 +102,10 @@ def obtenerRostros():
             if deteccion_correcta == False:
                 print("Error al capturar los rostros")
                 errorCaptura = True
-                videoCapture.release()
+#                videoCapture.release()
             else:
                 errorCaptura = False
-                videoCapture.release()
+#                videoCapture.release()
                 print("Termino captura de rostros exitosament")
         else:
             print("Aun no se inicia la captura de rostros")
