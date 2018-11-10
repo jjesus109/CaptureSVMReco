@@ -40,8 +40,8 @@ def conectarFirebase():
         return False, firebase, db, valores,entrenamiento
     return conexionExitosa, firebase, db, valores, entrenamiento.val()
 
-from gpiozero import LED
-ledes = LED(17)
+#from gpiozero import LED
+#ledes = LED(17)
 
 def obtenerRostros():
     
@@ -81,7 +81,7 @@ def obtenerRostros():
                         print("Inicia en " +str(3-i))
                         time.sleep(1)
                     print("enciendo los ledes")
-                    ledes.on()
+#                    ledes.on()
                     video_capture = cv2.VideoCapture(0)
                     print("sSe conecto la camara?")
                     print(video_capture.isOpened())
@@ -89,7 +89,7 @@ def obtenerRostros():
                     videoCapture.release()
                     print("se libero la camara?")
                     print(videoCapture.isOpened())
-                    ledes.off()
+#                    ledes.off()
                     if deteccion_correcta==True:
                         NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
                         numeroUsuarios+=1
@@ -97,7 +97,7 @@ def obtenerRostros():
                         print("Usuario capturado: "+deteccionActivadaUsuario)
                         print(NombresEtiquetas)
                 llamada=True
-                ledes.off()
+#                ledes.off()
             diccionarioUsuarios ={}
             keys = list(diccionarioUsuarios.keys())
             keys.sort()
