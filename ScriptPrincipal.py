@@ -119,14 +119,6 @@ pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 import validarRostro as vR
 
 while True:
-#    diccionarioUsuarios = {'3': 'Edson', '1': 'qwert', '2': 'Raul'}
-#    keys = list(diccionarioUsuarios.keys())
-#    keys.sort()
-#    targetnames = []
-#    for i in keys:
-#        targetnames.append(diccionarioUsuarios[i])
-#        nombreUsuarios = targetnames
-
     NombresEtiquetas = 0
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
     if entrenamiento=="False":

@@ -35,7 +35,7 @@ def ajusteGamma(imagen,gamma=1.0):
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue ):
 
 
-    video_capture = cv2.VideoCapture(0)
+    
     # Ajuste de ancho de espacio de visualizacion de camara
 #    video_capture.set(3,640)
     # Ajuste de alto de espacion de visualizacion de camara
@@ -46,7 +46,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     
     # Configuración de queues        
     vectorDim = [0,0,0,0]
-    
+    resizeW = 96
     if llamada == False:
         inputQueue = Queue(maxsize=1)
         outputQueue = Queue(maxsize=1)
@@ -55,73 +55,76 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         p.start()
         print("Esta vivo el proceso??")
         print(p.is_alive())
-    print("se prenden los ledes")
+    
     tamanioCara =  (0,0,0)
     numeroMuestrasRostros=160
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
-    if video_capture.isOpened():
-        
-        
-        print("Inicializacion de camara exitosa")
-        print("Comienza captura de video")
-        
-        
-#        ledes.value = 0.6  
-        while True:
-                  
-            _, frame = video_capture.read()
-#
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            CorreccionGamma = ajusteGamma(gray,1.8)
-            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-            Clahe_Gamma = clahe.apply(CorreccionGamma)
-            cv2.imshow("CAPTURA",Clahe_Gamma)
-            if inputQueue.empty():
-                inputQueue.put(Clahe_Gamma)
-            if not outputQueue.empty():
-                vectorDim = outputQueue.get()
-            if vectorDim !=[0,0,0,0]:
-                medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
-                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
-                crop_img = Clahe_Gamma[medidasY2:medidasY1, medidasX1:medidasX2]
-#                crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-                # Para evitar que devuelve basura en este caso un entero cuando 
-                # no reconcoe algun rostro
-                if crop_img.all()==0:
-                    tamanioCara = (0,0,0)
-#                    print("tamaño de cara pequeño")
-                else:
-                    tamanioCara = np.shape(crop_img)
-#                    print("se hace el crop")
-                
-                """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
-                PERSONA FRENTE A LA CAMAR"""
-                
-                if tamanioCara[0] >int(resizeW*0.7):
-                    # ajust de tamaño de rostros
-                    crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
-                    cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".png", crop_img)
-                    time.sleep(0.1)
-                    numeroImagen += 1
+    
+    video_capture = cv2.VideoCapture(0)
+    try:
+        if video_capture.isOpened():
             
             
-            # Solo se deje un usuario por que se realizará por usuario    
-#            print("numeroImagen")
-            print(numeroImagen)
-            if numeroImagen >numeroMuestrasRostros:
+            print("Inicializacion de camara exitosa")
+            print("Comienza captura de video")
+            
+            
+        #        ledes.value = 0.6  
+            while True:
+                      
+                _, frame = video_capture.read()
+        #
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                CorreccionGamma = ajusteGamma(gray,1.8)
+                clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+                Clahe_Gamma = clahe.apply(CorreccionGamma)
+                cv2.imshow("CAPTURA",Clahe_Gamma)
+                if inputQueue.empty():
+                    inputQueue.put(Clahe_Gamma)
+                if not outputQueue.empty():
+                    vectorDim = outputQueue.get()
+                if vectorDim !=[0,0,0,0]:
+                    medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
+                    cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
+                    crop_img = Clahe_Gamma[medidasY2:medidasY1, medidasX1:medidasX2]
+        #                crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+                    # Para evitar que devuelve basura en este caso un entero cuando 
+                    # no reconcoe algun rostro
+                    if crop_img.all()==0:
+                        tamanioCara = (0,0,0)
+        #                    print("tamaño de cara pequeño")
+                    else:
+                        tamanioCara = np.shape(crop_img)
+        #                    print("se hace el crop")
+                    
+                    """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
+                    PERSONA FRENTE A LA CAMAR"""
+                    
+                    if tamanioCara[0] >int(resizeW*0.7):
+                        # ajust de tamaño de rostros
+                        crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
+                        cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".png", crop_img)
+                        time.sleep(0.1)
+                        numeroImagen += 1
                 
-                print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
-                break
-        # Conexion extiosa con Camara
-        conexionCamara = True 
-    
-    else:
-        print("No se pudo conectar con la camara")
-        # NO se pudo conectar con camara
-        conexionCamara = False
-    #termino de proceso y de queue
-    
-#    video_capture.release()
+                
+                # Solo se deje un usuario por que se realizará por usuario    
+        #            print("numeroImagen")
+                print(numeroImagen)
+                if numeroImagen >numeroMuestrasRostros:
+                    
+                    print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
+                    break
+            # Conexion extiosa con Camara
+            conexionCamara = True 
+        
+        else:
+            print("No se pudo conectar con la camara")
+            # NO se pudo conectar con camara
+            conexionCamara = False
+            #termino de proceso y de queue
+    except:
+        video_capture.release()
     time.sleep(0.1)   
     return conexionCamara,p, inputQueue, outputQueue,video_capture 
