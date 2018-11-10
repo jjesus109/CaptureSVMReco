@@ -83,6 +83,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             CorreccionGamma = ajusteGamma(gray,1.8)
             clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
             Clahe_Gamma = clahe.apply(CorreccionGamma)
+            cv2.imshow("CAPTURA",Clahe_Gamma)
             if inputQueue.empty():
                 inputQueue.put(Clahe_Gamma)
             if not outputQueue.empty():
