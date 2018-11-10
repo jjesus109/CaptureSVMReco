@@ -30,8 +30,8 @@ def ajusteGamma(imagen,gamma=1.0):
     return cv2.LUT(imagen,table)
 
 
-from gpiozero import LED
-ledes = LED(17)
+from gpiozero import PWMLED
+ledes = PWMLED(17)
 # se pasa el label del usuario desde el script principal
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue,indexCamara ):
     print("estos son el len")
@@ -68,7 +68,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         time.sleep(1)
     video_capture = cv2.VideoCapture(indexCamara)
     if video_capture.isOpened():
-        ledes.on()
+#        ledes.on()
+        ledes.value = 0.5
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
         while True:

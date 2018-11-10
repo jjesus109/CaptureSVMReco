@@ -79,7 +79,7 @@ def obtenerRostros():
                             indexCamara=0
                     
                     else:
-                        NombresEtiquetas.update({str(numeroUsuarios):deteccionActivadaUsuario})
+                        NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
                         numeroUsuarios+=1
                         db.child("Facial").update({"Activacion":"False"})
                         print("Usuario capturado: "+deteccionActivadaUsuario)
@@ -99,6 +99,7 @@ def obtenerRostros():
             else:
                 errorCaptura = False
                 videoCapture.release()
+                print("Termino captura de rostros exitosament")
         else:
             print("Aun no se inicia la captura de rostros")
             errorCaptura = True

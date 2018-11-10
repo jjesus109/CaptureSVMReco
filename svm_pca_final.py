@@ -19,7 +19,7 @@ labelsAug =[]
 #nro = 0
 def SVM(carpeta,target_names):
     from time import time
-    import matplotlib.pyplot as pl
+#    import matplotlib.pyplot as pl
     import numpy as np
     import os
     import cv2  
@@ -29,7 +29,7 @@ def SVM(carpeta,target_names):
     from sklearn.metrics import confusion_matrix
     from sklearn.decomposition import RandomizedPCA
     from sklearn.svm import SVC
-    from skimage.feature import local_binary_pattern
+#    from skimage.feature import local_binary_pattern
     t0 = time()
     folders = os.listdir(carpeta)
     for im in folders:
