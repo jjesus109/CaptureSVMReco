@@ -24,10 +24,10 @@ def SVM(carpeta,target_names):
     import os
     import cv2  
     from sklearn.model_selection import train_test_split
-    from sklearn.grid_search import GridSearchCV
+    from sklearn.model_selection import GridSearchCV
     from sklearn.metrics import classification_report
     from sklearn.metrics import confusion_matrix
-    from sklearn.decomposition import RandomizedPCA
+    from sklearn.decomposition import PCA
     from sklearn.svm import SVC
 #    from skimage.feature import local_binary_pattern
     t0 = time()
@@ -83,7 +83,7 @@ def SVM(carpeta,target_names):
     #
     print("Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0]))
     t0 = time()
-    pca = RandomizedPCA(n_components=n_components, whiten=True).fit(X_train)
+    pca = PCA(n_components=n_components, whiten=True).fit(X_train)
     print("done in %0.3fs" % (time() - t0))
     
     #eigenfaces = pca.components_.reshape((n_components, h, w))
