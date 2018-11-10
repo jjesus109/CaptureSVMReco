@@ -48,7 +48,7 @@ from gpiozero import LED
 ledes = LED(17)
 
 def obtenerRostros():
-    indexCamara = 1
+    indexCamara = 0
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
