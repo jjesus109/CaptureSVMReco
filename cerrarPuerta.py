@@ -48,6 +48,7 @@ pir = MotionSensor(4) # Numero de pin de raspberry
 
 conexionExitosa, firebase, db, valores, entrenamiento = conectarFirebase()
 if conexionExitosa:
+    print("SE conecnto con firebase")
     while True:
         deteccionPasillo = db.child("Habitaciones/Pasillo2/Presencia").get()
         deteccionPasillo = deteccionPasillo.val()
@@ -57,7 +58,8 @@ if conexionExitosa:
             if pir.motion_detected == False and deteccionPasillo== False :
                 db.child("Habitaciones/Entrada").update({"Puerta":"Apagar"})
                 time.sleep(10)        
-            
+        
+        time.sleep(1)     
             
         
         
