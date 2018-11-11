@@ -167,7 +167,7 @@ print("Inicia reconocimiento de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
 
 import recog_queues as rL
-from gpiozero import MotionSensor
+from gpiozero import MotionSensor, LED
 
 pir = MotionSensor(4) # Numero de pin de raspberry
 
