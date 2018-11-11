@@ -46,7 +46,7 @@ def conectarFirebase():
 
 
 
-def obtenerRostros():
+def obtenerRostros(indexCamara):
     
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
@@ -68,7 +68,6 @@ def obtenerRostros():
         if comenzarCaptura.val()  == "True":
             
             p, inputQueue, outputQueue = 0 ,0 ,0            
-            videoCapture=0
 #            for i in range(len(nombreUsuarios)):
             NombresEtiquetas={}
             numeroUsuarios=1
@@ -76,6 +75,16 @@ def obtenerRostros():
             numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
             llamada=False
             video_capture = cv2.VideoCapture(indexCamara)
+            while video_capture.isOpened() != False:
+                video_capture.release()
+                if indexCamara >3:
+                    indexCamara=-1
+                else:
+                    indexCamara += 1
+                time.sleep(0.5)
+                video_capture = cv2.VideoCapture(indexCamara)
+            if video_capture.isOpened():
+                print("Se conecto bien con la camara")
             while numeroUsuarios<numeroUsuariosAEntrenar+1:
                 deteccionActivada = db.child("Facial/Activacion").get()
                 if deteccionActivada.val()=="True":
@@ -88,7 +97,7 @@ def obtenerRostros():
                     print("enciendo los ledes")
                     
                     
-                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,video_capture, ledes)
+                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture, ledes)
 #                    videoCapture.release()
 #                    videoCapture=0
 #                    if deteccion_correcta== False:
@@ -129,7 +138,7 @@ def obtenerRostros():
             errorCaptura = True
             
             
-    return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture
+    return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara
 
 
 import validarRostro as vR
@@ -143,7 +152,7 @@ while True:
         pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 #        try:
         errorObtencion = True
-        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture = obtenerRostros()
+        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara= obtenerRostros(indexCamara)
 #        except:
 #            print("Fallo en metodo de obtencion de rostros")
             
@@ -163,6 +172,14 @@ while True:
 #                print("reintentando")
     else:
         video_capture = cv2.VideoCapture(indexCamara)
+        while video_capture.isOpened() != False:
+            video_capture.release()
+            if indexCamara >3:
+                indexCamara=-1
+            else:
+                indexCamara += 1
+            time.sleep(0.5)
+            video_capture = cv2.VideoCapture(indexCamara)
         break
     
 
