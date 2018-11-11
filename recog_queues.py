@@ -143,7 +143,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
                 crop_img = Clahe_Gamma[medidasY2:medidasY1, medidasX1:medidasX2]
                 tamanioCara = np.shape(crop_img)
                 if tamanioCara[0] >int(resizeW*0.7):
-                    cv2.imwrite(str(n),crop_img)
+                    cv2.imwrite(str(n)+".png",crop_img)
                     n += 1
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                     imagenFlatten = crop_img.ravel()
