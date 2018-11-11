@@ -95,7 +95,8 @@ radius = 4
 n_points = 8
 nro = 0
 from skimage.feature import local_binary_pattern
-def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_capture):
+
+def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_capture, ledes):
     tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
     datos = pickle.load(tomaDatos)
     clf = datos["modelo"]
@@ -128,7 +129,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
 #    video_capture.set(4, 512)
     print("Se comunico con camara:" +str(video_capture.isOpened()))
     if video_capture.isOpened():
-#        ledes.on()
+        ledes.on()
         n=1
         while True:
             _, frame = video_capture.read()
@@ -193,7 +194,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                         cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                         db.child("Facial").update({"RostroValidado":"True"})
                         db.child("Facial").update({"NombreRostroReconocido":nombre})
-#                        ledes.off()
+                        ledes.off()
                         break
                     else:
 #                        print("aun no")
@@ -206,7 +207,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
         
             cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
             numeroappend += 1
-            cv2.imshow('Video', frame)
+#            cv2.imshow('Video', frame)
         ##    cv2.imshow('Video correccion', Clahe_Gamma)
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -215,5 +216,5 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
 #    p.join()    
     print("Salio del while")
 #    video_capture.release()
-    cv2.destroyAllWindows()
+#    cv2.destroyAllWindows()
     return conexionCamara, p, inputQueue, outputQueue,video_capture,nombre 

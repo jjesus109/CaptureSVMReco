@@ -10,6 +10,8 @@ import pathlib
 import capturaRostrosQueues as cr
 import svm_pca_final as svm
 import cv2
+from gpiozero import LED
+ledes = LED(17)
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
 
@@ -42,8 +44,7 @@ def conectarFirebase():
         return False, firebase, db, valores,entrenamiento
     return conexionExitosa, firebase, db, valores, entrenamiento.val()
 
-from gpiozero import LED
-ledes = LED(17)
+
 
 def obtenerRostros():
     indexCamara = 0
@@ -86,8 +87,8 @@ def obtenerRostros():
                         time.sleep(1)
                     print("enciendo los ledes")
                     
-                    ledes.on()
-                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,video_capture)
+                    
+                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,video_capture, ledes)
 #                    videoCapture.release()
 #                    videoCapture=0
 #                    if deteccion_correcta== False:
@@ -96,7 +97,7 @@ def obtenerRostros():
 #                        
 #                        if indexCamara>=3:
 #                            indexCamara=0
-                    ledes.off()
+                    
                     if deteccion_correcta==True:
                         
                         NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
@@ -117,11 +118,11 @@ def obtenerRostros():
             if deteccion_correcta == False:
                 print("Error al capturar los rostros")
                 errorCaptura = True
-                videoCapture.release()
+#                videoCapture.release()
 
             else:
                 errorCaptura = False
-                videoCapture.release()
+#                videoCapture.release()
                 print("Termino captura de rostros exitosament")
         else:
             print("Aun no se inicia la captura de rostros")
@@ -164,11 +165,11 @@ while True:
         break
     
 
-print("Inicia reconocimiento de rostros")
+print("Inicia clasificación de rostros")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
 
 import recog_queues as rL
-from gpiozero import MotionSensor, LED
+from gpiozero import MotionSensor
 
 pir = MotionSensor(4) # Numero de pin de raspberry
 
@@ -186,10 +187,10 @@ while True:
     if pir.motion_detected:
     
         print("Index actual = " + str(indexCamara))
-        ledes.on()
-        conexionCamara, p, inputQueue, outputQueue, vd,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture)
+#        ledes.on()
+        conexionCamara, p, inputQueue, outputQueue, vd,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes)
 #        vd.release()
-        ledes.off()
+#        ledes.off()
         if nombre=="Desconocido":
             time.sleep(4)
         else:

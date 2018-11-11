@@ -36,9 +36,9 @@ def ajusteGamma(imagen,gamma=1.0):
 
 
 # se pasa el label del usuario desde el script principal
-def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue, indexCamara , video_capture):
+def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue, indexCamara , video_capture, ledes):
 
-    
+
 #    else:
 #        video_capture.open(indexCamara)
     # Configuración de queues        
@@ -65,6 +65,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     conexionCamara = True
     conexionCamara = video_capture.isOpened()
     if video_capture.isOpened():
+        ledes.on()
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
         while True:
@@ -108,17 +109,17 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             # Solo se deje un usuario por que se realizará por usuario    
     #            print("numeroImagen")
             print(numeroImagen)
-            cv2.imshow('Video', frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-               break
+#            cv2.imshow('Video', frame)
+#            if cv2.waitKey(1) & 0xFF == ord('q'):
+#               break
             if numeroImagen >numeroMuestrasRostros:
-                
+                ledes.off()
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
                 break
     time.sleep(0.1)   
 
 #    video_capture.release()
     
-    cv2.destroyAllWindows()
+#    cv2.destroyAllWindows()
         
     return conexionCamara,p, inputQueue, outputQueue,video_capture 
