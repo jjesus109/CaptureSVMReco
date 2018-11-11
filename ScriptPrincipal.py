@@ -88,7 +88,7 @@ def obtenerRostros():
                     print("enciendo los ledes")
                     
                     
-                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,video_capture, ledes)
+                    deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue, indexCamara,video_capture)
 #                    videoCapture.release()
 #                    videoCapture=0
 #                    if deteccion_correcta== False:
@@ -188,7 +188,7 @@ while True:
     
         print("Index actual = " + str(indexCamara))
 #        ledes.on()
-        conexionCamara, p, inputQueue, outputQueue, vd,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes)
+        conexionCamara, p, inputQueue, outputQueue, vd,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture)
 #        vd.release()
 #        ledes.off()
         if nombre=="Desconocido":
