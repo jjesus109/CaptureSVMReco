@@ -75,6 +75,7 @@ def obtenerRostros(indexCamara):
             numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
             llamada=False
             video_capture = cv2.VideoCapture(indexCamara)
+            print("conectando con la camara...")
             while video_capture.isOpened() != False:
                 video_capture.release()
                 if indexCamara >3:
@@ -83,6 +84,7 @@ def obtenerRostros(indexCamara):
                     indexCamara += 1
                 time.sleep(0.5)
                 video_capture = cv2.VideoCapture(indexCamara)
+                print("...")
             if video_capture.isOpened():
                 print("Se conecto bien con la camara")
             while numeroUsuarios<numeroUsuariosAEntrenar+1:
