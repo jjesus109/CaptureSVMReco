@@ -177,7 +177,7 @@ pir = MotionSensor(4) # Numero de pin de raspberry
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
 indexCamara=1
-
+video_capture = cv2.VideoCapture(indexCamara)
 
 while True:
 
@@ -186,8 +186,8 @@ while True:
     
         print("Index actual = " + str(indexCamara))
         ledes.on()
-        conexionCamara, p, inputQueue, outputQueue, vd,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
-        vd.release()
+        conexionCamara, p, inputQueue, outputQueue, vd,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture)
+#        vd.release()
         ledes.off()
         if nombre=="Desconocido":
             time.sleep(2)
