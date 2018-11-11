@@ -14,7 +14,7 @@ from gpiozero import LED
 ledes = LED(17)
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-
+indexCamara = -1
 
 # conexion a firebase
 def conectarFirebase():
@@ -47,7 +47,7 @@ def conectarFirebase():
 
 
 def obtenerRostros():
-    indexCamara = 0
+    
     nombreUsuarios = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
@@ -129,7 +129,7 @@ def obtenerRostros():
             errorCaptura = True
             
             
-    return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas
+    return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture
 
 
 import validarRostro as vR
@@ -143,7 +143,7 @@ while True:
         pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 #        try:
         errorObtencion = True
-        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
+        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture = obtenerRostros()
 #        except:
 #            print("Fallo en metodo de obtencion de rostros")
             
@@ -162,6 +162,7 @@ while True:
 #                print("Fallo modelo")
 #                print("reintentando")
     else:
+        video_capture = cv2.VideoCapture(indexCamara)
         break
     
 
@@ -178,8 +179,8 @@ pir = MotionSensor(4) # Numero de pin de raspberry
 #ya llamo a process
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
-indexCamara=0
-video_capture = cv2.VideoCapture(indexCamara)
+#indexCamara=0
+#video_capture = cv2.VideoCapture(indexCamara)
 
 while True:
     print("Index actual = " + str(indexCamara))
