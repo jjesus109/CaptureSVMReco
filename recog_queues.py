@@ -24,9 +24,9 @@ def detect(inputQueue, outputQueue):
             faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 #            print("Aqui en faces")
             for (x, y, w, h) in faces:
-                medidasX1 = int(x*1.2)                
+                medidasX1 = int(x*1.13)                
                 medidasX2 = int(x+(w*0.9))
-                medidasY2 = int(y*1.25)
+                medidasY2 = int(y*1.22)
                 medidasY1 = int(y+(h*0.98))
 #        cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
                 
