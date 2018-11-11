@@ -38,8 +38,10 @@ def ajusteGamma(imagen,gamma=1.0):
 # se pasa el label del usuario desde el script principal
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue , video_capture, ledes):
 
-
-#    else:
+    
+    if video_capture == 0:
+        video_capture = cv2.VideoCapture(0)    
+##    else:
 #        video_capture.open(indexCamara)
     # Configuración de queues        
     
