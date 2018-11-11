@@ -116,7 +116,7 @@ def SVM(carpeta,target_names):
               'gamma': [0.0001, 0.0005, 0.05,0.0007,0.07,0.007,0.006,0.001,0.002,0.003],
               }
     # for sklearn version 0.16 or prior, the class_weight parameter value is 'auto'
-    clf = GridSearchCV(SVC(class_weight='balanced',probability=True, decision_function_shape = 'ovo'), param_grid)
+    clf = GridSearchCV(SVC(class_weight='balanced',probability=True, decision_function_shape = 'ovo'), param_grid,cv =5)
     clf = clf.fit(X_train_pca, y_train)
     print("done in %0.3fs" % (time() - t0))
     print("Best estimator found by grid search:")
