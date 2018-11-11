@@ -8,7 +8,7 @@ from multiprocessing import Queue
 import time
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 from gpiozero import LED
-ledes = LED(17
+ledes = LED(17)
 
 
 def _detect_(inputQueue, outputQueue):
