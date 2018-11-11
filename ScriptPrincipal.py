@@ -77,10 +77,10 @@ def obtenerRostros(indexCamara):
             video_capture = cv2.VideoCapture(indexCamara)
             print("conectando con la camara...")
             para=False
-            while para!=False:
+            while True:
                 
                 if video_capture.isOpened():
-                    para=True
+                    break
                 video_capture.release()
                 if indexCamara >3:
                     print("Index actual "+ str(indexCamara)) 
