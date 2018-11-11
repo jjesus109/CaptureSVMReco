@@ -193,14 +193,14 @@ while True:
             time.sleep(2)
         else:
             time.sleep(10)    
-        if conexionCamara== False:
-            indexCamara += 1
-            
-            if indexCamara>=3:
-                indexCamara=0
-        else:
-            print("conexion camara extiosa")
-            print("encender leds")
+#        if conexionCamara== False:
+#            indexCamara += 1
+#            
+#            if indexCamara>=3:
+#                indexCamara=0
+#        else:
+#            print("conexion camara extiosa")
+#            print("encender leds")
             
         llamada= True
         print("Sale del reconocimiento")
