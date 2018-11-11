@@ -14,7 +14,7 @@ from gpiozero import LED
 ledes = LED(17)
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-indexCamara = -1
+indexCamara = 0
 
 # conexion a firebase
 def conectarFirebase():
@@ -76,20 +76,20 @@ def obtenerRostros(indexCamara):
             llamada=False
             video_capture = cv2.VideoCapture(indexCamara)
             print("conectando con la camara...")
-            para=False
-            while True:
-                
-                if video_capture.isOpened():
-                    break
-                video_capture.release()
-                if indexCamara >3:
-                    print("Index actual "+ str(indexCamara)) 
-                    indexCamara=-1
-                else:
-                    indexCamara += 1
-                time.sleep(0.5)
-                video_capture = cv2.VideoCapture(indexCamara)
-                print("...")
+#            para=False
+#            while True:
+#                
+#                if video_capture.isOpened():
+#                    break
+#                video_capture.release()
+#                if indexCamara >1:
+#                    print("Index actual "+ str(indexCamara)) 
+#                    indexCamara=0
+#                else:
+#                    indexCamara += 1
+#                time.sleep(1)
+#                video_capture = cv2.VideoCapture(indexCamara)
+#                print("...")
             if video_capture.isOpened():
                 print("Se conecto bien con la camara")
             while numeroUsuarios<numeroUsuariosAEntrenar+1:
