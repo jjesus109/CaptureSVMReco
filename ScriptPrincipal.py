@@ -13,9 +13,7 @@ import cv2
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
 
-NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-#NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
-pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+
 # conexion a firebase
 def conectarFirebase():
     conexionExitosa=True
@@ -139,16 +137,21 @@ while True:
     NombresEtiquetas = 0
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
     if entrenamiento=="False":
+#        NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
+        #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
+#        pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 #        try:
-        errorObtencion = True
-        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
+        NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del 2018_November_10_22_56_19"
+        errorObtencion = False
+        nombreUsuarios = ["Jorge", "Tanatiuh","Jesus"]
+#        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
 #        except:
 #            print("Fallo en metodo de obtencion de rostros")
             
         if errorObtencion ==False:
 #            try:
-            print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
-            vR.filtrar(NombreCarpetaPrueba)
+#            print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
+#            vR.filtrar(NombreCarpetaPrueba)
 #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
             print("Termino modelo")

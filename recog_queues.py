@@ -90,6 +90,11 @@ def mayorFrecuencia(dk2):
 
 #from gpiozero import LED
 #ledes = LED(17)
+     
+radius = 4
+n_points = 8
+nro = 0
+from skimage.feature import local_binary_pattern
 def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_capture):
     tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
     datos = pickle.load(tomaDatos)
@@ -147,6 +152,10 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                     n += 1
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                     cv2.imwrite(str(n)+".png",crop_img)
+                    crop_img = cv2.imread(str(n)+".png")
+                    crop_img = cv2.cvtColor(crop_img,cv2.COLOR_BGR2GRAY)
+                    lbp = local_binary_pattern(crop_img, n_points, radius, 'default')
+                    imagenFlatten = lbp.ravel()
                     imagenFlatten = crop_img.ravel()
                     imagenLista = imagenFlatten.tolist()
                     listaImagenes.append(imagenLista)

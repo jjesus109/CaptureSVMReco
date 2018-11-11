@@ -29,7 +29,11 @@ def SVM(carpeta,target_names):
     from sklearn.metrics import confusion_matrix
     from sklearn.decomposition import PCA
     from sklearn.svm import SVC
-#    from skimage.feature import local_binary_pattern
+    radius = 4
+    n_points = 8
+    
+    from skimage.feature import local_binary_pattern
+
     resizeW = 96
     resizeH = 130
     t0 = time()
@@ -43,9 +47,9 @@ def SVM(carpeta,target_names):
         if tamanio[0]!=130:
             image = cv2.resize(image,(resizeW,resizeH))
 #            os.
-#        lbp = local_binary_pattern(image, n_points, radius, 'default')
-#        im_flat = lbp.ravel() 
-        im_flat = image.ravel() 
+        lbp = local_binary_pattern(image, n_points, radius, 'default')
+        im_flat = lbp.ravel() 
+#        im_flat = image.ravel() 
         im_flat = im_flat.tolist()
         datosAug.append(im_flat)
         labelsAug.append(label)
