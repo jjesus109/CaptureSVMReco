@@ -76,7 +76,11 @@ def obtenerRostros(indexCamara):
             llamada=False
             video_capture = cv2.VideoCapture(indexCamara)
             print("conectando con la camara...")
-            while video_capture.isOpened() != False:
+            para=False
+            while para!=False:
+                
+                if video_capture.isOpened():
+                    para=True
                 video_capture.release()
                 if indexCamara >3:
                     indexCamara=-1
