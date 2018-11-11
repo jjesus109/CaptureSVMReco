@@ -8,8 +8,7 @@ import time
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 import pickle
 
-from gpiozero import LED
-ledes = LED(17)
+
 
 
 #from skimage.feature import local_binary_pattern
