@@ -177,6 +177,8 @@ pir = MotionSensor(4) # Numero de pin de raspberry
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
 indexCamara=1
+
+
 while True:
 
 #    """Leer datos del senosor de presencia"""
