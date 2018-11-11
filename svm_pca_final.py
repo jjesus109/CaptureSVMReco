@@ -84,16 +84,16 @@ def SVM(carpeta,target_names):
     
     ###############################################################################
     
-    X_train, X_test, y_train, y_test = train_test_split(datosRostrosA, labelRostrosA, test_size=0.2, random_state=15)
+    X_train, X_test, y_train, y_test = train_test_split(datosRostrosA, labelRostrosA, test_size=0.2, random_state=20)
     ###############################################################################
     # Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled
     # dataset): unsupervised feature extraction / dimensionality reduction
     #n_components =  int(X_train.shape[0]*2/4)
-    n_components = 70
+    n_components = 100
     #
     print("Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0]))
     t0 = time()
-    pca = PCA(n_components=n_components, whiten=True).fit(X_train)
+    pca = PCA(n_components=n_components,svd_solver='randomized', whiten=True).fit(X_train)
     print("done in %0.3fs" % (time() - t0))
     
     #eigenfaces = pca.components_.reshape((n_components, h, w))
@@ -112,11 +112,11 @@ def SVM(carpeta,target_names):
     print("Fitting the classifier to the training set")
     t0 = time()
     param_grid = {
-             'C': [500,100,50,10,5,11e3, 5e3, 1e4, 5e4, 1e5,5e5,1e6],
-              'gamma': [0.0001, 0.0005, 0.05,0.0007,0.07,0.007,0.006,0.001,0.002,0.003,0.004, 0.005,],
+             'C': [1000,500,100,50,10,5,11e3, 5e3, 1e4, 5e4,],
+              'gamma': [0.0001, 0.0005, 0.05,0.0007,0.07,0.007,0.006,0.001,0.002,0.003],
               }
     # for sklearn version 0.16 or prior, the class_weight parameter value is 'auto'
-    clf = GridSearchCV(SVC(class_weight='balanced',probability=True), param_grid)
+    clf = GridSearchCV(SVC(class_weight='balanced',probability=True, decision_function_shape = 'ovo'), param_grid)
     clf = clf.fit(X_train_pca, y_train)
     print("done in %0.3fs" % (time() - t0))
     print("Best estimator found by grid search:")
