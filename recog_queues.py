@@ -76,7 +76,7 @@ def obtenerModa(matriz,matrizlista):
     
 
 def mayorFrecuencia(dk2):
-     
+      
      valores=list(dk2.values())
      llaves=list(dk2.keys())
      if llaves[valores.index(max(valores))]==-1:
@@ -145,7 +145,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                 vectorDim = outputQueue.get()
             if vectorDim !=[0,0,0,0]:
                 medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
-                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
+                cv2.rectangle(Clahe_Gamma, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
                 crop_img = Clahe_Gamma[medidasY2:medidasY1, medidasX1:medidasX2]
                 tamanioCara = np.shape(crop_img)
                 if tamanioCara[0] >int(resizeW*0.7):
@@ -160,7 +160,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                     imagenFlatten = crop_img.ravel()
                     imagenLista = imagenFlatten.tolist()
                     listaImagenes.append(imagenLista)
-                    if len(listaImagenes)==20:
+                    if len(listaImagenes)==90:
                         del listaImagenes[0:10]
                         n = 0
                         matrizImagenes= np.asarray(listaImagenes)
@@ -186,7 +186,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                             probabilidadSumada = probas[target_probable]
                             probabilidadFinal = probabilidadSumada/frecuencia
                             nombreUsuario = target_names[target_probable]
-                            nombre = nombreUsuario+":"+str(probabilidadFinal*100    )
+                            nombre = nombreUsuario+":"+str(probabilidadFinal*100)
                        
                         listaImagenes = []
                         print("ya reconocio a:")
@@ -208,7 +208,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
             cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
             numeroappend += 1
 #            cv2.imshow('Video', frame)
-        ##    cv2.imshow('Video correccion', Clahe_Gamma)
+            cv2.imshow('Video correccion', Clahe_Gamma)
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
@@ -216,5 +216,5 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
 #    p.join()    
     print("Salio del while")
 #    video_capture.release()
-#    cv2.destroyAllWindows()
+    cv2.destroyAllWindows()
     return conexionCamara, p, inputQueue, outputQueue,video_capture,nombre 
