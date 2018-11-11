@@ -136,22 +136,20 @@ import validarRostro as vR
 while True:
     NombresEtiquetas = 0
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
-    if entrenamiento=="True":
-#        NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
+    if entrenamiento=="False":
+        NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
         #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
-#        pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+        pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 #        try:
-        NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del 2018_November_10_22_56_19"
-        errorObtencion = False
-        nombreUsuarios = ["Jorge", "Tanatiuh","Jesus"]
-#        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
+        errorObtencion = True
+        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas = obtenerRostros()
 #        except:
 #            print("Fallo en metodo de obtencion de rostros")
             
         if errorObtencion ==False:
 #            try:
-#            print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
-#            vR.filtrar(NombreCarpetaPrueba)
+            print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
+            vR.filtrar(NombreCarpetaPrueba)
 #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
             print("Termino modelo")
@@ -193,7 +191,7 @@ while True:
 #        vd.release()
         ledes.off()
         if nombre=="Desconocido":
-            time.sleep(2)
+            time.sleep(4)
         else:
             time.sleep(10)    
 #        if conexionCamara== False:
