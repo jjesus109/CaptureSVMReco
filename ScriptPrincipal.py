@@ -83,6 +83,7 @@ def obtenerRostros(indexCamara):
                     para=True
                 video_capture.release()
                 if indexCamara >3:
+                    print("Index actual "+ str(indexCamara)) 
                     indexCamara=-1
                 else:
                     indexCamara += 1
