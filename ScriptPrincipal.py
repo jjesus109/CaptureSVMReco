@@ -15,7 +15,7 @@ from gpiozero import LED
 ledes = LED(17)
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-indexCamara = 0
+indexCamara = -1
 
 # conexion a firebase
 def conectarFirebase():
