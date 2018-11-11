@@ -47,7 +47,7 @@ EncontroUsuario=False
 
 def obtenerModa(matriz,matrizlista):
     listavalores=[]
-    probaminima = 0.6
+    probaminima = 0.70
     repeticiones = {}
     probas = {}
 #    numeroRepeticiones
