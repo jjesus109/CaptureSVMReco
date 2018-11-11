@@ -85,7 +85,7 @@ X_train, X_test, y_train, y_test = train_test_split(datosRostrosA, labelRostrosA
 # Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled
 # dataset): unsupervised feature extraction / dimensionality reduction
 #n_components =  int(X_train.shape[0]*2/4)
-n_components = 120
+n_components = 100
 #
 print("Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0]))
 t0 = time()
