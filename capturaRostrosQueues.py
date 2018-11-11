@@ -14,15 +14,14 @@ def _detect_(inputQueue, outputQueue):
             gray = inputQueue.get()
             faces = face_cascade.detectMultiScale(gray, 1.3, 5)
             for (x, y, w, h) in faces:
-                medidasX1 = int(x*1.135)
-                medidasX2 = int(x+(w*0.82))
-                medidasY2 = int(y*1.2)
-                medidasY1 = int(y+(h*0.95))
-#                medidasX1 = int(x*1.4)
-#                medidasX2 = int(x+(w*0.9))
-#                medidasY2 = int(y*1.25)
-#                medidasY1 = int(y+(h*0.98))
-                vectorDim = [x,y+h,x+w,y] 
+                medidasX1 = int(x*1.13)                
+                medidasX2 = int(x+(w*0.9))
+                medidasY2 = int(y*1.22)
+                medidasY1 = int(y+(h*0.98))
+#        cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
+                
+                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
+#                vectorDim = [x,y+h,x+w,y] 
 #                vectorDim = [medidasX1,medidasY1,medidasX2,medidasY2] 
                 outputQueue.put(vectorDim)
 
@@ -45,9 +44,10 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     # Configuración de queues        
     
     resizeW = 96
+    resizeH = 130
     vectorDim = [0,0,0,0]
     tamanioCara =  (0,0,0)
-    numeroMuestrasRostros=180
+    numeroMuestrasRostros = 70
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
     print("valor llamada : "+ str(llamada))
@@ -97,7 +97,9 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                 
                 if tamanioCara[0] >int(resizeW*0.7):
                     # ajust de tamaño de rostros
-                    crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
+#                    crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
+                    crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+#                     cv2.imwrite(Rimagen, crop_img)
                     cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".png", crop_img)
                     time.sleep(0.1)
                     numeroImagen += 1

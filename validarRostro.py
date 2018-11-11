@@ -46,22 +46,22 @@ def filtrar(carpeta):
         if numeroImagen in numeros :
             os.remove(Rimagen)
             
-        else:
-            if crop_img.all()==0:
-                #borrar la imagen
-                os.remove(Rimagen)
-            else:
-                 tamanioCara = np.shape(crop_img)
-                 if tamanioCara[0] >int(resizeW*0.83):
-        #        crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-                     cv2.imwrite(Rimagen, crop_img)
-#                 else:
+#        else:
+#            if crop_img.all()==0:
+#                #borrar la imagen
+#                os.remove(Rimagen)
+#            else:
+#                 tamanioCara = np.shape(crop_img)
+#                 if tamanioCara[0] >int(resizeW*0.83):
+#        #        crop_img = cv2.resize(crop_img,(resizeW,resizeH))
 #                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
 #                     cv2.imwrite(Rimagen, crop_img)
-                     
-        
-    #        time.sleep(0.1)
-#    print()
-            #obtenerPuroRostro
-    
+##                 else:
+##                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
+##                     cv2.imwrite(Rimagen, crop_img)
+#                     
+#        
+#    #        time.sleep(0.1)
+##    print()
+#            #obtenerPuroRostro
+#    
