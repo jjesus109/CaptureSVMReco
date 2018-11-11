@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Script principal donde se ejecuta la extraccion de rostros y 
 posteriormetne el entrenamiento
