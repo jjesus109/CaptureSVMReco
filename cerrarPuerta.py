@@ -56,6 +56,7 @@ if conexionExitosa:
         puertaAbierta = puertaAbierta.val()
         if puertaAbierta == "Encender":
             if pir.motion_detected == False and deteccionPasillo== False :
+                print("Se va a cerrar la PUERTA")
                 db.child("Habitaciones/Entrada").update({"Puerta":"Apagar"})
                 time.sleep(10)        
         
