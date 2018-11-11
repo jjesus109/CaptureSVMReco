@@ -200,4 +200,4 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
     print("Salio del while")
     video_capture.release()
     cv2.destroyAllWindows()
-    return conexionCamara, p, inputQueue, outputQueue,video_capture 
+    return conexionCamara, p, inputQueue, outputQueue,video_capture,nombre 

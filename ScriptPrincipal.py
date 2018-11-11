@@ -184,9 +184,13 @@ while True:
     
         print("Index actual = " + str(indexCamara))
         ledes.on()
-        conexionCamara, p, inputQueue, outputQueue, vd = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
+        conexionCamara, p, inputQueue, outputQueue, vd,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue)
         vd.release()
         ledes.off()
+        if nombre=="Desconocido":
+            time.sleep(2)
+        else:
+            time.sleep(10)    
         if conexionCamara== False:
             indexCamara += 1
             
@@ -199,7 +203,8 @@ while True:
         llamada= True
         print("Sale del reconocimiento")
         
-    time.sleep(0.5)
+        
+    time.sleep(1)
     
     print("Ya espero")
  
