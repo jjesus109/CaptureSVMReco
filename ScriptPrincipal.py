@@ -107,13 +107,13 @@ def obtenerRostros():
                         print("Usuario capturado: "+deteccionActivadaUsuario)
                         print(NombresEtiquetas)
                     llamada=True
-            diccionarioUsuarios ={}
+            
             keys = list(NombresEtiquetas.keys())
             keys.sort()
             targetnames = []
             for i in keys:
                 
-                targetnames.append(diccionarioUsuarios[i])
+                targetnames.append(NombresEtiquetas[i])
             print("Estos son los los target names")
             print(targetnames)
             if deteccion_correcta == False:
