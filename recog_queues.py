@@ -149,7 +149,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue):
                     imagenFlatten = crop_img.ravel()
                     imagenLista = imagenFlatten.tolist()
                     listaImagenes.append(imagenLista)
-                    if len(listaImagenes)==10:
+                    if len(listaImagenes)==13:
+                        del listaImagenes[0:2]
                         n = 0
                         matrizImagenes= np.asarray(listaImagenes)
                         prueba_pca = pca.transform(matrizImagenes)
