@@ -75,8 +75,8 @@ def obtenerRostros(indexCamara):
             numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
             numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
             llamada=False
-            video_capture = cv2.VideoCapture(indexCamara)
-            print("conectando con la camara...")
+            
+            
 #            para=False
 #            while True:
 #                
@@ -91,8 +91,8 @@ def obtenerRostros(indexCamara):
 #                time.sleep(1)
 #                video_capture = cv2.VideoCapture(indexCamara)
 #                print("...")
-            if video_capture.isOpened():
-                print("Se conecto bien con la camara")
+#            if video_capture.isOpened():
+#                print("Se conecto bien con la camara")
             while numeroUsuarios<numeroUsuariosAEntrenar+1:
                 deteccionActivada = db.child("Facial/Activacion").get()
                 if deteccionActivada.val()=="True":
@@ -103,8 +103,8 @@ def obtenerRostros(indexCamara):
                         print("Inicia en " +str(3-i))
                         time.sleep(1)
                     print("enciendo los ledes")
-                    
-                    
+                    print("conectando con la camara...")        
+                    video_capture = cv2.VideoCapture(indexCamara)    
                     deteccion_correcta, p, inputQueue, outputQueue, videoCapture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture, ledes)
 #                    videoCapture.release()
 #                    videoCapture=0
