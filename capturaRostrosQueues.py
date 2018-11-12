@@ -42,6 +42,9 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     if video_capture == 0:
         video_capture = cv2.VideoCapture(0) 
         print("Simon")
+    elif video_capture.isOpened() == False:
+        video_capture.release()
+        video_capture = cv2.VideoCapture(0) 
 ##    else:
 #        video_capture.open(indexCamara)
     # Configuración de queues        
