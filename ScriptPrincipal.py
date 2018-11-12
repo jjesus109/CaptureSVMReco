@@ -49,7 +49,7 @@ def conectarFirebase():
 
 def obtenerRostros(indexCamara):
     
-    nombreUsuarios = []
+    targetnames = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
     conexionExitosa,firebase,db, valores,_ = conectarFirebase()
@@ -127,7 +127,7 @@ def obtenerRostros(indexCamara):
             
             keys = list(NombresEtiquetas.keys())
             keys.sort()
-            targetnames = []
+            
             for i in keys:
                 
                 targetnames.append(NombresEtiquetas[i])
