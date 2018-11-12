@@ -15,7 +15,7 @@ from gpiozero import LED
 ledes = LED(17)
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-indexCamara = 0
+
 
 # conexion a firebase
 def conectarFirebase():
@@ -76,23 +76,7 @@ def obtenerRostros(indexCamara):
             numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
             llamada=False
             
-            
-#            para=False
-#            while True:
-#                
-#                if video_capture.isOpened():
-#                    break
-#                video_capture.release()
-#                if indexCamara >1:
-#                    print("Index actual "+ str(indexCamara)) 
-#                    indexCamara=0
-#                else:
-#                    indexCamara += 1
-#                time.sleep(1)
-#                video_capture = cv2.VideoCapture(indexCamara)
-#                print("...")
-#            if video_capture.isOpened():
-#                print("Se conecto bien con la camara")
+
             video_capture = 1.0
             while numeroUsuarios<numeroUsuariosAEntrenar+1:
                 deteccionActivada = db.child("Facial/Activacion").get()
@@ -107,14 +91,6 @@ def obtenerRostros(indexCamara):
                     print("conectando con la camara...")        
                     
                     deteccion_correcta, p, inputQueue, outputQueue, video_capture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture, ledes)
-#                    videoCapture.release()
-#                    videoCapture=0
-#                    if deteccion_correcta== False:
-#                        
-#                        indexCamara += 1
-#                        
-#                        if indexCamara>=3:
-#                            indexCamara=0
                     
                     if deteccion_correcta==True:
                         
@@ -151,7 +127,7 @@ def obtenerRostros(indexCamara):
 
 
 import validarRostro as vR
-
+indexCamara = 0
 while True:
     NombresEtiquetas = 0
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
@@ -176,19 +152,10 @@ while True:
             db.child("Facial").update({"EntrenamientoHecho":"True"})  
             break
 
-#            except:
-#                print("Fallo modelo")
-#                print("reintentando")
     else:
+        print("index:")
+        print(indexCamara)
         video_capture = cv2.VideoCapture(indexCamara)
-        while video_capture.isOpened() != False:
-            video_capture.release()
-            if indexCamara >3:
-                indexCamara=-1
-            else:
-                indexCamara += 1
-            time.sleep(0.5)
-            video_capture = cv2.VideoCapture(indexCamara)
         break
     
 
@@ -197,16 +164,11 @@ conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
 
 import recog_queues as rL
 from gpiozero import MotionSensor
-
 pir = MotionSensor(4) # Numero de pin de raspberry
 
-#import pickle
-#data = open(NombreCarpetaPrueba+"/archivo_modelo_LBP.pickle",'wb')
 #ya llamo a process
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
-#indexCamara=0
-#video_capture = cv2.VideoCapture(indexCamara)
 
 while True:
     print("Index actual = " + str(indexCamara))
@@ -222,15 +184,7 @@ while True:
             time.sleep(4)
         else:
             time.sleep(10)    
-#        if conexionCamara== False:
-#            indexCamara += 1
-#            
-#            if indexCamara>=3:
-#                indexCamara=0
-#        else:
-#            print("conexion camara extiosa")
-#            print("encender leds")
-            
+
         llamada= True
         print("Sale del reconocimiento")
         
