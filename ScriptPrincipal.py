@@ -135,18 +135,21 @@ while True:
         NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
         #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
         pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+        errorObtencion = False
 #        try:
-        errorObtencion = True
-        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara= obtenerRostros(indexCamara)
+#        errorObtencion = True
+#        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara= obtenerRostros(indexCamara)
 #        except:
 #            print("Fallo en metodo de obtencion de rostros")
             
         if errorObtencion ==False:
 #            try:
+            
+#            vR.filtrar(NombreCarpetaPrueba)
+            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/Proyecto del 2018_November_12_12_33_55"
             print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
-            vR.filtrar(NombreCarpetaPrueba)
-#            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
-            svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
+            nombreUsuarios = ["Nagaya","Barbosa","Jesus"]
+            svm.SVM(NombreCarpetaPrueba, nombreUsuarios)
             print("Termino modelo")
             print("Coninua con identifcacion de rostros")
             db.child("Facial").update({"EntrenamientoHecho":"True"})  
