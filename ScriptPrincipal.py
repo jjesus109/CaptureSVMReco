@@ -164,8 +164,14 @@ conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
 
 import recog_queues as rL
 from gpiozero import MotionSensor
+import pickle
 pir = MotionSensor(4) # Numero de pin de raspberry
-
+tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
+datos = pickle.load(tomaDatos)
+clf = datos["modelo"]
+pca = datos["pca"]
+target_names =datos["target_names"]
+print(target_names)
 #ya llamo a process
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
@@ -177,7 +183,7 @@ while True:
     
         print("Index actual = " + str(indexCamara))
 #        ledes.on()
-        conexionCamara, p, inputQueue, outputQueue, vd,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes)
+        conexionCamara, p, inputQueue, outputQueue, vd,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
 #        vd.release()
 #        ledes.off()
         if nombre=="Desconocido":

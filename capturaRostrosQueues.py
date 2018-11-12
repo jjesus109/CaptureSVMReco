@@ -60,8 +60,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     numeroUsuarioActual = numeroUsuarios         
     print("valor llamada : "+ str(llamada))
     if llamada == False:
-        inputQueue = Queue(maxsize=1)
-        outputQueue = Queue(maxsize=1)
+        inputQueue = Queue(maxsize=3)
+        outputQueue = Queue(maxsize=3)
         p = Process(target=_detect_, args=(inputQueue, outputQueue,))
         p.daemon = True
         p.start()

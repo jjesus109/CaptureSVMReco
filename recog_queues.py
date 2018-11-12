@@ -47,7 +47,7 @@ EncontroUsuario=False
 
 def obtenerModa(matriz,matrizlista):
     listavalores=[]
-    probaminima = 0.51
+    probaminima = 0.65
     repeticiones = {}
     probas = {}
 #    numeroRepeticiones
@@ -96,13 +96,8 @@ n_points = 8
 nro = 0
 from skimage.feature import local_binary_pattern
 
-def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_capture, ledes):
-    tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
-    datos = pickle.load(tomaDatos)
-    clf = datos["modelo"]
-    pca = datos["pca"]
-    target_names =datos["target_names"]
-    print(target_names)
+def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_capture, ledes, clf, pca, target_names):
+
     
 #    video_capture = cv2.VideoCapture(indexCamara)
     nombre="sin reconocer"
@@ -111,8 +106,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
     listaImagenes = []
     numeroappend=0
     if llamada == False:
-        inputQueue = Queue(maxsize=1)
-        outputQueue = Queue(maxsize=1)
+        inputQueue = Queue(maxsize=10)
+        outputQueue = Queue(maxsize=10)
         p = Process(target=detect, args=(inputQueue, outputQueue,))
         p.daemon = True
         p.start()
