@@ -47,7 +47,7 @@ EncontroUsuario=False
 
 def obtenerModa(matriz,matrizlista):
     listavalores=[]
-    probaminima = 0.7
+    probaminima = 0.65
     repeticiones = {}
     probas = {}
 #    numeroRepeticiones
@@ -208,7 +208,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
             cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
             numeroappend += 1
 #            cv2.imshow('Video', frame)
-            cv2.imshow('Video correccion', Clahe_Gamma)
+#            cv2.imshow('Video correccion', Clahe_Gamma)
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
@@ -216,5 +216,5 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
 #    p.join()    
     print("Salio del while")
 #    video_capture.release()
-    cv2.destroyAllWindows()
+#    cv2.destroyAllWindows()
     return conexionCamara, p, inputQueue, outputQueue,video_capture,nombre 
