@@ -48,7 +48,7 @@ def conectarFirebase():
 
 
 def obtenerRostros(indexCamara):
-    
+    NombresEtiquetas={}
     targetnames = []
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
@@ -70,7 +70,7 @@ def obtenerRostros(indexCamara):
             
             p, inputQueue, outputQueue = 0 ,0 ,0            
 #            for i in range(len(nombreUsuarios)):
-            NombresEtiquetas={}
+            
             numeroUsuarios=1
             numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
             numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
