@@ -93,7 +93,7 @@ def obtenerRostros(indexCamara):
 #                print("...")
 #            if video_capture.isOpened():
 #                print("Se conecto bien con la camara")
-            video_capture = 0
+            video_capture = 1.0
             while numeroUsuarios<numeroUsuariosAEntrenar+1:
                 deteccionActivada = db.child("Facial/Activacion").get()
                 if deteccionActivada.val()=="True":

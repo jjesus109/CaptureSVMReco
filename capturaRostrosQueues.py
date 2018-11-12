@@ -39,8 +39,10 @@ def ajusteGamma(imagen,gamma=1.0):
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue , video_capture, ledes):
 
     
-    if video_capture == 0:
+    if video_capture == 1.0:
         video_capture = cv2.VideoCapture(0) 
+        print("Valor video Capture")
+        print(video_capture)
         print("Simon")
     elif video_capture.isOpened() == False:
         video_capture.release()
