@@ -146,7 +146,7 @@ while True:
 #            try:
             
 #            vR.filtrar(NombreCarpetaPrueba)
-            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/Proyecto del 2018_November_12_12_33_55"
+            NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del 2018_November_12_12_33_55"
             print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
             nombreUsuarios = ["Nagaya","Barbosa","Jesus"]
             svm.SVM(NombreCarpetaPrueba, nombreUsuarios)
