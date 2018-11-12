@@ -47,7 +47,7 @@ EncontroUsuario=False
 
 def obtenerModa(matriz,matrizlista):
     listavalores=[]
-    probaminima = 0.65
+    probaminima = 0.56
     repeticiones = {}
     probas = {}
 #    numeroRepeticiones
@@ -181,12 +181,26 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                         print("frw")
                         print(frecuencia)
                         if target_probable == -1:
-                            nombre= "Desconocido"    
+                            nombre= "Desconocido" 
+                            ledes.off()
+                            time.sleep(0.4)
+                            ledes.on()
+                            time.sleep(0.4)
+                            ledes.off()
                         else:
                             probabilidadSumada = probas[target_probable]
                             probabilidadFinal = probabilidadSumada/frecuencia
                             nombreUsuario = target_names[target_probable]
                             nombre = nombreUsuario+":"+str(probabilidadFinal*100)
+                            ledes.off()
+                            time.sleep(0.4)
+                            ledes.on()
+                            time.sleep(0.4)
+                            ledes.off()
+                            time.sleep(0.4)
+                            ledes.on()
+                            time.sleep(0.4)
+                            ledes.off()
                        
                         listaImagenes = []
                         print("ya reconocio a:")
@@ -194,7 +208,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                         cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                         db.child("Facial").update({"RostroValidado":"True"})
                         db.child("Facial").update({"NombreRostroReconocido":nombre})
-                        ledes.off()
+                        
+                        
                         break
                     else:
                         print("aun no")
