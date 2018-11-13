@@ -104,7 +104,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
     resizeW = 96
     resizeH = 130
     listaImagenes = []
-    numeroappend=0
+    
     if llamada == False:
         inputQueue = Queue(maxsize=10)
         outputQueue = Queue(maxsize=10)
@@ -122,8 +122,9 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
     conexionCamara = video_capture.isOpened()
 #    video_capture.set(3 ,312)
 #    video_capture.set(4, 512)
-    print("Se comunico con camara:" +str(video_capture.isOpened()))
+    print("Se comunico con camara:")
     if video_capture.isOpened():
+        print(str(video_capture.isOpened()))
         ledes.on()
         n=1
         while True:
@@ -215,14 +216,15 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                         
                     
         
-            cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-            numeroappend += 1
+#            cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            
 #            cv2.imshow('Video', frame)
-            cv2.imshow('Video correccion', Clahe_Gamma)
+#            cv2.imshow('Video correccion', Clahe_Gamma)
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
-       
+
+    print("False")
 #    p.join()    
     print("Salio del while")
 #    video_capture.release()
