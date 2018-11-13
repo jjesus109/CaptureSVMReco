@@ -104,7 +104,9 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
         print(video_capture)
         print("Simon")
     elif video_capture.isOpened() == False:
+        print("puerto cerrado")
         video_capture.release()
+        time.sleep(1)
         video_capture = cv2.VideoCapture(0) 
 #    video_capture = cv2.VideoCapture(indexCamara)
     nombre="sin reconocer"
