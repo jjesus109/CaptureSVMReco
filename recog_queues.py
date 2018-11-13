@@ -98,7 +98,14 @@ from skimage.feature import local_binary_pattern
 
 def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_capture, ledes, clf, pca, target_names):
 
-    
+    if video_capture == 1.0:
+        video_capture = cv2.VideoCapture(0) 
+        print("Valor video Capture")
+        print(video_capture)
+        print("Simon")
+    elif video_capture.isOpened() == False:
+        video_capture.release()
+        video_capture = cv2.VideoCapture(0) 
 #    video_capture = cv2.VideoCapture(indexCamara)
     nombre="sin reconocer"
     resizeW = 96

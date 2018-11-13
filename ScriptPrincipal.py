@@ -154,9 +154,6 @@ while True:
             break
 
     else:
-        print("index:")
-        print(indexCamara)
-        video_capture = cv2.VideoCapture(indexCamara)
         break
     
 
@@ -193,7 +190,7 @@ while True:
             time.sleep(2)    
 
         llamada= True
-        print("valor llamada: "+ llamada)
+        print("valor llamada: "+ str(llamada))
         print("Sale del reconocimiento")
         
         
