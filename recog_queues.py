@@ -99,7 +99,7 @@ from skimage.feature import local_binary_pattern
 def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_capture, ledes, clf, pca, target_names):
 
     if video_capture == 1.0:
-        video_capture = cv2.VideoCapture(0) 
+        video_capture = cv2.VideoCapture(1) 
         print("Valor video Capture")
         print(video_capture)
         print("Simon")
@@ -107,7 +107,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
         print("puerto cerrado")
         video_capture.release()
         time.sleep(1)
-        video_capture = cv2.VideoCapture(0) 
+        video_capture = cv2.VideoCapture(1) 
 #    video_capture = cv2.VideoCapture(indexCamara)
     nombre="sin reconocer"
     resizeW = 96
@@ -123,7 +123,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
         print("Esta vivo el proceso??")
         print(p.is_alive())
     vectorDim = [0,0,0,0]
-    print("[INFO] starting process...")
+
     
     
 #    print( p.exitcode == -signal.SIGTERM)
