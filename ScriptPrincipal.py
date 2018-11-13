@@ -127,7 +127,7 @@ def obtenerRostros(indexCamara):
 
 
 import validarRostro as vR
-indexCamara = -1
+indexCamara = 0
 video_capture = 1.0
 while True:
     NombresEtiquetas = 0
