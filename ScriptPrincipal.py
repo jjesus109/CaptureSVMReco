@@ -189,10 +189,11 @@ while True:
 #        ledes.off()
         if nombre=="Desconocido":
             time.sleep(4)
-        else:
-            time.sleep(10)    
+        elif nombre!="Desconocido":
+            time.sleep(2)    
 
         llamada= True
+        print("valor llamada: "+ llamada)
         print("Sale del reconocimiento")
         
         

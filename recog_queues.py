@@ -125,8 +125,9 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
     print("Se comunico con camara:")
     if video_capture.isOpened():
         print(str(video_capture.isOpened()))
-        ledes.on()
+        
         n=1
+        ledes.on()
         while True:
             _, frame = video_capture.read()
         
