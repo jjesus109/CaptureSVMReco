@@ -88,8 +88,6 @@ def mayorFrecuencia(dk2):
      return target, max(valores)
 
 
-#from gpiozero import LED
-#ledes = LED(17)
      
 radius = 4
 n_points = 8
