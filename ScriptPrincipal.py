@@ -127,7 +127,7 @@ def obtenerRostros(indexCamara):
 
 
 import validarRostro as vR
-indexCamara = 0
+indexCamara = -1
 while True:
     NombresEtiquetas = 0
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
