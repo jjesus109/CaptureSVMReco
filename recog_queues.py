@@ -113,8 +113,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
     listaImagenes = []
     
     if llamada == False:
-        inputQueue = Queue(maxsize=3)
-        outputQueue = Queue(maxsize=3)
+        inputQueue = Queue(maxsize=1)
+        outputQueue = Queue(maxsize=1)
         p = Process(target=detect, args=(inputQueue, outputQueue,))
         p.daemon = True
         p.start()

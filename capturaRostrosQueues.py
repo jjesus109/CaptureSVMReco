@@ -60,8 +60,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     numeroUsuarioActual = numeroUsuarios         
     print("valor llamada : "+ str(llamada))
     if llamada == False:
-        inputQueue = Queue(maxsize=3)
-        outputQueue = Queue(maxsize=3)
+        inputQueue = Queue(maxsize=1)
+        outputQueue = Queue(maxsize=1)
         p = Process(target=_detect_, args=(inputQueue, outputQueue,))
         p.daemon = True
         p.start()
@@ -117,7 +117,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             # Solo se deje un usuario por que se realizará por usuario    
     #            print("numeroImagen")
             print(numeroImagen)
-            cv2.imshow('Video', frame)
+            cv2.imshow('Video', Clahe_Gamma)
 #            if cv2.waitKey(1) & 0xFF == ord('q'):
 #               break
             if numeroImagen >numeroMuestrasRostros:
