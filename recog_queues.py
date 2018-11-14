@@ -109,7 +109,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
 #    video_capture = cv2.VideoCapture(indexCamara)
     nombre="sin reconocer"
     resizeW = 96
-    resizeH = 130
+    resizeH = 96
     listaImagenes = []
     
     if llamada == False:

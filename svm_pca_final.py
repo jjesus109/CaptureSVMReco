@@ -35,7 +35,7 @@ def SVM(carpeta,target_names):
     from skimage.feature import local_binary_pattern
 
     resizeW = 96
-    resizeH = 130
+    resizeH = 96
     t0 = time()
     folders = os.listdir(carpeta)
     for im in folders:

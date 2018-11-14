@@ -52,10 +52,10 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     # Configuración de queues        
     
     resizeW = 96
-    resizeH = 130
+    resizeH = 96
     vectorDim = [0,0,0,0]
     tamanioCara =  (0,0,0)
-    numeroMuestrasRostros = 81
+    numeroMuestrasRostros = 121
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
     print("valor llamada : "+ str(llamada))
@@ -73,7 +73,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     conexionCamara = True
     conexionCamara = video_capture.isOpened()
     if video_capture.isOpened():
-        ledes.on()
+#        ledes.on()
+        ledes.value = 0.7
         print("Inicializacion de camara exitosa")
         print("Comienza captura de video")
         while True:
@@ -121,7 +122,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
 #            if cv2.waitKey(1) & 0xFF == ord('q'):
 #               break
             if numeroImagen >numeroMuestrasRostros:
-                ledes.off()
+#                ledes.off()
+                ledes.value = 0.0
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
                 break
     time.sleep(0.1)   
