@@ -134,8 +134,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
         print(str(video_capture.isOpened()))
         
         n=1
-#        ledes.on()
-        ledes.value= 0.7
+        ledes.on()
+#        ledes.value= 0.7
         while True:
             _, frame = video_capture.read()
         
@@ -187,40 +187,40 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                         print(frecuencia)
                         if target_probable == -1:
                             nombre= "Desconocido" 
-#                            ledes.off()
-#                            time.sleep(0.4)
-#                            ledes.on()
-#                            time.sleep(0.4)
-#                            ledes.off()
-                            ledes.value= 0.0
+                            ledes.off()
                             time.sleep(0.4)
-                            ledes.value= 0.7
+                            ledes.on()
                             time.sleep(0.4)
-                            ledes.value= 0.0
+                            ledes.off()
+#                            ledes.value= 0.0
+#                            time.sleep(0.4)
+#                            ledes.value= 0.7
+#                            time.sleep(0.4)
+#                            ledes.value= 0.0
                         else:
                             probabilidadSumada = probas[target_probable]
                             probabilidadFinal = probabilidadSumada/frecuencia
                             nombreUsuario = target_names[target_probable]
                             nombre = nombreUsuario+":"+str(probabilidadFinal*100)
-#                            ledes.off()
-#                            time.sleep(0.4)
-#                            ledes.on()
-#                            time.sleep(0.4)
-#                            ledes.off()
-#                            time.sleep(0.4)
-#                            ledes.on()
-#                            time.sleep(0.4)
-#                            ledes.off()
-                            ledes.value= 0.0
+                            ledes.off()
                             time.sleep(0.4)
-                            ledes.value= 0.7
+                            ledes.on()
                             time.sleep(0.4)
-                            ledes.value= 0.0
+                            ledes.off()
                             time.sleep(0.4)
-                            ledes.value= 0.7
+                            ledes.on()
                             time.sleep(0.4)
-                            ledes.value= 0.0
-                       
+                            ledes.off()
+#                            ledes.value= 0.0
+#                            time.sleep(0.4)
+#                            ledes.value= 0.7
+#                            time.sleep(0.4)
+#                            ledes.value= 0.0
+#                            time.sleep(0.4)
+#                            ledes.value= 0.7
+#                            time.sleep(0.4)
+#                            ledes.value= 0.0
+#                       
                         listaImagenes = []
                         print("ya reconocio a:")
                         print(nombre)
