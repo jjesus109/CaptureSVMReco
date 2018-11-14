@@ -11,7 +11,7 @@ import pathlib
 import capturaRostrosQueues as cr
 import svm_pca_final as svm
 import cv2
-from gpiozero import LED
+from gpiozero import PWMLED
 ledes = LED(17)
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
@@ -158,7 +158,9 @@ while True:
     
 
 print("Inicia clasificación de rostros")
+print("conectandose a Firebase")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
+
 
 import recog_queues as rL
 from gpiozero import MotionSensor
