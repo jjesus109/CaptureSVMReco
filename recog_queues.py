@@ -227,7 +227,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
 #            cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
             
 #            cv2.imshow('Video', frame)
-#            cv2.imshow('Video correccion', Clahe_Gamma)
+            cv2.imshow('Video correccion', Clahe_Gamma)
         
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
