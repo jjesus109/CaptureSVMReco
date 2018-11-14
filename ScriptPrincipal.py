@@ -12,7 +12,7 @@ import capturaRostrosQueues as cr
 import svm_pca_final as svm
 import cv2
 from gpiozero import PWMLED
-ledes = LED(17)
+ledes = PWMLED(17)
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
 
