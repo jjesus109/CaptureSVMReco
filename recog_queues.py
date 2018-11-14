@@ -152,7 +152,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                 cv2.rectangle(Clahe_Gamma, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
                 crop_img = Clahe_Gamma[medidasY2:medidasY1, medidasX1:medidasX2]
                 tamanioCara = np.shape(crop_img)
-                if tamanioCara[0] >int(resizeW*0.8):
+                if tamanioCara[0] >int(resizeW*0.98):
                     
                     n += 1
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))

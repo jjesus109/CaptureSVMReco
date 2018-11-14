@@ -104,7 +104,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                 """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
                 PERSONA FRENTE A LA CAMAR"""
                 
-                if tamanioCara[0] >int(resizeW*0.7):
+                if tamanioCara[0] >int(resizeW*0.98):
                     # ajust de tamaño de rostros
 #                    crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
