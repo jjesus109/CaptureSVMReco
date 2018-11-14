@@ -56,8 +56,8 @@ def SVM(carpeta,target_names):
         
     print("total time: ", time()-t0)
     
-    datosRostrosA = np.asarray(datosAug)
-    labelRostrosA = np.asarray(labelsAug)
+    datosRostrosA = np.array(datosAug)
+    labelRostrosA = np.array(labelsAug)
     ###############################################################################
 #    resizeW = 96
 #    resizeH = 130
@@ -84,12 +84,12 @@ def SVM(carpeta,target_names):
     
     ###############################################################################
     
-    X_train, X_test, y_train, y_test = train_test_split(datosRostrosA, labelRostrosA, test_size=0.2, random_state=20)
+    X_train, X_test, y_train, y_test = train_test_split(datosRostrosA, labelRostrosA, test_size=0.22, random_state=20)
     ###############################################################################
     # Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled
     # dataset): unsupervised feature extraction / dimensionality reduction
     #n_components =  int(X_train.shape[0]*2/4)
-    n_components = 70
+    n_components = 80
     #
     print("Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0]))
     t0 = time()

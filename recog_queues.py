@@ -47,7 +47,7 @@ EncontroUsuario=False
 
 def obtenerModa(matriz,matrizlista):
     listavalores=[]
-    probaminima = 0.7
+    probaminima = 0.8
     repeticiones = {}
     probas = {}
 #    numeroRepeticiones
@@ -139,8 +139,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
             _, frame = video_capture.read()
         
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            CorreccionGamma = ajusteGamma(gray,1.8)
-            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+            CorreccionGamma = ajusteGamma(gray,1.6)
+            clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
             Clahe_Gamma = clahe.apply(CorreccionGamma)
             
             if inputQueue.empty():
@@ -167,7 +167,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                     if len(listaImagenes)==20:
                         del listaImagenes[0:10]
                         n = 0
-                        matrizImagenes= np.asarray(listaImagenes)
+                        matrizImagenes= np.array(listaImagenes)
                         prueba_pca = pca.transform(matrizImagenes)
                         probabilidades = clf.predict_proba(prueba_pca)
         #                matriz = probabilidades

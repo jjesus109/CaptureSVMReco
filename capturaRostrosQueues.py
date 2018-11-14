@@ -80,7 +80,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             _, frame = video_capture.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             CorreccionGamma = ajusteGamma(gray,1.8)
-            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+            clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
             Clahe_Gamma = clahe.apply(CorreccionGamma)
 #                cv2.imshow("CAPTURA",Clahe_Gamma)
             if inputQueue.empty():
@@ -109,7 +109,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
 #                    crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
 #                     cv2.imwrite(Rimagen, crop_img)
-                    cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".png", crop_img)
+                    cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".jg", crop_img)
                     time.sleep(0.1)
                     numeroImagen += 1
             
