@@ -55,7 +55,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     resizeH = 96
     vectorDim = [0,0,0,0]
     tamanioCara =  (0,0,0)
-    numeroMuestrasRostros = 121
+    numeroMuestrasRostros = 131
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
     print("valor llamada : "+ str(llamada))
