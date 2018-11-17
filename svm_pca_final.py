@@ -89,7 +89,7 @@ def SVM(carpeta,target_names):
     # Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled
     # dataset): unsupervised feature extraction / dimensionality reduction
     #n_components =  int(X_train.shape[0]*2/4)
-    n_components = 85
+    n_components = 150
     #
     print("Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0]))
     t0 = time()
