@@ -143,6 +143,7 @@ def SVM(carpeta,target_names):
     datos = {"modelo":clf, "pca": pca, "target_names": target_names}
     data = open("archivo_modelo_LBP.pickle",'wb')
     pickle.dump(datos, data)
+    data.close()
     
  
 ##    return clf, pca   
