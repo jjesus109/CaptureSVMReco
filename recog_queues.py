@@ -166,7 +166,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                     imagenFlatten = crop_img.ravel()
                     imagenLista = imagenFlatten.tolist()
                     listaImagenes.append(imagenLista)
-                    if len(listaImagenes)==30:
+                    if len(listaImagenes)==20:
                         del listaImagenes[0:10]
                         n = 0
                         matrizImagenes= np.array(listaImagenes)
