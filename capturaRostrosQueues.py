@@ -115,7 +115,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
 #                     cv2.imwrite(Rimagen, crop_img)
                     cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".jpg", crop_img)
-#                    time.sleep(0.1)
+                    time.sleep(0.1)
                     numeroImagen += 1
             
             
@@ -123,8 +123,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     #            print("numeroImagen")
             print(numeroImagen)
             cv2.imshow('Video', Clahe_Gamma)
-#            if cv2.waitKey(1) & 0xFF == ord('q'):
-#               break
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+               break
             if numeroImagen >numeroMuestrasRostros:
                 ledes.off()
 #                ledes.value = 0.0
