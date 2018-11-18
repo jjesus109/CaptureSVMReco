@@ -158,6 +158,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                     n += 1
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                     cv2.imwrite(str(n)+".png",crop_img)
+                    time.sleep(0.1)
 #                    crop_img = cv2.imread(str(n)+".png")
 #                    crop_img = cv2.cvtColor(crop_img,cv2.COLOR_BGR2GRAY)
                     lbp = local_binary_pattern(crop_img, n_points, radius, 'default')
