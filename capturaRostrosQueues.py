@@ -67,7 +67,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     conexionCamara = True
     if video_capture.isOpened() == False:
         video_capture.release()
-	time.sleep(0.5)
+        time.sleep(0.5)
         video_capture = cv2.VideoCapture(0) 
     elif video_capture == 1.0:
         video_capture = cv2.VideoCapture(0) 
