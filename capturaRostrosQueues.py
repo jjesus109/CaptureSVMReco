@@ -39,14 +39,8 @@ def ajusteGamma(imagen,gamma=1.0):
 def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, outputQueue , video_capture, ledes):
 
     
-    if video_capture == 1.0:
-        video_capture = cv2.VideoCapture(0) 
-        print("Valor video Capture")
-        print(video_capture)
-        print("Simon")
-    elif video_capture.isOpened() == False:
-        video_capture.release()
-        video_capture = cv2.VideoCapture(0) 
+
+
 ##    else:
 #        video_capture.open(indexCamara)
     # Configuración de queues        
@@ -71,6 +65,15 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
 #    video_capture.set(3 ,312)
 #    video_capture.set(4, 512)
     conexionCamara = True
+    if video_capture.isOpened() == False:
+        video_capture.release()
+	time.sleep(0.5)
+        video_capture = cv2.VideoCapture(0) 
+    elif video_capture == 1.0:
+        video_capture = cv2.VideoCapture(0) 
+        print("Valor video Capture")
+        print(video_capture)
+        print("Simon")
     conexionCamara = video_capture.isOpened()
     if video_capture.isOpened():
         ledes.on()
