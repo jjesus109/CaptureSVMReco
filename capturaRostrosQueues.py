@@ -115,7 +115,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
 #                     cv2.imwrite(Rimagen, crop_img)
                     cv2.imwrite(NombreCarpetaPrueba+"/"+str(numeroUsuarioActual)+"_"+str(numeroImagen)+".jpg", crop_img)
-                    time.sleep(0.1)
+#                    time.sleep(0.1)
                     numeroImagen += 1
             
             
