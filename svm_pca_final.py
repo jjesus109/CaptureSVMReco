@@ -17,7 +17,7 @@ labelsAug =[]
 #radius = 4
 #n_points = 8
 #nro = 0
-def diferenciaProbas():
+
     
 def SVM(carpeta,target_names, numeroMuestrasRostros):
     from time import time
