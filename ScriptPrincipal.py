@@ -166,7 +166,7 @@ import recog_queues as rL
 from gpiozero import MotionSensor
 import pickle 
 pir = MotionSensor(4) # Numero de pin de raspberry
-tomaDatos = open("60_m_70_comp.pickle", "rb")
+tomaDatos = open("55_m_70_comp.pickle", "rb")
 datos = pickle.load(tomaDatos)
 clf = datos["modelo"]
 pca = datos["pca"]
