@@ -174,7 +174,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
 #                    cv2.imwrite(str(n)+".jpg",crop_img)
                     time.sleep(0.1)
 #                    crop_img = cv2.imread(str(n)+".jpg")
-                    crop_img = cv2.cvtColor(crop_img,cv2.COLOR_BGR2GRAY)
+#                    crop_img = cv2.cvtColor(crop_img,cv2.COLOR_BGR2GRAY)
                     lbp = local_binary_pattern(crop_img, n_points, radius, 'default')
                     imagenFlatten = lbp.ravel()
                     imagenFlatten = crop_img.ravel()
