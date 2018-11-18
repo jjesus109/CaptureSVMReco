@@ -190,7 +190,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
         #                matrizlista = probabilidades.tolist()
                         print("probas antes de yorch")
                         print(probabilidades)
-                        probabilidades = diferenciaProbas(probabilidadesprobabilidades.tolist())
+                        probabilidades = diferenciaProbas(probabilidades,probabilidades.tolist())
                         print("probas despues de yorch")
                         print(probabilidades)
                         repeticiones,probas = obtenerModa(probabilidades,probabilidades.tolist())
