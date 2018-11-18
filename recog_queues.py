@@ -90,9 +90,11 @@ def mayorFrecuencia(dk2):
 def diferenciaProbas(probabilidades,probabilidadesLista):
     nCategorias = probabilidades.shape[1]
     for i in range(len(probabilidades)):
-        valorMax = probabilidades[i].max()
+        arreglo = probabilidades[i]
+        valorMax = arreglo.max()
         categoria = probabilidadesLista[i].index(valorMax)
-        otroValor = abs(categoria- nCategorias)
+        otroValorPosicion = abs(categoria- nCategorias)
+        otroValor = arreglo[otroValorPosicion]
         diferenciaProbas = valorMax - otroValor
         if diferenciaProbas >=0.3:
             probabilidades[i] =  probabilidades[i]*2
