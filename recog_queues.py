@@ -87,7 +87,21 @@ def mayorFrecuencia(dk2):
         
      return target, max(valores)
 
-
+def diferenciaProbas(probabilidades,probabilidadesLista):
+    nCategorias = probabilidades.shape[1]
+    for i in range(len(probabilidades)):
+        valorMax = probabilidades[i].max()
+        categoria = probabilidadesLista[i].index(valorMax)
+        otroValor = abs(categoria- nCategorias)
+        diferenciaProbas = valorMax - otroValor
+        if diferenciaProbas >=0.3:
+            probabilidades[i] =  probabilidades[i]*2
+        return probabilidades
+            
+            
+#    maximaProba = matrizlista[i].index(valor)
+    
+    
      
 radius = 4
 n_points = 8
@@ -157,9 +171,9 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                     
                     n += 1
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-                    cv2.imwrite(str(n)+".jpg",crop_img)
+#                    cv2.imwrite(str(n)+".jpg",crop_img)
                     time.sleep(0.1)
-                    crop_img = cv2.imread(str(n)+".jpg")
+#                    crop_img = cv2.imread(str(n)+".jpg")
                     crop_img = cv2.cvtColor(crop_img,cv2.COLOR_BGR2GRAY)
                     lbp = local_binary_pattern(crop_img, n_points, radius, 'default')
                     imagenFlatten = lbp.ravel()
@@ -174,7 +188,11 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                         probabilidades = clf.predict_proba(prueba_pca)
         #                matriz = probabilidades
         #                matrizlista = probabilidades.tolist()
-                        
+                        print("probas antes de yorch")
+                        print(probabilidades)
+                        probabilidades = diferenciaProbas(probabilidades)
+                        print("probas despues de yorch")
+                        print(probabilidades)
                         repeticiones,probas = obtenerModa(probabilidades,probabilidades.tolist())
                         print("reps")
                         print(repeticiones)

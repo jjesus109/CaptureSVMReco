@@ -49,7 +49,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     resizeH = 96
     vectorDim = [0,0,0,0]
     tamanioCara =  (0,0,0)
-    numeroMuestrasRostros = 50
+    numeroMuestrasRostros = 100
     numeroImagen = 1
     numeroUsuarioActual = numeroUsuarios         
     print("valor llamada : "+ str(llamada))
@@ -136,4 +136,4 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     
     cv2.destroyAllWindows()
         
-    return conexionCamara,p, inputQueue, outputQueue,video_capture 
+    return conexionCamara,p, inputQueue, outputQueue,video_capture,numeroMuestrasRostros-10

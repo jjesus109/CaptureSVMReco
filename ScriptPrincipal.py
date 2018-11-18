@@ -90,7 +90,7 @@ def obtenerRostros(indexCamara):
                     print("enciendo los ledes")
                     print("conectando con la camara...")        
                     
-                    deteccion_correcta, p, inputQueue, outputQueue, video_capture= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture, ledes)
+                    deteccion_correcta, p, inputQueue, outputQueue, video_capture,numeroMuestrasRostros= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture, ledes)
                     
                     if deteccion_correcta==True:
                         
@@ -123,9 +123,9 @@ def obtenerRostros(indexCamara):
             errorCaptura = True
             
             
-    return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara
+    return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara,numeroMuestrasRostros
 
-
+numeroMuestrasRostros=0
 import validarRostro as vR
 indexCamara = 0
 video_capture = 1.0
@@ -138,7 +138,7 @@ while True:
         pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
 #        try:
         errorObtencion = True
-        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara= obtenerRostros(indexCamara)
+        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara)
 #        except:
 #            print("Fallo en metodo de obtencion de rostros")
             
@@ -147,7 +147,7 @@ while True:
             print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
             vR.filtrar(NombreCarpetaPrueba)
 #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
-            svm.SVM(NombreCarpetaPrueba,nombreUsuarios)
+            svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
             print("Termino modelo")
             print("Coninua con identifcacion de rostros")
             db.child("Facial").update({"EntrenamientoHecho":"True"})  

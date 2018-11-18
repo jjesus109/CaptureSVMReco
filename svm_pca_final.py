@@ -17,7 +17,9 @@ labelsAug =[]
 #radius = 4
 #n_points = 8
 #nro = 0
-def SVM(carpeta,target_names):
+def diferenciaProbas():
+    
+def SVM(carpeta,target_names, numeroMuestrasRostros):
     from time import time
 #    import matplotlib.pyplot as pl
     import numpy as np
@@ -38,21 +40,36 @@ def SVM(carpeta,target_names):
     resizeH = 96
     t0 = time()
     folders = os.listdir(carpeta)
+    indiceImagen = 0
+    nDatosOcultos=10
+    datosAug=[]
+    labelsAug=[]
+    datosOcultos=[]
+    labelsOcultas=[]
     for im in folders:
         label =int(im[0])
+        if indiceImagen==numeroMuestrasRostros:
+            indiceImagen=0
+        
+            
         Rimagen = carpeta+"/"+im
         imagen=cv2.imread(Rimagen)
         image = cv2.cvtColor(imagen,cv2.COLOR_BGR2GRAY)
         tamanio = np.shape(image)
-        if tamanio[0]!=130:
+        if tamanio[0]!=96:
             image = cv2.resize(image,(resizeW,resizeH))
 #            os.
         lbp = local_binary_pattern(image, n_points, radius, 'default')
         im_flat = lbp.ravel() 
-#        im_flat = image.ravel() 
         im_flat = im_flat.tolist()
-        datosAug.append(im_flat)
-        labelsAug.append(label)
+#        im_flat = image.ravel() 
+        if indiceImagen<nDatosOcultos:
+            datosOcultos.append(im_flat)
+            labelsOcultos.append(label)
+        else:
+            datosAug.append(im_flat)
+            labelsAug.append(label)
+        indiceImagen += 1
         
     print("total time: ", time()-t0)
     
@@ -89,7 +106,7 @@ def SVM(carpeta,target_names):
     # Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled
     # dataset): unsupervised feature extraction / dimensionality reduction
     #n_components =  int(X_train.shape[0]*2/4)
-    n_components = 70
+    n_components = 160
     #
     print("Extracting the top %d eigenfaces from %d faces" % (n_components, X_train.shape[0]))
     t0 = time()
@@ -116,7 +133,7 @@ def SVM(carpeta,target_names):
               'gamma': [0.0001, 0.0005, 0.005,0.05,0.0007,0.07,0.007,0.001,0.002,0.003],
               }
     # for sklearn version 0.16 or prior, the class_weight parameter value is 'auto'
-    clf = GridSearchCV(SVC(class_weight='balanced',probability=True, decision_function_shape = 'ovr'), param_grid,cv =5)
+    clf = GridSearchCV(SVC(class_weight='balanced',probability=True, decision_function_shape = 'ovr', degree =4,kernel ="rbf"), param_grid,cv =5)
     clf = clf.fit(X_train_pca, y_train)
     print("done in %0.3fs" % (time() - t0))
     print("Best estimator found by grid search:")
@@ -138,7 +155,9 @@ def SVM(carpeta,target_names):
     
     print(classification_report(y_test, y_pred, target_names=target_names))
     print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))
-
+    print(probas)
+    y_pred_probas = clf.predict(X_test_pca)
+    
     import pickle
     datos = {"modelo":clf, "pca": pca, "target_names": target_names}
     data = open("archivo_modelo_LBP.pickle",'wb')
