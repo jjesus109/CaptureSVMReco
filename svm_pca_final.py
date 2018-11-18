@@ -45,7 +45,7 @@ def SVM(carpeta,target_names, numeroMuestrasRostros):
     datosAug=[]
     labelsAug=[]
     datosOcultos=[]
-    labelsOcultas=[]
+    labelsOcultos=[]
     for im in folders:
         label =int(im[0])
         if indiceImagen==numeroMuestrasRostros:
@@ -155,8 +155,8 @@ def SVM(carpeta,target_names, numeroMuestrasRostros):
     
     print(classification_report(y_test, y_pred, target_names=target_names))
     print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))
-    print(probas)
-    y_pred_probas = clf.predict(X_test_pca)
+#    print(probas)
+#    y_pred_probas = clf.predict(X_test_pca)
     
     import pickle
     datos = {"modelo":clf, "pca": pca, "target_names": target_names}
