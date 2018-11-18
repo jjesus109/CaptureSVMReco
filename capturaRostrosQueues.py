@@ -65,15 +65,16 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
 #    video_capture.set(3 ,312)
 #    video_capture.set(4, 512)
     conexionCamara = True
-    if video_capture.isOpened() == False:
-        video_capture.release()
-        time.sleep(0.5)
-        video_capture = cv2.VideoCapture(0) 
-    elif video_capture == 1.0:
+    if video_capture == 1.0:
         video_capture = cv2.VideoCapture(0) 
         print("Valor video Capture")
         print(video_capture)
         print("Simon")
+    elif video_capture.isOpened() == False:
+        video_capture.release()
+        time.sleep(0.5)
+        video_capture = cv2.VideoCapture(0) 
+
     conexionCamara = video_capture.isOpened()
     if video_capture.isOpened():
         ledes.on()
