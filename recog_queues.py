@@ -97,7 +97,7 @@ def diferenciaProbas(probabilidades,probabilidadesLista):
         otroValor = arreglo[otroValorPosicion]
         diferenciaProbas = valorMax - otroValor
         if diferenciaProbas >=0.4:
-            probabilidades[i] =  probabilidades[i]*2
+            arreglo[valorMax] =  arreglo[valorMax]*2
         return probabilidades
             
             
@@ -145,6 +145,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
     conexionCamara = video_capture.isOpened()
 #    video_capture.set(3 ,312)
 #    video_capture.set(4, 512)
+    print("los target names:")
+    print(target_names)
     print("Se comunico con camara:")
     if video_capture.isOpened():
         print(str(video_capture.isOpened()))
