@@ -96,7 +96,7 @@ def diferenciaProbas(probabilidades,probabilidadesLista):
         otroValorPosicion = abs(categoria- nCategorias)
         otroValor = arreglo[otroValorPosicion]
         diferenciaProbas = valorMax - otroValor
-        if diferenciaProbas >=0.3:
+        if diferenciaProbas >=0.4:
             probabilidades[i] =  probabilidades[i]*2
         return probabilidades
             
