@@ -105,7 +105,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             if vectorDim !=[0,0,0,0]:
                 medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
                 cv2.rectangle(bgr, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
-                crop_img = bgr[medidasY2:medidasY1, medidasX1:medidasX2]
+                crop_img = Clahe_Gamma[medidasY2:medidasY1, medidasX1:medidasX2]
     #                crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                 # Para evitar que devuelve basura en este caso un entero cuando 
                 # no reconcoe algun rostro
