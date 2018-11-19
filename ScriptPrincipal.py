@@ -172,7 +172,8 @@ datos = pickle.load(tomaDatos)
 clf = datos["modelo"]
 pca = datos["pca"]
 target_names =datos["target_names"]
-NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
+#NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
+NombreCarpetaPrueba ="/home/pi/Desktop/P2/Imagenes/Proyecto del 2018_November_18_17_47_46"
 print(target_names)
 #ya llamo a process
 llamada = False

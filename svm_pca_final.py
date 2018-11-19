@@ -159,7 +159,7 @@ def SVM(carpeta,target_names, numeroMuestrasRostros):
 #    y_pred_probas = clf.predict(X_test_pca)
     
     import pickle
-    datos = {"modelo":clf, "pca": pca, "target_names": target_names,"NombreCarpetaPrueba":NombreCarpetaPrueba}
+    datos = {"modelo":clf, "pca": pca, "target_names": target_names,"NombreCarpetaPrueba":carpeta}
     data = open("archivo_modelo_LBP.pickle",'wb')
     pickle.dump(datos, data)
     data.close()
