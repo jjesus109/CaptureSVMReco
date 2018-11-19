@@ -33,8 +33,8 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
     
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
-    indiceImagen = 0
-    
+    indiceImagen = 1
+    print("numero de muestras")
     for im in folders:
 #        label =int(im[0])
         Rimagen = NombreCarpetaPrueba+"/"+im

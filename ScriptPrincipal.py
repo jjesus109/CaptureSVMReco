@@ -125,7 +125,7 @@ def obtenerRostros(indexCamara):
             
     return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara,numeroMuestrasRostros
 
-numeroMuestrasRostros=60
+numeroMuestrasRostros=61
 import validarRostro as vR
 indexCamara = 0
 video_capture = 1.0
