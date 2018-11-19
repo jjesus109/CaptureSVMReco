@@ -99,7 +99,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             Clahe_Gamma = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
 #                cv2.imshow("CAPTURA",Clahe_Gamma)
             if inputQueue.empty():
-                inputQueue.put(bgr)
+                inputQueue.put(Clahe_Gamma)
             if not outputQueue.empty():
                 vectorDim = outputQueue.get()
             if vectorDim !=[0,0,0,0]:
