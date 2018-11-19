@@ -21,6 +21,7 @@ import time
 
 # Get a reference to webcam #0 (the default one)
 def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca, clf,video_capture ):
+    ledes.on()
     if video_capture == 1.0:
         video_capture = cv2.VideoCapture(0) 
         print("Valor video Capture")
@@ -85,6 +86,7 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
     print("los target names:")
     print(target_names)
     print("Se comunico con camara:")
+    
     if video_capture.isOpened():
         while True:
             # Grab a single frame of video
@@ -155,6 +157,7 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
                 ledes.on()
                 time.sleep(0.4)
                 ledes.off()
+                time.sleep(3)
                 print("reconocio a :")
                 print(nombre)
                 break
@@ -166,8 +169,10 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
                 ledes.on()
                 time.sleep(0.4)
                 ledes.off()
+                time.sleep(3)
                 print("reconocio a :")
                 print(nombre)
+                
                 break
         
         # Release handle to the webcam
