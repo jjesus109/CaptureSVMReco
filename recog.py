@@ -37,7 +37,9 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
     imagenes = ["1_47","2_47","3_47"]
     print("numero de muestras")
     for im in folders:
-        label =im[0:5]
+#        print(label)
+        label =im[0:4]
+        print(label)
         Rimagen = NombreCarpetaPrueba+"/"+im
         if indiceImagen==numeroMuestrasRostros:
             indiceImagen = 0
