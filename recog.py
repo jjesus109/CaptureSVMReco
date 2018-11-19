@@ -36,13 +36,14 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
     indiceImagen = 1
     imagenes = ["1_47","2_47","3_47"]
     print("numero de muestras")
+    print(numeroMuestrasRostros)
     for im in folders:
 #        print(label)
         label =im[0:4]
         print(label)
         Rimagen = NombreCarpetaPrueba+"/"+im
-        if indiceImagen==numeroMuestrasRostros:
-            indiceImagen = 0
+#        if indiceImagen==numeroMuestrasRostros:
+#            indiceImagen = 0
         if label in imagenes :
             print(Rimagen)
             print(type(Rimagen))
