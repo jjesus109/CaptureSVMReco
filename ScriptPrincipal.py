@@ -172,6 +172,7 @@ datos = pickle.load(tomaDatos)
 clf = datos["modelo"]
 pca = datos["pca"]
 target_names =datos["target_names"]
+NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
 print(target_names)
 #ya llamo a process
 llamada = False
