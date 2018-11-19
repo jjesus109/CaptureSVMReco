@@ -34,7 +34,7 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
 #    indiceImagen = 1
-    imagenes = ["1_47.","2_47.","3_47."]
+    imagenes = ["1_57.","2_57.","3_57."]
     print("numero de muestras")
     print(numeroMuestrasRostros)
     for im in folders:
