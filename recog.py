@@ -108,7 +108,7 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
                     if True in matches:
                         first_match_index = matches.index(True)
                         nombre = target_names[first_match_index]
-        
+                        print("Nombre: "+ nombre)
                     face_names.append(nombre)
         
             process_this_frame = not process_this_frame
@@ -151,6 +151,7 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
                 ledes.on()
                 time.sleep(0.4)
                 ledes.off()
+                break
             elif nombre in target_names:
                 db.child("Facial").update({"RostroValidado":"True"})
                 db.child("Facial").update({"NombreRostroReconocido":nombre})
@@ -159,6 +160,7 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
                 ledes.on()
                 time.sleep(0.4)
                 ledes.off()
+                break
         
         # Release handle to the webcam
         video_capture.release()
