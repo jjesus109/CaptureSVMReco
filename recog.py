@@ -31,7 +31,7 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
         Rimagen = NombreCarpetaPrueba+"/"+im
         if indiceImagen==numeroMuestrasRostros:
             indiceImagen = 0
-        if indiceImagen== 0 :
+        if indiceImagen== 35 :
             image = face_recognition.load_image_file(Rimagen)
             image_face_encoding = face_recognition.face_encodings(image)[0]
             images_encondes.append(image_face_encoding)
