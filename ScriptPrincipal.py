@@ -167,7 +167,7 @@ import recog as rg
 from gpiozero import MotionSensor
 import pickle 
 pir = MotionSensor(4) # Numero de pin de raspberry
-tomaDatos = open("55_m_70_comp.pickle", "rb")
+tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
 datos = pickle.load(tomaDatos)
 clf = datos["modelo"]
 pca = datos["pca"]
