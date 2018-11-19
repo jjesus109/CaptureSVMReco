@@ -20,8 +20,17 @@ import time
 # specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
 
 # Get a reference to webcam #0 (the default one)
-def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca, clf):
-    video_capture = cv2.VideoCapture(0)
+def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca, clf,video_capture ):
+    if video_capture == 1.0:
+        video_capture = cv2.VideoCapture(0) 
+        print("Valor video Capture")
+        print(video_capture)
+        print("Simon")
+    elif video_capture.isOpened() == False:
+        video_capture.release()
+        time.sleep(0.5)
+        video_capture = cv2.VideoCapture(0) 
+    
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
     indiceImagen = 0
@@ -152,4 +161,4 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
         # Release handle to the webcam
         video_capture.release()
         cv2.destroyAllWindows()
-    return nombre
+    return video_capture, nombre

@@ -185,7 +185,7 @@ while True:
         print("Index actual = " + str(indexCamara))
 #        ledes.on()
 #        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
-        nombre = rg.recog(NombreCarpetaPrueba,numeroMuestrasRostros, target_names, db, ledes,pca,clf)
+        video_capture,nombre = rg.recog(NombreCarpetaPrueba,numeroMuestrasRostros, target_names, db, ledes,pca,clf,video_capture)
 #        vd.release()
 #        ledes.off()
         if nombre=="Desconocido":
