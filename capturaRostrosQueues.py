@@ -110,6 +110,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     #                crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                 # Para evitar que devuelve basura en este caso un entero cuando 
                 # no reconcoe algun rostro
+                print(crop_img)
                 if crop_img.all()==0:
                     tamanioCara = (0,0,0)
                     print("tamaño de cara pequeño")
@@ -133,7 +134,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             # Solo se deje un usuario por que se realizará por usuario    
     #            print("numeroImagen")
             print(numeroImagen)
-            cv2.imshow('Video', bgr)
+            cv2.imshow('Video', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
             if numeroImagen >numeroMuestrasRostros:
