@@ -11,7 +11,8 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 def _detect_(inputQueue, outputQueue):
     while True:
         if not inputQueue.empty():
-            gray = inputQueue.get()
+            bgr = inputQueue.get()
+            gray = gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY) 
             faces = face_cascade.detectMultiScale(gray, 1.3, 5)
             for (x, y, w, h) in faces:
                 medidasX1 = int(x*1.15)                
@@ -83,11 +84,11 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         print("Comienza captura de video")
         while True:
             _, frame = video_capture.read()
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            CorreccionGamma = ajusteGamma(gray,1.8)
-            clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
-            Clahe_Gamma = clahe.apply(CorreccionGamma)
-            
+#            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+#            CorreccionGamma = ajusteGamma(gray,1.8)
+#            clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
+#            Clahe_Gamma = clahe.apply(CorreccionGamma)
+#            
 
             CGamma = ajusteGamma(frame,1.8)
             clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
@@ -96,10 +97,10 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             lab_planes[0] = clahe.apply (lab_planes[0])
             lab = cv2.merge(lab_planes)
             bgr = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
-            Clahe_Gamma = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+#            Clahe_Gamma = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
 #                cv2.imshow("CAPTURA",Clahe_Gamma)
             if inputQueue.empty():
-                inputQueue.put(Clahe_Gamma)
+                inputQueue.put(bgr)
             if not outputQueue.empty():
                 vectorDim = outputQueue.get()
             if vectorDim !=[0,0,0,0]:
@@ -132,7 +133,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             # Solo se deje un usuario por que se realizará por usuario    
     #            print("numeroImagen")
             print(numeroImagen)
-            cv2.imshow('Video', frame)
+            cv2.imshow('Video', bgr)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
             if numeroImagen >numeroMuestrasRostros:
