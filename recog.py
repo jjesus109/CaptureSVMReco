@@ -34,13 +34,14 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
     indiceImagen = 1
+    imagenes = ["1_47","2_47","3_47"]
     print("numero de muestras")
     for im in folders:
-#        label =int(im[0])
+        label =im[0:5]
         Rimagen = NombreCarpetaPrueba+"/"+im
         if indiceImagen==numeroMuestrasRostros:
             indiceImagen = 0
-        if indiceImagen== 47 :
+        if label in imagenes :
             print(Rimagen)
             print(type(Rimagen))
             image = face_recognition.load_image_file(Rimagen)
