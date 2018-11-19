@@ -46,8 +46,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
 #        video_capture.open(indexCamara)
     # Configuración de queues        
     
-    resizeW = 96
-    resizeH = 96
+    resizeW = 140
+    resizeH = 140
     vectorDim = [0,0,0,0]
     tamanioCara =  (0,0,0)
     numeroMuestrasRostros = 70
