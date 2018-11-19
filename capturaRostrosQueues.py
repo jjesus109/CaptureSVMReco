@@ -113,7 +113,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
 
 
                 tamanioCara = np.shape(crop_img)
-                print("se hace el crop")
+#                print("se hace el crop")
                 
                 """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
                 PERSONA FRENTE A LA CAMAR"""
