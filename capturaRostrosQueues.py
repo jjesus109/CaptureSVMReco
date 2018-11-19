@@ -89,14 +89,14 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             Clahe_Gamma = clahe.apply(CorreccionGamma)
             
 
-#            CGamma = ajusteGamma(frame,1.8)
-#            clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
-#            lab = cv2.cvtColor(CGamma, cv2.COLOR_BGR2LAB)
-#            lab_planes = cv2.split(lab)
-#            lab_planes[0] = clahe.apply (lab_planes[0])
-#            lab = cv2.merge(lab_planes)
-#            bgr = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
-#            Clahe_Gamma = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+            CGamma = ajusteGamma(frame,1.8)
+            clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
+            lab = cv2.cvtColor(CGamma, cv2.COLOR_BGR2LAB)
+            lab_planes = cv2.split(lab)
+            lab_planes[0] = clahe.apply (lab_planes[0])
+            lab = cv2.merge(lab_planes)
+            bgr = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
+            Clahe_Gamma = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
 #                cv2.imshow("CAPTURA",Clahe_Gamma)
             if inputQueue.empty():
                 inputQueue.put(Clahe_Gamma)
@@ -104,17 +104,17 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                 vectorDim = outputQueue.get()
             if vectorDim !=[0,0,0,0]:
                 medidasX1,medidasY1,medidasX2,medidasY2 = vectorDim
-                cv2.rectangle(frame, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
-                crop_img = frame[medidasY2:medidasY1, medidasX1:medidasX2]
+                cv2.rectangle(bgr, (medidasX1, medidasY1), (medidasX2, medidasY2), (255, 0, 0), 2)
+                crop_img = bgr[medidasY2:medidasY1, medidasX1:medidasX2]
     #                crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                 # Para evitar que devuelve basura en este caso un entero cuando 
                 # no reconcoe algun rostro
                 if crop_img.all()==0:
                     tamanioCara = (0,0,0)
-    #                    print("tamaño de cara pequeño")
+                        print("tamaño de cara pequeño")
                 else:
                     tamanioCara = np.shape(crop_img)
-    #                    print("se hace el crop")
+                        print("se hace el crop")
                 
                 """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
                 PERSONA FRENTE A LA CAMAR"""
@@ -132,7 +132,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             # Solo se deje un usuario por que se realizará por usuario    
     #            print("numeroImagen")
             print(numeroImagen)
-            cv2.imshow('Video', Clahe_Gamma)
+            cv2.imshow('Video', bgr)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                break
             if numeroImagen >numeroMuestrasRostros:
