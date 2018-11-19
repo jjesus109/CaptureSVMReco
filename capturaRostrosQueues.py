@@ -110,13 +110,10 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
     #                crop_img = cv2.resize(crop_img,(resizeW,resizeH))
                 # Para evitar que devuelve basura en este caso un entero cuando 
                 # no reconcoe algun rostro
-                print(crop_img)
-                if crop_img.all()==0:
-                    tamanioCara = (0,0,0)
-                    print("tamaño de cara pequeño")
-                else:
-                    tamanioCara = np.shape(crop_img)
-                    print("se hace el crop")
+
+
+                tamanioCara = np.shape(crop_img)
+                print("se hace el crop")
                 
                 """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
                 PERSONA FRENTE A LA CAMAR"""
