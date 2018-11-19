@@ -45,8 +45,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
 #        video_capture.open(indexCamara)
     # Configuración de queues        
     
-    resizeW = 100
-    resizeH = 100
+    resizeW = 96
+    resizeH = 96
     vectorDim = [0,0,0,0]
     tamanioCara =  (0,0,0)
     numeroMuestrasRostros = 70
@@ -119,7 +119,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                 """AJUSTARLO RESPECTO A LA DISTANCIA MINIMA QUE SE DEBA POSICIONAR UNA 
                 PERSONA FRENTE A LA CAMAR"""
                 
-                if tamanioCara[0] >int(resizeW*0.98):
+                if tamanioCara[0] >int(resizeW*0.78):
                     # ajust de tamaño de rostros
 #                    crop_img = cv2.resize(crop_img,(0,0),fx=0.7, fy=0.7)
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
