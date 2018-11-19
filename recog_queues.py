@@ -88,12 +88,12 @@ def mayorFrecuencia(dk2):
      return target, max(valores)
 
 def diferenciaProbas(probabilidades,probabilidadesLista):
-    nCategorias = probabilidades.shape[1]
+    nCategorias = probabilidades.shape[1]-1
     for i in range(len(probabilidades)):
         arreglo = probabilidades[i]
         valorMax = arreglo.max()
         categoria = probabilidadesLista[i].index(valorMax)
-        otroValorPosicion = abs(categoria- nCategorias-1)
+        otroValorPosicion = abs(categoria- nCategorias)
         otroValor = arreglo[otroValorPosicion]
         diferenciaProbas = valorMax - otroValor
         if diferenciaProbas >=0.4:
@@ -175,7 +175,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                     
                     n += 1
                     crop_img = cv2.resize(crop_img,(resizeW,resizeH))
-#                    cv2.imwrite(str(n)+".jpg",crop_img)
+                    cv2.imwrite(str(n)+".jpg",crop_img)
                     time.sleep(0.1)
 #                    crop_img = cv2.imread(str(n)+".jpg")
 #                    crop_img = cv2.cvtColor(crop_img,cv2.COLOR_BGR2GRAY)

@@ -125,7 +125,7 @@ def obtenerRostros(indexCamara):
             
     return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara,numeroMuestrasRostros
 
-numeroMuestrasRostros=0
+numeroMuestrasRostros=70
 import validarRostro as vR
 indexCamara = 0
 video_capture = 1.0
@@ -162,7 +162,8 @@ print("conectandose a Firebase")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
 
 
-import recog_queues as rL
+#import recog_queues as rL
+import recog as rg
 from gpiozero import MotionSensor
 import pickle 
 pir = MotionSensor(4) # Numero de pin de raspberry
@@ -183,7 +184,8 @@ while True:
     
         print("Index actual = " + str(indexCamara))
 #        ledes.on()
-        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
+#        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
+        nombre = rg.recog(NombreCarpetaPrueba,numeroMuestrasRostros, target_names, db, ledes,pca,clf)
 #        vd.release()
 #        ledes.off()
         if nombre=="Desconocido":
