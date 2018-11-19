@@ -83,11 +83,11 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         print("Comienza captura de video")
         while True:
             _, frame = video_capture.read()
-#            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-#            CorreccionGamma = ajusteGamma(gray,1.8)
-#            clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
-#            Clahe_Gamma = clahe.apply(CorreccionGamma)
-#            
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            CorreccionGamma = ajusteGamma(gray,1.8)
+            clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
+            Clahe_Gamma = clahe.apply(CorreccionGamma)
+            
 
             CGamma = ajusteGamma(frame,1.8)
             clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
@@ -96,7 +96,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             lab_planes[0] = clahe.apply (lab_planes[0])
             lab = cv2.merge(lab_planes)
             bgr = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)
-            Clahe_Gamma = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
+#            Clahe_Gamma = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
 #                cv2.imshow("CAPTURA",Clahe_Gamma)
             if inputQueue.empty():
                 inputQueue.put(Clahe_Gamma)
