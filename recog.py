@@ -152,6 +152,8 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
                 ledes.on()
                 time.sleep(0.4)
                 ledes.off()
+                print("reconocio a :")
+                print(nombre)
                 break
             elif nombre in target_names:
                 db.child("Facial").update({"RostroValidado":"True"})
@@ -161,6 +163,8 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
                 ledes.on()
                 time.sleep(0.4)
                 ledes.off()
+                print("reconocio a :")
+                print(nombre)
                 break
         
         # Release handle to the webcam
