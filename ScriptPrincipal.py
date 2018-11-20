@@ -206,12 +206,18 @@ while True:
             print("Sale del reconocimiento")
     
     elif estadoPuerta == "Abrir":
+        print("esta abierta la puerta")
         estadoPasadoPasillo = estadoActualPasillo
+        print("estado pasado")
+        print(estadoPasadoPasillo)
         estadoActualPasillo = db.child("Habitaciones/Entrada/Pasillo2").get()
         estadoActualPasillo = estadoActualPasillo.val()
+        print("estado actual")
+        print(estadoActualPasillo)
         if estadoPasadoPasillo == True and estadoActualPasillo == False:
+            print("Puerta cerrada")
             db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
-    time.sleep(2)
+    time.sleep(1)
     
     print("Ya espero")
  
