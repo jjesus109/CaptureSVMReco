@@ -210,7 +210,7 @@ while True:
         estadoPasadoPasillo = estadoActualPasillo
         print("estado pasado")
         print(estadoPasadoPasillo)
-        estadoActualPasillo = db.child("Habitaciones/Pasillo2/Presencia").get()
+        estadoActualPasillo = db.child("Habitaciones/Pasillo 2/Presencia").get()
         estadoActualPasillo = estadoActualPasillo.val()
         print("estado actual")
         print(estadoActualPasillo)
