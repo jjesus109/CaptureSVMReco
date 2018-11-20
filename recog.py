@@ -5,7 +5,7 @@ Created on Sun Nov 18 20:25:32 2018
 @author: shuuz
 """
 
-import face_recognition
+
 import cv2
 import os
 import numpy as np
@@ -20,7 +20,7 @@ import time
 # specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
 
 # Get a reference to webcam #0 (the default one)
-def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca, clf,video_capture ):
+def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca, clf,video_capture,face_recognition ):
     ledes.on()
     if video_capture == 1.0:
         video_capture = cv2.VideoCapture(0) 
@@ -146,7 +146,7 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
             if nombre == "Desconocido":
-                db.child("Facial").update({"RostroValidado":"True"})
+                db.child("Facial").update({"RostroValidado":True})
                 db.child("Facial").update({"NombreRostroReconocido":nombre})
                 ledes.off()
                 time.sleep(0.4)
@@ -162,7 +162,7 @@ def recog( NombreCarpetaPrueba,numeroMuestrasRostros, target_names,db,ledes,pca,
                 print(nombre)
                 break
             elif nombre in target_names:
-                db.child("Facial").update({"RostroValidado":"True"})
+                db.child("Facial").update({"RostroValidado":True})
                 db.child("Facial").update({"NombreRostroReconocido":nombre})
                 ledes.off()
                 time.sleep(0.4)

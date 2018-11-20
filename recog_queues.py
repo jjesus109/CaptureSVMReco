@@ -248,7 +248,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                         print("ya reconocio a:")
                         print(nombre)
                         cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-                        db.child("Facial").update({"RostroValidado":"True"})
+                        db.child("Facial").update({"RostroValidado":True})
                         db.child("Facial").update({"NombreRostroReconocido":nombre})
                         
                         
@@ -258,7 +258,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
 #                        print("Width :"+str(video_capture.get(3)))
 #                        print("Height :"+str(video_capture.get(4)))
 #                        print("FPS reales"+str(video_capture.get(7)))
-                        db.child("Facial").update({"RostroValidado":"False"})
+                        db.child("Facial").update({"RostroValidado":False})
                         
                     
         

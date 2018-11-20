@@ -13,6 +13,7 @@ import svm_pca_final as svm
 import cv2
 from gpiozero import LED
 ledes = LED(17)
+import face_recognition
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
 
@@ -25,14 +26,14 @@ def conectarFirebase():
     valores = 0
     entrenamiento = "False"
     config = {
-#          "apiKey": "4yqY4AS24CGMfIFrNnaDVZYU4ITPl9XmE7mXmsCc",
-#          "authDomain": "casa-34c19.firebaseapp.com",
-#          "databaseURL": "https://casa-34c19.firebaseio.com",
-#          "storageBucket": "casa-34c19.appspot.com",
-          "apiKey": "tASIqdHPCcl9RrZ139kwoAMWjS68WMaQ62z9Hosr",
-          "authDomain": "casa-90566.firebaseapp.com",
-          "databaseURL": "https://casa-90566.firebaseio.com",
-          "storageBucket": "casa-90566.appspot.com",    
+          "apiKey": "4yqY4AS24CGMfIFrNnaDVZYU4ITPl9XmE7mXmsCc",
+          "authDomain": "casa-34c19.firebaseapp.com",
+          "databaseURL": "https://casa-34c19.firebaseio.com",
+          "storageBucket": "casa-34c19.appspot.com",
+#          "apiKey": "tASIqdHPCcl9RrZ139kwoAMWjS68WMaQ62z9Hosr",
+#          "authDomain": "casa-90566.firebaseapp.com",
+#          "databaseURL": "https://casa-90566.firebaseio.com",
+#          "storageBucket": "casa-90566.appspot.com",    
     #          "serviceAccount":  "base-rostros-firebase-adminsdk-2w8tl-1940b517ba.json"
           }
     try:
@@ -66,7 +67,7 @@ def obtenerRostros(indexCamara):
 
         except:
             print("Favor de conectar a internet")
-        if comenzarCaptura.val()  == "True":
+        if comenzarCaptura.val()  == True:  
             
             p, inputQueue, outputQueue = 0 ,0 ,0            
 #            for i in range(len(nombreUsuarios)):
@@ -80,7 +81,7 @@ def obtenerRostros(indexCamara):
             video_capture = 1.0
             while numeroUsuarios<numeroUsuariosAEntrenar+1:
                 deteccionActivada = db.child("Facial/Activacion").get()
-                if deteccionActivada.val()=="True":
+                if deteccionActivada.val()==True:
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
                     deteccionActivadaUsuario = deteccionActivadaUsuario.val()
                     print("La captura de rostros del usuario "+deteccionActivadaUsuario)
@@ -164,7 +165,7 @@ conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
 
 #import recog_queues as rL
 import recog as rg
-from gpiozero import MotionSensor
+from gpiozero import MotionSensor   
 import pickle 
 pir = MotionSensor(4) # Numero de pin de raspberry
 tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
@@ -179,29 +180,38 @@ NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
 #ya llamo a process
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
-
+estadoActualPasillo = False
 while True:
     print("Index actual = " + str(indexCamara))
 #    """Leer datos del senosor de presencia"""
-    if pir.motion_detected:
+    estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
+    estadoPuerta = estadoPuerta.val()
+    if estadoPuerta == "Cerrar":
+        if pir.motion_detected:
+            print("Index actual = " + str(indexCamara))
+    #        ledes.on()
+    #        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
+            video_capture,nombre = rg.recog(NombreCarpetaPrueba,numeroMuestrasRostros, target_names, db, ledes,pca,clf,video_capture, face_recognition)
+    #        vd.release()
+    #        ledes.off()
+            if nombre=="Desconocido":
+                time.sleep(4)
+            elif nombre!="Desconocido":
+                db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
+                
+        
     
-        print("Index actual = " + str(indexCamara))
-#        ledes.on()
-#        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
-        video_capture,nombre = rg.recog(NombreCarpetaPrueba,numeroMuestrasRostros, target_names, db, ledes,pca,clf,video_capture)
-#        vd.release()
-#        ledes.off()
-        if nombre=="Desconocido":
-            time.sleep(4)
-        elif nombre!="Desconocido":
-            time.sleep(2)    
-
-        llamada= True
-        print("valor llamada: "+ str(llamada))
-        print("Sale del reconocimiento")
-        
-        
-    time.sleep(1)
+            llamada= True
+            print("valor llamada: "+ str(llamada))
+            print("Sale del reconocimiento")
+    
+    elif estadoPuerta == "Abrir":
+        estadoPasadoPasillo = estadoActualPasillo
+        estadoActualPasillo = db.child("Habitaciones/Entrada/Pasillo2").get()
+        estadoActualPasillo = estadoActualPasillo.val()
+        if estadoPasadoPasillo == True and estadoActualPasillo == False:
+            db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
+    time.sleep(2)
     
     print("Ya espero")
  
