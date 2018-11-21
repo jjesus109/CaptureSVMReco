@@ -100,6 +100,8 @@ def obtenerRostros(indexCamara):
                         db.child("Facial").update({"Activacion":"False"})
                         print("Usuario capturado: "+deteccionActivadaUsuario)
                         print(NombresEtiquetas)
+                        nombreUsuario= {deteccionActivadaUsuario: True}
+                        db.child("Facial/UsuariosActivados").update(nombreUsuario)
                     llamada=True
             
             keys = list(NombresEtiquetas.keys())
@@ -133,7 +135,7 @@ video_capture = 1.0
 while True:
     NombresEtiquetas = 0
     conexionExitosa,firebase,db, valores,entrenamiento = conectarFirebase()
-    if entrenamiento=="False":
+    if entrenamiento==False:
         NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
         #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
         pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
@@ -158,7 +160,7 @@ while True:
         break
     
 
-print("Inicia clasificación de rostros")
+
 print("conectandose a Firebase")
 conexionExitosa,firebase,db, valores, entrenamiento = conectarFirebase()
 
@@ -168,6 +170,7 @@ import recog as rg
 from gpiozero import MotionSensor   
 import pickle 
 pir = MotionSensor(4) # Numero de pin de raspberry
+print("Extracciòn de modelo")
 tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
 datos = pickle.load(tomaDatos)
 clf = datos["modelo"]
@@ -182,6 +185,7 @@ llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
 estadoActualPasillo = False
 im_en = rg.encode(NombreCarpetaPrueba)
+print("Inicia clasificación de rostros")
 while True:
     print("Index actual = " + str(indexCamara))
 #    """Leer datos del senosor de presencia"""
@@ -222,6 +226,3 @@ while True:
     
     print("Ya espero")
  
-
-        
-        
