@@ -120,7 +120,7 @@ def obtenerRostros(indexCamara):
             else:
                 errorCaptura = False
 #                videoCapture.release()
-                print("Termino captura de rostros exitosament")
+                print("Termino captura de rostros exitosamente")
         else:
             print("Aun no se inicia la captura de rostros")
             errorCaptura = True
@@ -202,9 +202,6 @@ while True:
                 time.sleep(4)
             elif nombre!="Desconocido":
                 db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
-                
-        
-    
             llamada= True
             print("valor llamada: "+ str(llamada))
             print("Sale del reconocimiento")

@@ -22,19 +22,18 @@ def encode(NombreCarpetaPrueba):
         Rimagen = NombreCarpetaPrueba+"/"+im
 #        if indiceImagen==numeroMuestrasRostros:
 #            indiceImagen = 0
-        error = True
+        
         if label in imagenes :
 #            print(Rimagen)
 #            print(type(Rimagen))
-            while error != True:
+            while True:
                 Rimagen = NombreCarpetaPrueba+"/"+im
                 image = face_recognition.load_image_file(Rimagen)
             
                 try:
                     image_face_encoding = face_recognition.face_encodings(image)[0]
-                    error = False
+                    break
                 except:
-                    error = True
                     im[2:4] = str(int(im[2:4]) + 1)
                     
             images_encondes.append(image_face_encoding) 
