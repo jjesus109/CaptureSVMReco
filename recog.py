@@ -18,14 +18,14 @@ def encode(NombreCarpetaPrueba):
     for im in folders:
 #        print(label)
         label =im[0:5]
-        print(im)
+#        print(im)
         Rimagen = NombreCarpetaPrueba+"/"+im
 #        if indiceImagen==numeroMuestrasRostros:
 #            indiceImagen = 0
         
         if label in imagenes :
-            print(Rimagen)
-            print(type(Rimagen))
+#            print(Rimagen)
+#            print(type(Rimagen))
             image = face_recognition.load_image_file(Rimagen)
             image_face_encoding = face_recognition.face_encodings(image)[0]
             images_encondes.append(image_face_encoding)
