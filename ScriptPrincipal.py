@@ -153,7 +153,7 @@ while True:
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
             print("Termino modelo")
             print("Coninua con identifcacion de rostros")
-            db.child("Facial").update({"EntrenamientoHecho":"True"})  
+            db.child("Facial").update({"EntrenamientoHecho":True})  
             break
 
     else:
@@ -177,6 +177,7 @@ clf = datos["modelo"]
 pca = datos["pca"]
 target_names =datos["target_names"]
 NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
+print(NombreCarpetaPrueba)
 #target_names = ["Jesus","Jorge","Tona"]
 #NombreCarpetaPrueba ="/home/pi/Desktop/P2/Imagenes/Proyecto del 2018_November_18_17_47_46"
 #print(target_names)
