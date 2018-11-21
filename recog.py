@@ -2,7 +2,7 @@
 """
 Created on Sun Nov 18 20:25:32 2018
 
-@author: shuuz
+@author: Jesus
 """
 import cv2
 import os
@@ -22,15 +22,24 @@ def encode(NombreCarpetaPrueba):
         Rimagen = NombreCarpetaPrueba+"/"+im
 #        if indiceImagen==numeroMuestrasRostros:
 #            indiceImagen = 0
-        
+        error = True
         if label in imagenes :
 #            print(Rimagen)
 #            print(type(Rimagen))
-            image = face_recognition.load_image_file(Rimagen)
-            image_face_encoding = face_recognition.face_encodings(image)[0]
-            images_encondes.append(image_face_encoding)
-        
-
+            while error != True:
+                Rimagen = NombreCarpetaPrueba+"/"+im
+                image = face_recognition.load_image_file(Rimagen)
+            
+                try:
+                    image_face_encoding = face_recognition.face_encodings(image)[0]
+                    error = False
+                except:
+                    error = True
+                    im[2:4] = str(int(im[2:4]) + 1)
+                    
+            images_encondes.append(image_face_encoding) 
+                
+                
         
     return images_encondes
 
@@ -46,52 +55,6 @@ def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture ):
         time.sleep(0.5)
         video_capture = cv2.VideoCapture(0) 
     
-#    images_encondes = []
-#    folders = os.listdir(NombreCarpetaPrueba)
-##    indiceImagen = 1
-#    imagenes = ["1_57.","2_57.","3_57."]
-#    print("numero de muestras")
-#    print(numeroMuestrasRostros)
-#    for im in folders:
-##        print(label)
-#        label =im[0:5]
-#        print(im)
-#        Rimagen = NombreCarpetaPrueba+"/"+im
-##        if indiceImagen==numeroMuestrasRostros:
-##            indiceImagen = 0
-#        if label in imagenes :
-#            print(Rimagen)
-#            print(type(Rimagen))
-#            image = face_recognition.load_image_file(Rimagen)
-#            image_face_encoding = face_recognition.face_encodings(image)[0]
-#            images_encondes.append(image_face_encoding)
-#        indiceImagen += 1
-#
-#        
-        
-#    for i in range(numeroUsuarios):
-        
-#        images.append(face_recognition.load_image_file(pathImage))
-        # Load a sample picture and learn how to recognize it.
-#    image = face_recognition.load_image_file("/home/pi/Desktop/P2/chu.png")
-#    obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
-#    
-#    # Load a second sample picture and learn how to recognize it.
-#    biden_image = face_recognition.load_image_file("/home/pi/Desktop/P2/chong.png")
-#    biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
-#    
-    # Create arrays of known face encodings and their names
-#    known_face_encodings = [
-#        obama_face_encoding,
-#        biden_face_encoding
-#    ]
-#    known_face_names = [
-#        "chu",
-#        "chong",
-#    
-#    ]
-#    
-    # Initialize some variables
     face_locations = []
     face_encodings = []
     face_names = []

@@ -215,11 +215,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                             ledes.on()
                             time.sleep(0.4)
                             ledes.off()
-#                            ledes.value= 0.0
-#                            time.sleep(0.4)
-#                            ledes.value= 0.7
-#                            time.sleep(0.4)
-#                            ledes.value= 0.0
+
                         else:
                             probabilidadSumada = probas[target_probable]
                             probabilidadFinal = probabilidadSumada/frecuencia
@@ -234,15 +230,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                             ledes.on()
                             time.sleep(0.4)
                             ledes.off()
-#                            ledes.value= 0.0
-#                            time.sleep(0.4)
-#                            ledes.value= 0.7
-#                            time.sleep(0.4)
-#                            ledes.value= 0.0
-#                            time.sleep(0.4)
-#                            ledes.value= 0.7
-#                            time.sleep(0.4)
-#                            ledes.value= 0.0
+
 #                       
                         listaImagenes = []
                         print("ya reconocio a:")
@@ -254,17 +242,8 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                         
                         break
                     else:
-                        print("aun no")
-#                        print("Width :"+str(video_capture.get(3)))
-#                        print("Height :"+str(video_capture.get(4)))
-#                        print("FPS reales"+str(video_capture.get(7)))
+
                         db.child("Facial").update({"RostroValidado":False})
-                        
-                    
-        
-#            cv2.putText(frame, nombre, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-            
-#            cv2.imshow('Video', frame)
             cv2.imshow('Video correccion', Clahe_Gamma)
         
             if cv2.waitKey(1) & 0xFF == ord('q'):

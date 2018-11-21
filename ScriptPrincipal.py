@@ -97,7 +97,7 @@ def obtenerRostros(indexCamara):
                         
                         NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
                         numeroUsuarios+=1
-                        db.child("Facial").update({"Activacion":"False"})
+                        db.child("Facial").update({"Activacion":False})
                         print("Usuario capturado: "+deteccionActivadaUsuario)
                         print(NombresEtiquetas)
                         nombreUsuario= {deteccionActivadaUsuario: True}
@@ -178,13 +178,11 @@ pca = datos["pca"]
 target_names =datos["target_names"]
 NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
 print(NombreCarpetaPrueba)
-#target_names = ["Jesus","Jorge","Tona"]
-#NombreCarpetaPrueba ="/home/pi/Desktop/P2/Imagenes/Proyecto del 2018_November_18_17_47_46"
-#print(target_names)
-#ya llamo a process
+
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
 estadoActualPasillo = False
+estadoActualPuerta = False
 im_en = rg.encode(NombreCarpetaPrueba)
 print("Inicia clasificación de rostros")
 while True:
@@ -212,7 +210,10 @@ while True:
             print("Sale del reconocimiento")
     
     elif estadoPuerta == "Abrir":
+        
         print("esta abierta la puerta")
+        estadoPasadoPuerta = estadoActualPuerta
+        estadoActualPuerta = pir.motion_detected
         estadoPasadoPasillo = estadoActualPasillo
         print("estado pasado")
         print(estadoPasadoPasillo)
@@ -220,7 +221,7 @@ while True:
         estadoActualPasillo = estadoActualPasillo.val()
         print("estado actual")
         print(estadoActualPasillo)
-        if estadoPasadoPasillo == True and estadoActualPasillo == False:
+        if estadoActualPuerta ==False and estadoPasadoPuerta == True and estadoPasadoPasillo == True and estadoActualPasillo == False:
             print("Puerta cerrada")
             db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
     time.sleep(2)
