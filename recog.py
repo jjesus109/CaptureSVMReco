@@ -22,6 +22,7 @@ def encode(NombreCarpetaPrueba):
         Rimagen = NombreCarpetaPrueba+"/"+im
 #        if indiceImagen==numeroMuestrasRostros:
 #            indiceImagen = 0
+        label.sort()
         if label in imagenes :
             print(Rimagen)
             print(type(Rimagen))
