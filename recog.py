@@ -14,17 +14,23 @@ def encode(NombreCarpetaPrueba):
     folders = os.listdir(NombreCarpetaPrueba)
 #    indiceImagen = 1
     imagenes = ["1_57.","2_57.","3_57."]
-    
-    
+
     for im in folders:
 #        print(label)
         label =im[0:5]
-        
+        print(im)
         Rimagen = NombreCarpetaPrueba+"/"+im
+#        if indiceImagen==numeroMuestrasRostros:
+#            indiceImagen = 0
         if label in imagenes :
+            print(Rimagen)
+            print(type(Rimagen))
             image = face_recognition.load_image_file(Rimagen)
             image_face_encoding = face_recognition.face_encodings(image)[0]
             images_encondes.append(image_face_encoding)
+        
+
+        
     return images_encondes
 
 def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture ):
@@ -59,8 +65,8 @@ def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture ):
 #            image_face_encoding = face_recognition.face_encodings(image)[0]
 #            images_encondes.append(image_face_encoding)
 #        indiceImagen += 1
-
-        
+#
+#        
         
 #    for i in range(numeroUsuarios):
         
