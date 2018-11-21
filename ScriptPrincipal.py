@@ -13,7 +13,7 @@ import svm_pca_final as svm
 import cv2
 from gpiozero import LED
 ledes = LED(17)
-import face_recognition
+
 # Activacion variable para saber cuando esta activado el sensor
 #NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
 
@@ -181,6 +181,7 @@ NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
 estadoActualPasillo = False
+im_en = rg.encode(NombreCarpetaPrueba)
 while True:
     print("Index actual = " + str(indexCamara))
 #    """Leer datos del senosor de presencia"""
@@ -191,7 +192,7 @@ while True:
             print("Index actual = " + str(indexCamara))
     #        ledes.on()
     #        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
-            video_capture,nombre = rg.recog(NombreCarpetaPrueba,numeroMuestrasRostros, target_names, db, ledes,pca,clf,video_capture, face_recognition)
+            video_capture,nombre = rg.recog(im_en, target_names, db, ledes,pca,clf,video_capture)
     #        vd.release()
     #        ledes.off()
             if nombre=="Desconocido":
