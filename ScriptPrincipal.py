@@ -220,7 +220,7 @@ while True:
         estadoActualPasillo = estadoActualPasillo.val()
         print("estado actual")
         print(estadoActualPasillo)
-        if estadoActualPuerta ==False and estadoPasadoPasillo == True and estadoActualPasillo == False:
+        if estadoActualPuerta ==False and estadoActualPasillo == False:
             print("Puerta cerrada")
             db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
     time.sleep(2)
