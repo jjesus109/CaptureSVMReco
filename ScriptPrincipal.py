@@ -193,7 +193,7 @@ while True:
 #    estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
 #    estadoPuerta = estadoPuerta.val()
 #    if estadoPuerta == "Cerrar":
-    if pir.motion_detected:
+    if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
         
 #        ledes.on()
 #        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
