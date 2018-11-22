@@ -185,49 +185,69 @@ estadoActualPasillo = False
 estadoActualPuerta = False
 im_en = rg.encode(NombreCarpetaPrueba)
 print("Inicia clasificación de rostros")
-t0 = 0.0
+
 while True:
     print("Index actual = " + str(indexCamara))
 #    """Leer datos del senosor de presencia"""
-    estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
-    estadoPuerta = estadoPuerta.val()
-    if estadoPuerta == "Cerrar":
-        if pir.motion_detected:
-            print("Index actual = " + str(indexCamara))
-    #        ledes.on()
-    #        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
-            video_capture,nombre = rg.recog(im_en, target_names, db, ledes,pca,clf,video_capture)
-    #        vd.release()
-    #        ledes.off()
-            if nombre=="Desconocido":
-                time.sleep(4)
-            elif nombre == "Sin reconocer":
-                ledes.off()
-            elif nombre!="Desconocido":
-                db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
-            llamada= True
-            print("valor llamada: "+ str(llamada))
-            print("Sale del reconocimiento")
-    
-    elif estadoPuerta == "Abrir":
-        if t0 == 0.0:
-            t0 = time.time()
-#        print("esta abierta la puerta")
-#        estadoPasadoPuerta = estadoActualPuerta
-#        estadoActualPuerta = pir.motion_detected
-#        estadoPasadoPasillo = estadoActualPasillo
-#        print("estado pasado")
-#        print(estadoPasadoPasillo)
-#        estadoActualPasillo = db.child("Habitaciones/Pasillo 2/Presencia").get()
-#        estadoActualPasillo = estadoActualPasillo.val()
-        print("estado actual PIR")
-        print(pir.motion_detected)
-        
-        if (time.time() - t0) >= 15.0 and pir.motion_detected == False:
-            t0 = time.time()
-            time.sleep(5)
-            print("Puerta cerrada")
-            db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
+#    estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
+#    estadoPuerta = estadoPuerta.val()
+#    if estadoPuerta == "Cerrar":
+    if pir.motion_detected:
+        print("Index actual = " + str(indexCamara))
+#        ledes.on()
+#        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
+        video_capture,nombre = rg.recog(im_en, target_names, db, ledes,pca,clf,video_capture)
+#        vd.release()
+#        ledes.off()
+        if nombre=="Desconocido":
+            time.sleep(4)
+        elif nombre == "Sin reconocer":
+            ledes.off()
+        elif nombre!="Desconocido":
+            db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
+            time.sleep(15)
+#            t0 = 0.0
+#            if t0 == 0.0:
+#                t0 = time.time()
+    #        print("esta abierta la puerta")
+    #        estadoPasadoPuerta = estadoActualPuerta
+    #        estadoActualPuerta = pir.motion_detected
+    #        estadoPasadoPasillo = estadoActualPasillo
+    #        print("estado pasado")
+    #        print(estadoPasadoPasillo)
+    #        estadoActualPasillo = db.child("Habitaciones/Pasillo 2/Presencia").get()
+    #        estadoActualPasillo = estadoActualPasillo.val()
+            print("estado actual PIR")
+            print(pir.motion_detected)
+            
+            if pir.motion_detected == False:
+                t0 = time.time()
+                time.sleep(5)
+                print("Puerta cerrada")
+                db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
+        llamada= True
+        print("valor llamada: "+ str(llamada))
+        print("Sale del reconocimiento")
+
+#    elif estadoPuerta == "Abrir":
+#    if t0 == 0.0:
+#        t0 = time.time()
+##        print("esta abierta la puerta")
+##        estadoPasadoPuerta = estadoActualPuerta
+##        estadoActualPuerta = pir.motion_detected
+##        estadoPasadoPasillo = estadoActualPasillo
+##        print("estado pasado")
+##        print(estadoPasadoPasillo)
+##        estadoActualPasillo = db.child("Habitaciones/Pasillo 2/Presencia").get()
+##        estadoActualPasillo = estadoActualPasillo.val()
+#    print("estado actual PIR")
+#    print(pir.motion_detected)
+#    
+#    if (time.time() - t0) >= 15.0 and pir.motion_detected == False:
+#        t0 = time.time()
+#        time.sleep(5)
+#        print("Puerta cerrada")
+#        db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
 #        if estadoActualPuerta ==False and estadoActualPasillo == False:
 #            print("Puerta cerrada")
 #            db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
