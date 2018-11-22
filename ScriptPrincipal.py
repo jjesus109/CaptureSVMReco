@@ -201,8 +201,6 @@ while True:
 #        ledes.off()
         if nombre=="Desconocido":
             time.sleep(4)
-        elif nombre == "Sin reconocer":
-            ledes.off()
         elif nombre!="Desconocido":
             db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
             time.sleep(15)
@@ -217,18 +215,19 @@ while True:
     #        print(estadoPasadoPasillo)
     #        estadoActualPasillo = db.child("Habitaciones/Pasillo 2/Presencia").get()
     #        estadoActualPasillo = estadoActualPasillo.val()
-            print("estado actual PIR")
-            print(pir.motion_detected)
             
-            if pir.motion_detected == False:
-                t0 = time.time()
-                time.sleep(5)
-                print("Puerta cerrada")
-                db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
         llamada= True
         print("valor llamada: "+ str(llamada))
         print("Sale del reconocimiento")
-
+    elif nombre != "Sin reconocer":
+        print("estado actual PIR")
+        print(pir.motion_detected)
+            
+        if pir.motion_detected == False:
+            t0 = time.time()
+            time.sleep(5)
+            print("Puerta cerrada")
+            db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
 #    elif estadoPuerta == "Abrir":
 #    if t0 == 0.0:
 #        t0 = time.time()

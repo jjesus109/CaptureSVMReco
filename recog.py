@@ -159,6 +159,7 @@ def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture ):
                 break
         
         # Release handle to the webcam
+        ledes.off()
         video_capture.release()
         cv2.destroyAllWindows()
     return video_capture, nombre
