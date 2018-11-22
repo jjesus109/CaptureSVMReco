@@ -185,16 +185,16 @@ estadoActualPasillo = False
 estadoActualPuerta = False
 im_en = rg.encode(NombreCarpetaPrueba)
 print("Inicia clasificación de rostros")
-
+nombre = "Sin reconocer"
 while True:
     print("Index actual = " + str(indexCamara))
-    nombre = "Sin reconocer"
+    
 #    """Leer datos del senosor de presencia"""
 #    estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
 #    estadoPuerta = estadoPuerta.val()
 #    if estadoPuerta == "Cerrar":
     if pir.motion_detected:
-        print("Index actual = " + str(indexCamara))
+        
 #        ledes.on()
 #        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
         video_capture,nombre = rg.recog(im_en, target_names, db, ledes,pca,clf,video_capture)
@@ -220,12 +220,11 @@ while True:
         llamada= True
         print("valor llamada: "+ str(llamada))
         print("Sale del reconocimiento")
-    elif nombre != "Sin reconocer":
+    elif nombre != "Sin reconocer" and nombre != "Desconocido":
         print("estado actual PIR")
         print(pir.motion_detected)
             
         if pir.motion_detected == False:
-            t0 = time.time()
             time.sleep(5)
             print("Puerta cerrada")
             db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
