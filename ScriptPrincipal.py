@@ -237,7 +237,7 @@ while True:
             time.sleep(5)
             print("Puerta cerrada")
             db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
-        nombre = "Sin reconocer"   
+            nombre = "Sin reconocer"   
 #    elif estadoPuerta == "Abrir":
 #    if t0 == 0.0:
 #        t0 = time.time()
