@@ -7,7 +7,7 @@ Created on Sun Nov 18 20:25:32 2018
 import cv2
 import os
 import time
-from time import time
+
 import face_recognition
 
 def encode(NombreCarpetaPrueba):
@@ -65,7 +65,7 @@ def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture ):
     print("Se comunico con camara:")
     
     if video_capture.isOpened():
-        t0 = time()
+        t0 = time.time()
         while True:
             # Grab a single frame of video
             ret, frame = video_capture.read()
@@ -94,7 +94,7 @@ def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture ):
                         nombre = target_names[first_match_index]
                         print("Nombre: "+ nombre)
                     face_names.append(nombre)
-                tiempo = time() - t0
+                tiempo = time.time() - t0
                 if tiempo >= 10.0 :
                     print("tiempo de espera superado")
                     break
