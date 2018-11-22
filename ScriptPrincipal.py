@@ -224,6 +224,7 @@ while True:
         print(pir.motion_detected)
         
         if (time.time() - t0) >= 15.0 and pir.motion_detected == False:
+            t0 = time.time()
             print("Puerta cerrada")
             db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
 #        if estadoActualPuerta ==False and estadoActualPasillo == False:
