@@ -185,6 +185,7 @@ estadoActualPasillo = False
 estadoActualPuerta = False
 im_en = rg.encode(NombreCarpetaPrueba)
 print("Inicia clasificación de rostros")
+t0 = 0.0
 while True:
     print("Index actual = " + str(indexCamara))
 #    """Leer datos del senosor de presencia"""
@@ -209,20 +210,25 @@ while True:
             print("Sale del reconocimiento")
     
     elif estadoPuerta == "Abrir":
-        
-        print("esta abierta la puerta")
-        estadoPasadoPuerta = estadoActualPuerta
-        estadoActualPuerta = pir.motion_detected
-        estadoPasadoPasillo = estadoActualPasillo
-        print("estado pasado")
-        print(estadoPasadoPasillo)
+        if t0 == 0.0:
+            t0 = time.time()
+#        print("esta abierta la puerta")
+#        estadoPasadoPuerta = estadoActualPuerta
+#        estadoActualPuerta = pir.motion_detected
+#        estadoPasadoPasillo = estadoActualPasillo
+#        print("estado pasado")
+#        print(estadoPasadoPasillo)
         estadoActualPasillo = db.child("Habitaciones/Pasillo 2/Presencia").get()
         estadoActualPasillo = estadoActualPasillo.val()
         print("estado actual")
         print(estadoActualPasillo)
-        if estadoActualPuerta ==False and estadoActualPasillo == False:
+        
+        if (time.time() - t0) >= 15.0 and pir.motion_detected == False:
             print("Puerta cerrada")
             db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
+#        if estadoActualPuerta ==False and estadoActualPasillo == False:
+#            print("Puerta cerrada")
+#            db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
     time.sleep(2)
     
     print("Ya espero")
