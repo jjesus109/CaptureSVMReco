@@ -214,7 +214,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                             time.sleep(0.4)
                             ledes.on()
                             time.sleep(0.4)
-                            ledes.off()
+                            
 
                         else:
                             probabilidadSumada = probas[target_probable]
@@ -229,7 +229,7 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
                             time.sleep(0.4)
                             ledes.on()
                             time.sleep(0.4)
-                            ledes.off()
+                            
 
 #                       
                         listaImagenes = []
@@ -253,5 +253,6 @@ def reconocimiento(db,llamada,indexCamara, p, inputQueue, outputQueue, video_cap
 #    p.join()    
     print("Salio del while")
 #    video_capture.release()
+    ledes.off()
     cv2.destroyAllWindows()
     return conexionCamara, p, inputQueue, outputQueue,video_capture,nombre 
