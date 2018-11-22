@@ -96,6 +96,7 @@ def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture ):
                     face_names.append(nombre)
                 tiempo = time() - t0
                 if tiempo >= 10.0 :
+                    print("tiempo de espera superado")
                     break
                 
         
