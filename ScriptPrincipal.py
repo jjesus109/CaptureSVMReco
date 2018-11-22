@@ -192,6 +192,8 @@ while True:
 #    """Leer datos del senosor de presencia"""
     estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
     estadoPuerta = estadoPuerta.val()
+    print("Valor del nombree")
+    print(nombre)
 #    if estadoPuerta == "Cerrar":
     if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
         
@@ -235,7 +237,7 @@ while True:
             time.sleep(5)
             print("Puerta cerrada")
             db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
-        nombre == "Sin reconocer"   
+        nombre = "Sin reconocer"   
 #    elif estadoPuerta == "Abrir":
 #    if t0 == 0.0:
 #        t0 = time.time()
