@@ -188,6 +188,7 @@ print("Inicia clasificación de rostros")
 
 while True:
     print("Index actual = " + str(indexCamara))
+    nombre = "Sin reconocer"
 #    """Leer datos del senosor de presencia"""
 #    estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
 #    estadoPuerta = estadoPuerta.val()
