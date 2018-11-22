@@ -218,10 +218,10 @@ while True:
 #        estadoPasadoPasillo = estadoActualPasillo
 #        print("estado pasado")
 #        print(estadoPasadoPasillo)
-        estadoActualPasillo = db.child("Habitaciones/Pasillo 2/Presencia").get()
-        estadoActualPasillo = estadoActualPasillo.val()
-        print("estado actual")
-        print(estadoActualPasillo)
+#        estadoActualPasillo = db.child("Habitaciones/Pasillo 2/Presencia").get()
+#        estadoActualPasillo = estadoActualPasillo.val()
+        print("estado actual PIR")
+        print(pir.motion_detected)
         
         if (time.time() - t0) >= 15.0 and pir.motion_detected == False:
             print("Puerta cerrada")
