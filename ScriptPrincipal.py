@@ -190,8 +190,8 @@ while True:
     print("Index actual = " + str(indexCamara))
     
 #    """Leer datos del senosor de presencia"""
-#    estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
-#    estadoPuerta = estadoPuerta.val()
+    estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
+    estadoPuerta = estadoPuerta.val()
 #    if estadoPuerta == "Cerrar":
     if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
         
@@ -201,6 +201,8 @@ while True:
 #        vd.release()
 #        ledes.off()
         if nombre=="Desconocido":
+            time.sleep(4)
+        elif nombre == "Sin reconocer":
             time.sleep(4)
         elif nombre!="Desconocido":
             db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
@@ -221,6 +223,11 @@ while True:
         print("valor llamada: "+ str(llamada))
         print("Sale del reconocimiento")
     elif nombre != "Sin reconocer" and nombre != "Desconocido":
+#        estadoPuerta = db.child("Habitaciones/Entrada/Puerta").get()
+#        estadoPuerta = estadoPuerta.val()
+#        print("estado actual puerta")
+#        print(estadoPuerta)            
+#        if estadoPuerta == False:
         print("estado actual PIR")
         print(pir.motion_detected)
             
@@ -228,6 +235,7 @@ while True:
             time.sleep(5)
             print("Puerta cerrada")
             db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
+        nombre == "Sin reconocer"   
 #    elif estadoPuerta == "Abrir":
 #    if t0 == 0.0:
 #        t0 = time.time()
