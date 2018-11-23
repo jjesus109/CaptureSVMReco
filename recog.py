@@ -14,7 +14,7 @@ def encode(NombreCarpetaPrueba):
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
 #    indiceImagen = 1
-    imagenes = ["1_32.","2_32."]
+    imagenes = ["1_40.","2_40."]
     folders.sort()
     for im in folders:
 #        print(label)
@@ -25,8 +25,8 @@ def encode(NombreCarpetaPrueba):
 #            indiceImagen = 0
         
         if label in imagenes :
-#            print(Rimagen)
-#            print(type(Rimagen))
+            print(Rimagen)
+            print(type(Rimagen))
 #            while True:
 #                Rimagen = NombreCarpetaPrueba+"/"+im
             image = face_recognition.load_image_file(Rimagen)
