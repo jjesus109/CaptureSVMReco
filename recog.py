@@ -27,16 +27,16 @@ def encode(NombreCarpetaPrueba):
         if label in imagenes :
 #            print(Rimagen)
 #            print(type(Rimagen))
-            while True:
-                Rimagen = NombreCarpetaPrueba+"/"+im
-                image = face_recognition.load_image_file(Rimagen)
+#            while True:
+#                Rimagen = NombreCarpetaPrueba+"/"+im
+            image = face_recognition.load_image_file(Rimagen)
             
-                try:
-                    image_face_encoding = face_recognition.face_encodings(image)[0]
-                    break
-                except:
-                    im[2:4] = str(int(im[2:4]) + 1)
-                    
+#                try:
+            image_face_encoding = face_recognition.face_encodings(image)[0]
+#                    break
+#                except:
+#                    im[2:4] = str(int(im[2:4]) + 1)
+#                    
             images_encondes.append(image_face_encoding) 
                 
                 
