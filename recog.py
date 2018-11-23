@@ -14,7 +14,7 @@ def encode(NombreCarpetaPrueba):
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
 #    indiceImagen = 1
-    imagenes = ["1_27.","2_27."]
+    imagenes = ["1_28.","2_28."]
     folders.sort()
     for im in folders:
 #        print(label)
