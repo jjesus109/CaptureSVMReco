@@ -139,6 +139,7 @@ while True:
     configurado = db.child("Facial/Configurado").get()
     configurado = configurado.val()
 
+
     if configurado==True:
 
         numeroUsuarios = db.child("Facial/NumeroUsuarios").get()
@@ -206,7 +207,7 @@ while True:
     #        ledes.on()
     #        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
 
-            video_capture,nombre = rg.recog(im_en, target_names, db, ledes,pca,clf,video_capture.usuariosEliminados,usuariosEliminados)
+            video_capture,nombre = rg.recog(im_en, target_names, db, ledes,pca,clf,video_capture, usuariosEliminados)
     #        vd.release()
     #        ledes.off()
             if nombre=="Desconocido":
