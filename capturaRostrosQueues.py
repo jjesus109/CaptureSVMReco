@@ -139,6 +139,8 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
 #                ledes.value = 0.0
                 print("********Termino de adquisisción de usuario"+str(numeroUsuarioActual))
                 break
+    else:
+        print("no se conecto con la camara")
     time.sleep(0.1)   
 
 #    video_capture.release()
