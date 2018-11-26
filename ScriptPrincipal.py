@@ -48,82 +48,66 @@ def conectarFirebase():
 
 
 
-def obtenerRostros(indexCamara):
-    NombresEtiquetas={}
-    targetnames = []
+def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
+    
+    
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
     conexionExitosa,firebase,db, valores,_ = conectarFirebase()
     if conexionExitosa ==False:
         print("Favor de conectar a internet")
     else:
-        # validacion para saber en que momento inicia la catura de los usuarios 
-        # que tendran el acceso por reconocimiento 
-        try:
-            comenzarCaptura = db.child("Facial/IniciarCaptura").get()
-            print("comenzarcaptura")
-            print(comenzarCaptura.val())
-            
+                 
+        p, inputQueue, outputQueue = 0 ,0 ,0            
+        numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
+        numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
+        llamada=False
+        
 
-        except:
-            print("Favor de conectar a internet")
-        if comenzarCaptura.val()  == True:  
-            
-            p, inputQueue, outputQueue = 0 ,0 ,0            
-#            for i in range(len(nombreUsuarios)):
-            
-            numeroUsuarios=1
-            numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
-            numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
-            llamada=False
-            
-
-            video_capture = 1.0
-            while numeroUsuarios<numeroUsuariosAEntrenar+1:
-                deteccionActivada = db.child("Facial/Activacion").get()
-                if deteccionActivada.val()==True:
-                    deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
-                    deteccionActivadaUsuario = deteccionActivadaUsuario.val()
-                    print("La captura de rostros del usuario "+deteccionActivadaUsuario)
-                    for i in range(3):
-                        print("Inicia en " +str(3-i))
-                        time.sleep(1)
-                    print("enciendo los ledes")
-                    print("conectando con la camara...")        
-                    
-                    deteccion_correcta, p, inputQueue, outputQueue, video_capture,numeroMuestrasRostros= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture, ledes)
-                    
-                    if deteccion_correcta==True:
-                        
-                        NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
-                        numeroUsuarios+=1
-                        db.child("Facial").update({"Activacion":False})
-                        print("Usuario capturado: "+deteccionActivadaUsuario)
-                        print(NombresEtiquetas)
-                        nombreUsuario= {deteccionActivadaUsuario: True}
-                        db.child("Facial/UsuariosActivados").update(nombreUsuario)
-                    llamada=True
-            
-            keys = list(NombresEtiquetas.keys())
-            keys.sort()
-            
-            for i in keys:
+        video_capture = 1.0
+        while numeroUsuarios<numeroUsuariosAEntrenar+1:
+            deteccionActivada = db.child("Facial/Captura").get()
+            if deteccionActivada.val()==True:
+                deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
+                deteccionActivadaUsuario = deteccionActivadaUsuario.val()
+                print("La captura de rostros del usuario "+deteccionActivadaUsuario)
+                for i in range(3):
+                    print("Inicia en " +str(3-i))
+                    time.sleep(1)
+                print("enciendo los ledes")
+                print("conectando con la camara...")        
                 
-                targetnames.append(NombresEtiquetas[i])
-            print("Estos son los los target names")
-            print(targetnames)
-            if deteccion_correcta == False:
-                print("Error al capturar los rostros")
-                errorCaptura = True
+                deteccion_correcta, p, inputQueue, outputQueue, video_capture,numeroMuestrasRostros= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture, ledes)
+                
+                if deteccion_correcta==True:
+                    
+                    NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
+                    numeroUsuarios+=1
+                    db.child("Facial").update({"Activacion":False})
+                    print("Usuario capturado: "+deteccionActivadaUsuario)
+                    print(NombresEtiquetas)
+                    nombreUsuario= {deteccionActivadaUsuario: True}
+                    db.child("Facial/UsuariosActivados").update(nombreUsuario)
+                llamada=True
+        
+        keys = list(NombresEtiquetas.keys())
+        keys.sort()
+        
+        for i in keys:
+            
+            targetnames.append(NombresEtiquetas[i])
+        print("Estos son los los target names")
+        print(targetnames)
+        if deteccion_correcta == False:
+            print("Error al capturar los rostros")
+            errorCaptura = True
 #                videoCapture.release()
 
-            else:
-                errorCaptura = False
-#                videoCapture.release()
-                print("Termino captura de rostros exitosamente")
         else:
-            print("Aun no se inicia la captura de rostros")
-            errorCaptura = True
+            errorCaptura = False
+#                videoCapture.release()
+            print("Termino captura de rostros exitosamente")
+    
             
             
     return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara,numeroMuestrasRostros
@@ -137,14 +121,7 @@ import recog as rg
 from gpiozero import MotionSensor   
 import pickle 
 pir = MotionSensor(4) # Numero de pin de raspberry
-print("Extracciòn de modelo")
-tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
-datos = pickle.load(tomaDatos)
-clf = datos["modelo"]
-pca = datos["pca"]
-target_names =datos["target_names"]
-NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
-print(NombreCarpetaPrueba)
+
 
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
@@ -154,33 +131,39 @@ estadoActualPuerta = False
 nombre = "Sin reconocer"
 conexionExitosa,firebase,db, valores,_ = conectarFirebase()
 while True:
-    NombresEtiquetas = 0
     
-    entrenamiento = db.child("Facial/EntrenamientoHecho").get()    
-    if entrenamiento==False:
-        NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-        #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
-        pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
-#        try:
-        errorObtencion = True
-        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara)
-#        except:
-#            print("Fallo en metodo de obtencion de rostros")
-            
-        if errorObtencion ==False:
-#            try:
-            print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
-            vR.filtrar(NombreCarpetaPrueba)
+    numeroMuestrasRostros = 60
+    configurado = db.child("Facial/Configurado").get()    
+    print("Extracciòn de modelo")
+    tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
+    datos = pickle.load(tomaDatos)
+    clf = datos["modelo"]
+    pca = datos["pca"]
+    target_names =datos["target_names"]
+    NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
+    if configurado:
+        
+        
+        
+        
+        print(NombreCarpetaPrueba)
+        usuariosActivados = db.child("Facial/UsuariosActivados").get()    
+        usuariosActivados = usuariosActivados.val()
+        usuariosActivados = list(usuariosActivados)
+        #Validacion para entrenar mas usuarios
+        if len(target_names)<len(usuariosActivados):
+            NombresEtiquetas={}
+            for i in range(len(target_names)):
+                NombresEtiquetas[i+1] = target_names[i]
+            #Obtencion de rostros fatantes
+            errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, target_names,len(target_names)+1)
+            # Entrenamiento de rostros
+            vR.filtrar(NombreCarpetaPrueba,len(usuariosActivados))
 #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
-            print("Termino modelo")
-            print("Coninua con identifcacion de rostros")
-            db.child("Facial").update({"EntrenamientoHecho":True})  
-            break
-
-    else:
-        im_en = rg.encode(NombreCarpetaPrueba)
-        print("Inicia clasificación de rostros")
+            
+        im_en = rg.encode(NombreCarpetaPrueba,len(usuariosActivados))
+        print("Clasificación de rostros")
         if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
         
     #        ledes.on()
@@ -213,6 +196,31 @@ while True:
                 db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
                 nombre = "Sin reconocer"   
         time.sleep(2)
+    
+    
+    else:
+        NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
+        #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
+        pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+#        try:
+        errorObtencion = True
+        targetnames = []
+        NombresEtiquetas={}
+        numeroUsuario=1
+        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, targetnames, numeroUsuario)
+#        except:
+#            print("Fallo en metodo de obtencion de rostros")
+            
+        if errorObtencion ==False:
+#            try:
+            print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
+            vR.filtrar(NombreCarpetaPrueba)
+#            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
+            svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
+            print("Termino modelo")
+            print("Coninua con identifcacion de rostros")
+            db.child("Facial").update({"EntrenamientoHecho":True})  
+            
         
     
 

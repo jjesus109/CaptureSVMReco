@@ -10,11 +10,15 @@ import time
 
 import face_recognition
 
-def encode(NombreCarpetaPrueba):
+def encode(NombreCarpetaPrueba,numeroUsuarios):
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
 #    indiceImagen = 1
-    imagenes = ["1_40.","2_40."]
+    substitucion = 0
+    imagenes = []
+    for i in range(numeroUsuarios):
+        imagenes.append(str(i+1)+"_40.")
+#    imagenes = ["1_40.","2_40."]
     folders.sort()
     for im in folders:
 #        print(label)
@@ -27,15 +31,16 @@ def encode(NombreCarpetaPrueba):
         if label in imagenes :
             print(Rimagen)
             print(type(Rimagen))
-#            while True:
-#                Rimagen = NombreCarpetaPrueba+"/"+im
-            image = face_recognition.load_image_file(Rimagen)
+            while True:
+                Rimagen = NombreCarpetaPrueba+"/"+im
+                image = face_recognition.load_image_file(Rimagen)
             
-#                try:
-            image_face_encoding = face_recognition.face_encodings(image)[0]
-#                    break
-#                except:
-#                    im[2:4] = str(int(im[2:4]) + 1)
+                try:
+                    image_face_encoding = face_recognition.face_encodings(image)[0]
+                    break
+                except:
+                    substitucion = int(im[2:4])
+                    im[2:4] = str(substitucion + 1)
 #                    
             images_encondes.append(image_face_encoding) 
                 

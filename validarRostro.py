@@ -27,12 +27,16 @@ def detect(gray):
             crop_img = np.array([[[0],[0],[0]],[[0],[0],[0]],[[0],[0],[0]]])
     return gray, crop_img
 #
-def filtrar(carpeta):
+def filtrar(carpeta,numeroUsuarios):
     resizeW = 96
     resizeH = 130
+    numeros = []
     numeros = ["1_1.","1_2.","1_3.","1_4.","1_5.","1_6.","1_7.","1_8.","1_9.",
                "2_1.","2_2.","2_3.","2_4.","2_5.","2_6.","2_7.","2_8.","2_9.",
                "3_1.","3_2.","3_3.","3_4.","3_5.","3_6.","3_7.","3_8.","3_9."]
+    for i in range(numeroUsuarios):
+        for j in range(9):
+            numeros.append(str(i+1)+"_"+str(j+1)+".")
     folders = os.listdir(carpeta)
     for im in folders:
         numeroImagen =im[0:4]
