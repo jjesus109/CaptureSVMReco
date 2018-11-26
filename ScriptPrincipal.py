@@ -49,8 +49,7 @@ def conectarFirebase():
 
 
 def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
-    
-    
+    video_capture = 1.0
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
     conexionExitosa,firebase,db, valores,_ = conectarFirebase()
@@ -64,7 +63,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
         llamada=False
         
 
-        video_capture = 1.0
+
         while numeroUsuarios<numeroUsuariosAEntrenar+1:
             deteccionActivada = db.child("Facial/Captura").get()
             if deteccionActivada.val()==True:
@@ -74,7 +73,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
                 for i in range(3):
                     print("Inicia en " +str(3-i))
                     time.sleep(1)
-                print("enciendo los ledes")
+                print("enciendo los #ledes")
                 print("conectando con la camara...")        
                 
                 deteccion_correcta, p, inputQueue, outputQueue, video_capture,numeroMuestrasRostros= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture, ledes)
