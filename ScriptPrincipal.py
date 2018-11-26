@@ -50,6 +50,7 @@ def conectarFirebase():
 
 
 def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
+    deteccion_correcta=False
     video_capture = 1.0
     # Variable para saber si hubo pedos cuando capturo los rostros
     errorCaptura = True
