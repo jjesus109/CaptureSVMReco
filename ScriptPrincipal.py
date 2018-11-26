@@ -82,22 +82,22 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
                 deteccion_correcta, p, inputQueue, outputQueue, video_capture,numeroMuestrasRostros= cr.capturaCamara(NombreCarpetaPrueba,numeroUsuarios,llamada,p, inputQueue, outputQueue,video_capture, ledes)
                 
                 if deteccion_correcta==True:
-                    
-                    NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
+
+                    targetnames.append(deteccionActivadaUsuario)
                     numeroUsuarios+=1
                     db.child("Facial").update({"Captura":False})
-                    print("Usuario capturado: "+deteccionActivadaUsuario)
-                    print(NombresEtiquetas)
+                    #print("Usuario capturado: "+deteccionActivadaUsuario)
+                    #print(NombresEtiquetas)
                     nombreUsuario= {deteccionActivadaUsuario: True}
                     db.child("Facial/UsuariosActivados").update(nombreUsuario)
+
                 llamada=True
         
-        keys = list(NombresEtiquetas.keys())
-        keys.sort()
-        
-        for i in keys:
-            
-            targetnames.append(NombresEtiquetas[i])
+        #keys = list(NombresEtiquetas.keys())
+        #keys.sort()
+        #for i in keys:
+
+            #targetnames.append(NombresEtiquetas[i])
         print("Estos son los los target names")
         print(targetnames)
         if deteccion_correcta == False:
