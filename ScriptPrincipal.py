@@ -207,7 +207,7 @@ while True:
         targetnames = []
         NombresEtiquetas={}
         numeroUsuario=1
-        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, targetnames, numeroUsuario)
+        errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, targetnames, numeroUsuario,, NombresEtiquetas)
 #        except:
 #            print("Fallo en metodo de obtencion de rostros")
             
