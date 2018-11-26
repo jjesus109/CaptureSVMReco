@@ -143,7 +143,7 @@ while True:
 
         usuariosActivados = db.child("Facial/NumeroUsuarios").get()
         usuariosActivados = usuariosActivados.val()
-        usuariosActivados = list(usuariosActivados)
+
         if extraccion == False:
             print("Esta configurado")
             print("Extracciòn de modelo")
@@ -160,7 +160,8 @@ while True:
         
 
         #Validacion para entrenar mas usuarios
-        if len(target_names)<len(usuariosActivados):
+        if len(target_names)<usuariosActivados:
+            print("se va a añadir un nuevo usuario")
             NombresEtiquetas={}
             for i in range(len(target_names)):
                 NombresEtiquetas[i+1] = target_names[i]
