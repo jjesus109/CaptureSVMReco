@@ -158,7 +158,7 @@ while True:
             for i in range(len(target_names)):
                 NombresEtiquetas[i+1] = target_names[i]
             #Obtencion de rostros fatantes
-            errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, target_names,len(target_names)+1)
+            errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, target_names,len(target_names)+1,NombresEtiquetas)
             # Entrenamiento de rostros
             vR.filtrar(NombreCarpetaPrueba,len(usuariosActivados))
 #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
