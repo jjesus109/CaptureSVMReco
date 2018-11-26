@@ -132,12 +132,13 @@ estadoActualPuerta = False
 
 nombre = "Sin reconocer"
 conexionExitosa,firebase,db, valores,_ = conectarFirebase()
+extraccion = False
 while True:
     
     numeroMuestrasRostros = 60
     configurado = db.child("Facial/Configurado").get()
     configurado = configurado.val()
-    extraccion = False
+
     if configurado==True:
         if extraccion == False:
             print("Esta configurado")
