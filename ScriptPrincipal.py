@@ -134,15 +134,15 @@ while True:
     
     numeroMuestrasRostros = 60
     configurado = db.child("Facial/Configurado").get()    
-    print("Extracciòn de modelo")
-    tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
-    datos = pickle.load(tomaDatos)
-    clf = datos["modelo"]
-    pca = datos["pca"]
-    target_names =datos["target_names"]
-    NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
+    
     if configurado:
-        
+        print("Extracciòn de modelo")
+        tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
+        datos = pickle.load(tomaDatos)
+        clf = datos["modelo"]
+        pca = datos["pca"]
+        target_names =datos["target_names"]
+        NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]    
         
         
         
