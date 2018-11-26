@@ -140,8 +140,8 @@ while True:
     configurado = configurado.val()
 
     if configurado==True:
-        
-        usuariosActivados = db.child("Facial/UsuariosActivados").get()
+
+        usuariosActivados = db.child("Facial/NumeroUsuarios").get()
         usuariosActivados = usuariosActivados.val()
         usuariosActivados = list(usuariosActivados)
         if extraccion == False:
@@ -204,7 +204,7 @@ while True:
                 print("Puerta cerrada")
                 db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
                 nombre = "Sin reconocer"   
-        time.sleep(2)
+        time.sleep(1)
     
     
     else:
