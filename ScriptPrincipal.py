@@ -141,8 +141,8 @@ while True:
 
     if configurado==True:
 
-        usuariosActivados = db.child("Facial/NumeroUsuarios").get()
-        usuariosActivados = usuariosActivados.val()
+        numeroUsuarios = db.child("Facial/NumeroUsuarios").get()
+        numeroUsuarios = numeroUsuarios.val()
 
         if extraccion == False:
             print("Esta configurado")
@@ -154,13 +154,13 @@ while True:
             target_names =datos["target_names"]
             NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
 
-            im_en = rg.encode(NombreCarpetaPrueba, usuariosActivados)
+            im_en = rg.encode(NombreCarpetaPrueba, numeroUsuarios)
             extraccion = True
         
         
 
         #Validacion para entrenar mas usuarios
-        if len(target_names)<usuariosActivados:
+        if len(target_names)<numeroUsuarios:
             print("se va a añadir un nuevo usuario")
             NombresEtiquetas={}
             for i in range(len(target_names)):
@@ -168,16 +168,34 @@ while True:
             #Obtencion de rostros fatantes
             errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, list(target_names),len(target_names)+1,NombresEtiquetas)
             # Entrenamiento de rostros
-            vR.filtrar(NombreCarpetaPrueba,usuariosActivados)
+            vR.filtrar(NombreCarpetaPrueba,numeroUsuarios)
 #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
+
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
-            
-            im_en = rg.encode(NombreCarpetaPrueba,usuariosActivados)
+            print("Extraccion de modelo con nuevos usuarios")
+            tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
+            datos = pickle.load(tomaDatos)
+            clf = datos["modelo"]
+            pca = datos["pca"]
+            target_names = datos["target_names"]
+            NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
+
+            im_en = rg.encode(NombreCarpetaPrueba,numeroUsuarios)
         print("Clasificación de rostros")
+
+        # Obtener Discriminantes
+        usuariosActivados = db.child("Facial/UsuariosActivados").get()
+        usuariosActivados = usuariosActivados.val()
+        usuariosActivados = list(usuariosActivados)
+
+        # Comparacion de metodos
+        
+
         if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
         
     #        ledes.on()
     #        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
+
             video_capture,nombre = rg.recog(im_en, target_names, db, ledes,pca,clf,video_capture)
     #        vd.release()
     #        ledes.off()
