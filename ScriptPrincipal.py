@@ -140,6 +140,10 @@ while True:
     configurado = configurado.val()
 
     if configurado==True:
+        
+        usuariosActivados = db.child("Facial/UsuariosActivados").get()
+        usuariosActivados = usuariosActivados.val()
+        usuariosActivados = list(usuariosActivados)
         if extraccion == False:
             print("Esta configurado")
             print("Extracciòn de modelo")
@@ -154,10 +158,7 @@ while True:
             extraccion = True
         
         
-        print(NombreCarpetaPrueba)
-        usuariosActivados = db.child("Facial/UsuariosActivados").get()    
-        usuariosActivados = usuariosActivados.val()
-        usuariosActivados = list(usuariosActivados)
+
         #Validacion para entrenar mas usuarios
         if len(target_names)<len(usuariosActivados):
             NombresEtiquetas={}
