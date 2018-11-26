@@ -148,7 +148,7 @@ while True:
             pca = datos["pca"]
             target_names =datos["target_names"]
             NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
-        
+            extraccion = True
         
         
         print(NombreCarpetaPrueba)
