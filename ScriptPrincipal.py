@@ -154,7 +154,7 @@ while True:
             target_names =datos["target_names"]
             NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
 
-            im_en = rg.encode(NombreCarpetaPrueba, len(usuariosActivados))
+            im_en = rg.encode(NombreCarpetaPrueba, usuariosActivados)
             extraccion = True
         
         
@@ -168,11 +168,11 @@ while True:
             #Obtencion de rostros fatantes
             errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, list(target_names),len(target_names)+1,NombresEtiquetas)
             # Entrenamiento de rostros
-            vR.filtrar(NombreCarpetaPrueba,len(usuariosActivados))
+            vR.filtrar(NombreCarpetaPrueba,usuariosActivados)
 #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
             
-            im_en = rg.encode(NombreCarpetaPrueba,len(usuariosActivados))
+            im_en = rg.encode(NombreCarpetaPrueba,usuariosActivados)
         print("Clasificación de rostros")
         if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
         
