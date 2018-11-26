@@ -189,14 +189,22 @@ while True:
         usuariosActivados = list(usuariosActivados)
 
         # Comparacion de metodos
-        
+        usuariosActivados = db.child("Facial/UsuariosActivados").get()
+        usuariosActivados = usuariosActivados.val()
+        usuariosActivados = list(usuariosActivados)
+        usuariosEliminados = []
+        target_names = list(target_names)
+        for i in target_names:
+            if i not in usuariosActivados:
+                usuariosEliminados.append(i)
+
 
         if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
         
     #        ledes.on()
     #        conexionCamara, p, inputQueue, outputQueue, video_capture,nombre = rL.reconocimiento(db,llamada,indexCamara,p, inputQueue, outputQueue,video_capture, ledes, clf, pca, target_names)
 
-            video_capture,nombre = rg.recog(im_en, target_names, db, ledes,pca,clf,video_capture)
+            video_capture,nombre = rg.recog(im_en, target_names, db, ledes,pca,clf,video_capture.usuariosEliminados,usuariosEliminados)
     #        vd.release()
     #        ledes.off()
             if nombre=="Desconocido":

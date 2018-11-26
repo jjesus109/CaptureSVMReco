@@ -10,7 +10,7 @@ import time
 
 import face_recognition
 
-def encode(NombreCarpetaPrueba,numeroUsuarios):
+def encode(NombreCarpetaPrueba,numeroUsuarios, usuariosEliminados):
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
 #    indiceImagen = 1
@@ -97,6 +97,9 @@ def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture ):
                     if True in matches:
                         first_match_index = matches.index(True)
                         nombre = target_names[first_match_index]
+                        # verificar usuarioEliminado
+                        if nombre in usuariosEliminados:
+                            nombre = "Desconocido"
                         print("Nombre: "+ nombre)
                     face_names.append(nombre)
                 tiempo = time.time() - t0
