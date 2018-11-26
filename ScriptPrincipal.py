@@ -41,10 +41,10 @@ def conectarFirebase():
         db = firebase.database()
         # Para validara que si  se conecto se obtiene los datos de la los usuarios
         valores = db.child("Users").get()    
-        
+        return conexionExitosa, firebase, db, valores, entrenamiento.val()    
     except:
         return False, firebase, db, valores,entrenamiento
-    return conexionExitosa, firebase, db, valores, entrenamiento.val()
+    
 
 
 

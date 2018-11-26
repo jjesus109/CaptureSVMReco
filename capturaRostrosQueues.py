@@ -131,9 +131,9 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
             # Solo se deje un usuario por que se realizará por usuario    
     #            print("numeroImagen")
             print(numeroImagen)
-#            cv2.imshow('Video', frame)
-#            if cv2.waitKey(1) & 0xFF == ord('q'):
-#               break
+            cv2.imshow('Video', bgr)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+               break
             if numeroImagen >numeroMuestrasRostros:
                 ledes.off()
 #                ledes.value = 0.0
