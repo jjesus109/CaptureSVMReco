@@ -135,7 +135,7 @@ while True:
     numeroMuestrasRostros = 60
     configurado = db.child("Facial/Configurado").get()    
     
-    if configurado:
+    if configurado==True:
         print("Extracciòn de modelo")
         tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
         datos = pickle.load(tomaDatos)
