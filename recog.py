@@ -97,6 +97,8 @@ def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture, usuari
                     if True in matches:
                         first_match_index = matches.index(True)
                         nombre = target_names[first_match_index]
+                        print("antes de verificar si es un usuario desconocido")
+                        print(nombre)
                         # verificar usuarioEliminado
                         if nombre in usuariosEliminados:
                             nombre = "Desconocido"
