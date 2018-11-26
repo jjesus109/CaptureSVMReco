@@ -197,7 +197,9 @@ while True:
         for i in target_names:
             if i not in usuariosActivados:
                 usuariosEliminados.append(i)
-
+        if usuariosEliminados!=[]:
+            print("estos son los usuarios eliminados del reconocimiento")
+            print(usuariosEliminados)
 
         if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
         
