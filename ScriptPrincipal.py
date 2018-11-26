@@ -29,7 +29,7 @@ def conectarFirebase():
           "apiKey": "4yqY4AS24CGMfIFrNnaDVZYU4ITPl9XmE7mXmsCc",
           "authDomain": "casa-34c19.firebaseapp.com",
           "databaseURL": "https://casa-34c19.firebaseio.com",
-          "storageBucket": "casa-34c19.appspot.com",
+          "storageBucket": "casa-34c19.appspot.com",}
 #          "apiKey": "tASIqdHPCcl9RrZ139kwoAMWjS68WMaQ62z9Hosr",
 #          "authDomain": "casa-90566.firebaseapp.com",
 #          "databaseURL": "https://casa-90566.firebaseio.com",
@@ -40,7 +40,8 @@ def conectarFirebase():
         firebase = pyrebase.initialize_app(config)
         db = firebase.database()
         # Para validara que si  se conecto se obtiene los datos de la los usuarios
-        valores = db.child("Users").get()    
+        valores = db.child("Users").get()
+        entrenamiento = db.child("Facial/Configurado").get()
         return conexionExitosa, firebase, db, valores, entrenamiento.val()    
     except:
         return False, firebase, db, valores,entrenamiento
@@ -218,7 +219,7 @@ while True:
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
             print("Termino modelo")
             print("Coninua con identifcacion de rostros")
-            db.child("Facial").update({"EntrenamientoHecho":True})  
+            db.child("Facial").update({"Configurado":True})
             
         
     
