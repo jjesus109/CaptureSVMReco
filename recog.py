@@ -10,7 +10,7 @@ import time
 
 import face_recognition
 
-def encode(NombreCarpetaPrueba,numeroUsuarios, usuariosEliminados):
+def encode(NombreCarpetaPrueba,numeroUsuarios):
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
 #    indiceImagen = 1
@@ -48,7 +48,7 @@ def encode(NombreCarpetaPrueba,numeroUsuarios, usuariosEliminados):
         
     return images_encondes
 
-def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture ):
+def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture, usuariosEliminados ):
     ledes.on()
     if video_capture == 1.0:
         video_capture = cv2.VideoCapture(0) 
