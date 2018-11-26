@@ -67,6 +67,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
 
         while numeroUsuarios<numeroUsuariosAEntrenar+1:
             deteccionActivada = db.child("Facial/Captura").get()
+            print("Esperando usuario para ser capturado...")
             if deteccionActivada.val()==True:
                 deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
                 deteccionActivadaUsuario = deteccionActivadaUsuario.val()
@@ -133,9 +134,10 @@ conexionExitosa,firebase,db, valores,_ = conectarFirebase()
 while True:
     
     numeroMuestrasRostros = 60
-    configurado = db.child("Facial/Configurado").get()    
-    
+    configurado = db.child("Facial/Configurado").get()
+    configurado = configurado.val()
     if configurado==True:
+        print("Esta configurado")
         print("Extracciòn de modelo")
         tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
         datos = pickle.load(tomaDatos)
