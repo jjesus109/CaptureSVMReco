@@ -83,7 +83,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
                     
                     NombresEtiquetas[numeroUsuarios] = deteccionActivadaUsuario
                     numeroUsuarios+=1
-                    db.child("Facial").update({"Activacion":False})
+                    db.child("Facial").update({"Captura":False})
                     print("Usuario capturado: "+deteccionActivadaUsuario)
                     print(NombresEtiquetas)
                     nombreUsuario= {deteccionActivadaUsuario: True}
@@ -214,7 +214,7 @@ while True:
         if errorObtencion ==False:
 #            try:
             print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
-            vR.filtrar(NombreCarpetaPrueba)
+            vR.filtrar(NombreCarpetaPrueba,len(nombreUsuarios))
 #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
             svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
             print("Termino modelo")
