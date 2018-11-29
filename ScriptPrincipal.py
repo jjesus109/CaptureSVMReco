@@ -311,6 +311,6 @@ def funcionPrincipal():
         
 
 if __name__ == "__main__":
-    print("Esta aqui papo")
-    funcionPrincipal()
-    print("Ya no papo")
+    
+    while True:
+        funcionPrincipal()
