@@ -165,10 +165,12 @@ while True:
                 im_en = rg.encode(NombreCarpetaPrueba, numeroUsuarios)
                 extraccion = True
                 print("Extracciòn de modelo realizado correctamente")
-                db.child("Facial/Error").update("NoErrorExtract")
+                
+                db.child("Facial").update({"Error":"NoErrorExtract"})
             except:
                 print("Fallo en la extracción del modelo")
-                db.child("Facial/Error").update("Extract")
+                db.child("Facial").update({"Error":"Extract"})
+                
         
         
 
@@ -182,12 +184,14 @@ while True:
             try:
                 errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, list(target_names),len(target_names)+1,NombresEtiquetas)
             # Envio de mensaje de error <-------------------
-                db.child("Facial/Error").update("NoErrorCaptura")
+                db.child("Facial").update({"Error":"NoErrorCaptura"})    
+                
             except:
                 
                 print("Fallo en metodo de obtencion de rostros")
                 # Envio de mensaje de error <-------------------
-                db.child("Facial/Error").update("Captura")
+                db.child("Facial").update({"Error":"Captura"})    
+                
             detener= db.child("Facial/Detener").get()
             if detener.val() == True:
                 break
@@ -271,12 +275,15 @@ while True:
             numeroUsuario=1
             errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, targetnames, numeroUsuario, NombresEtiquetas)
             # Envio de mensaje de error <-------------------
-            db.child("Facial/Error").update("NoErrorCaptura")
+            db.child("Facial").update({"Error":"NoErrorCaptura"})    
+            
+            
         except:
             
             print("Fallo en metodo de obtencion de rostros")
             # Envio de mensaje de error <-------------------
-            db.child("Facial/Error").update("Captura")
+            db.child("Facial").update({"Error":"Captura"})    
+            
         if errorObtencion ==False:
 #            try:
             print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
@@ -286,11 +293,12 @@ while True:
                 svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
                 # Envio de mensaje de error <-------------------
                 print("Entrenamiento realizado correctamente")
-                db.child("Facial/Error").update("NoErrorTrain")
+                
+                db.child("Facial").update({"Error":"NoErrorTrain"})    
             except:
                 # Envio de mensaje de error <-------------------
                 print("Fallo entrenamiento")
-                db.child("Facial/Error").update("Train")
+                db.child("Facial").update({"Error":"Train"})    
             print("Termino modelo")
             print("Coninua con identifcacion de rostros")
             db.child("Facial").update({"Configurado":True})
