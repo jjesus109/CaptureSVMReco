@@ -49,7 +49,8 @@ def conectarFirebase():
 
 
 
-def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, NombreCarpetaPrueba):
+def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, NombreCarpetaPrueba ):
+    nombresAñadir = []
     numeroMuestrasRostros = 70
     detener = False
     deteccion_correcta=False
@@ -93,8 +94,9 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
                     db.child("Facial").update({"Captura":False})
                     #print("Usuario capturado: "+deteccionActivadaUsuario)
                     #print(NombresEtiquetas)
-                    nombreUsuario= {deteccionActivadaUsuario: True}
-                    db.child("Facial/UsuariosActivados").update(nombreUsuario)
+                    nombresAñadir.append(deteccionActivadaUsuario)
+#                    nombreUsuario= {deteccionActivadaUsuario: True}
+#                    db.child("Facial/UsuariosActivados").update(nombreUsuario)
                 
                 llamada=True
             
@@ -117,7 +119,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
     
             
             
-    return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara,numeroMuestrasRostros
+    return errorCaptura,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara,numeroMuestrasRostros, nombresAñadir
 
 numeroMuestrasRostros=61
 import validarRostro as vR
@@ -143,6 +145,7 @@ def funcionPrincipal():
     extraccion = False
     indexCamara = 0
     db.child("Facial").update({"Error":"IniciaProg"})
+    print("Inicia el proceso")
     while True:
         
         numeroMuestrasRostros = 60
@@ -187,8 +190,16 @@ def funcionPrincipal():
                     NombresEtiquetas[i+1] = target_names[i]
                 #Obtencion de rostros fatantes
                 try:
-                    errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, list(target_names),len(target_names)+1,NombresEtiquetas,NombreCarpetaPrueba)
+                    errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros, nombresAñadir= obtenerRostros(indexCamara, list(target_names),len(target_names)+1,NombresEtiquetas,NombreCarpetaPrueba)
                 # Envio de mensaje de error <-------------------
+                    if errorObtencion == True:
+                        print("Se  reinicia el proceso")
+                        break
+                    
+                    for i in nombresAñadir:
+                        nombreUsuario= {i: True}
+                        db.child("Facial/UsuariosActivados").update(nombreUsuario)    
+                    
                     db.child("Facial").update({"Error":"NoErrorCaptura"})    
                     
                 except:
@@ -278,10 +289,17 @@ def funcionPrincipal():
                 targetnames = []
                 NombresEtiquetas={}
                 numeroUsuario=1
-                errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, targetnames, numeroUsuario, NombresEtiquetas,NombreCarpetaPrueba)
+                errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros, nombresAñadir= obtenerRostros(indexCamara, targetnames, numeroUsuario, NombresEtiquetas,NombreCarpetaPrueba)
+                
+                if errorObtencion == True:
+                    print("Se  reinicia el proceso")
+                    break
+                for i in nombresAñadir:
+                    nombreUsuario= {i: True}
+                    db.child("Facial/UsuariosActivados").update(nombreUsuario)    
                 # Envio de mensaje de error <-------------------
                 db.child("Facial").update({"Error":"NoErrorCaptura"})    
-                
+
                 
             except:
                 
