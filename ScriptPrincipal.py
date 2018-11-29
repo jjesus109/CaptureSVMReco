@@ -147,7 +147,7 @@ def funcionPrincipal():
         numeroMuestrasRostros = 60
         configurado = db.child("Facial/Configurado").get()
         configurado = configurado.val()
-    
+        print("valor configurado"+ configurado)
         if configurado==True:
     
             numeroUsuarios = db.child("Facial/NumeroUsuarios").get()
