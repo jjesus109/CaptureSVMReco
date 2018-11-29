@@ -49,7 +49,7 @@ def conectarFirebase():
 
 
 
-def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
+def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, NombreCarpetaPrueba):
     numeroMuestrasRostros = 70
     detener = False
     deteccion_correcta=False
@@ -139,6 +139,7 @@ nombre = "Sin reconocer"
 conexionExitosa,firebase,db, valores,_ = conectarFirebase()
 
 def funcionPrincipal():
+    nombre = "Sin reconocer"
     extraccion = False
     indexCamara = 0
     db.child("Facial").update({"Error":"IniciaProg"})
@@ -186,7 +187,7 @@ def funcionPrincipal():
                     NombresEtiquetas[i+1] = target_names[i]
                 #Obtencion de rostros fatantes
                 try:
-                    errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, list(target_names),len(target_names)+1,NombresEtiquetas)
+                    errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, list(target_names),len(target_names)+1,NombresEtiquetas,NombreCarpetaPrueba)
                 # Envio de mensaje de error <-------------------
                     db.child("Facial").update({"Error":"NoErrorCaptura"})    
                     
@@ -277,7 +278,7 @@ def funcionPrincipal():
                 targetnames = []
                 NombresEtiquetas={}
                 numeroUsuario=1
-                errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, targetnames, numeroUsuario, NombresEtiquetas)
+                errorObtencion, NombreCarpetaPrueba, nombreUsuarios, NombresEtiquetas, video_capture, indexCamara,numeroMuestrasRostros= obtenerRostros(indexCamara, targetnames, numeroUsuario, NombresEtiquetas,NombreCarpetaPrueba)
                 # Envio de mensaje de error <-------------------
                 db.child("Facial").update({"Error":"NoErrorCaptura"})    
                 
