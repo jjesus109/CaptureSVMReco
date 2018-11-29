@@ -141,6 +141,7 @@ conexionExitosa,firebase,db, valores,_ = conectarFirebase()
 def funcionPrincipal():
     extraccion = False
     indexCamara = 0
+    db.child("Facial").update({"Error":"IniciaProg"})
     while True:
         
         numeroMuestrasRostros = 60
