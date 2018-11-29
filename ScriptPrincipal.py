@@ -50,6 +50,7 @@ def conectarFirebase():
 
 
 def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas):
+    numeroMuestrasRostros = 70
     detener = False
     deteccion_correcta=False
     video_capture = 1.0
