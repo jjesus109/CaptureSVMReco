@@ -66,7 +66,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
         
         sale = False
         
-        while sale != True:
+        while sale != False:
             print("Esperando a iniciar capturas")    
             mensajeError = db.child("Facial/Error").get()
             mensajeError = mensajeError.val()
@@ -78,7 +78,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
         llamada=False
         print("Ya comienza captura")
         print("Cuantas veces hara esto:")
-        print(str(numeroUsuarios))
+        print(str(numeroUsuariosAEntrenar))
         while numeroUsuarios<numeroUsuariosAEntrenar+1:
             print(str(numeroUsuarios))
             deteccionActivada = db.child("Facial/Captura").get()
