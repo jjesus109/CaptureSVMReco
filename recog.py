@@ -17,7 +17,7 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
     substitucion = 0
     imagenes = []
     for i in range(numeroUsuarios):
-        imagenes.append(str(i+1)+"_40.")
+        imagenes.append(str(i+1)+"_50.")
 #    imagenes = ["1_40.","2_40."]
     folders.sort()
     for im in folders:

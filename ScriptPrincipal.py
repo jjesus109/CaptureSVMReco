@@ -79,7 +79,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
         print("Ya comienza captura")
         print("Cuantas veces hara esto:")
         print(str(numeroUsuariosAEntrenar))
-        while numeroUsuarios<numeroUsuariosAEntrenar+1:
+        while numeroUsuarios<numeroUsuariosAEntrenar:
             print(str(numeroUsuarios))
             deteccionActivada = db.child("Facial/Captura").get()
             print("Esperando usuario para ser capturado...")
@@ -320,6 +320,7 @@ def funcionPrincipal():
                 
             if errorObtencion ==False:
     #            try:
+                db.child("Facial").update({"ProcesoFinalizado":False})            
                 print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
                 vR.filtrar(NombreCarpetaPrueba,len(nombreUsuarios))
     #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
@@ -330,6 +331,8 @@ def funcionPrincipal():
                     
                     db.child("Facial").update({"Error":"NoErrorTrain"})    
                 except:
+                    # Actualiza 
+                    db.child("Facial").update({"ProcesoFinalizado":True})            
                     # Envio de mensaje de error <-------------------
                     print("Fallo entrenamiento")
                     db.child("Facial").update({"Error":"Train"})    
