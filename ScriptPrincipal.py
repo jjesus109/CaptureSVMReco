@@ -62,12 +62,21 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
         print("Favor de conectar a internet")
     else:
                  
+
+        
+        sale = False
+        
+        while sale != False:
+            print("Esperando a iniciar capturas")    
+            mensajeError = db.child("Facial/Error").get()
+            mensajeError = mensajeError.val()
+            if mensajeError == "inicap":
+                sale = True
         p, inputQueue, outputQueue = 0 ,0 ,0            
         numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
         numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
         llamada=False
-        
-
+        print("Ya comienza captura")
         print("Cuantas veces hara esto:")
         print(str(numeroUsuarios))
         while numeroUsuarios<numeroUsuariosAEntrenar+1:
