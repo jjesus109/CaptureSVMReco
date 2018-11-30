@@ -226,10 +226,30 @@ def funcionPrincipal():
                 # Entrenamiento de rostros
                 vR.filtrar(NombreCarpetaPrueba,numeroUsuarios)
     #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
+                
+    
                 detener= db.child("Facial/Detener").get()
                 if detener.val() == True:
                     break
-                svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
+                
+                try:
+                    svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
+                    # Envio de mensaje de error <-------------------
+                    print("Entrenamiento realizado correctamente")
+                    
+                    db.child("Facial").update({"Error":"NoErrorTrain"})    
+                except:
+                    # Actualiza 
+                    db.child("Facial").update({"ProcesoFinalizado":True})            
+                    # Envio de mensaje de error <-------------------
+                    print("Fallo entrenamiento")
+                    db.child("Facial").update({"Error":"Train"})    
+                print("Termino modelo")
+                print("Coninua con identifcacion de rostros")
+                db.child("Facial").update({"Configurado":True})
+                db.child("Facial").update({"ProcesoFinalizado":True})  
+                
+                
                 detener= db.child("Facial/Detener").get()
                 if detener.val() == True:
                     break
@@ -339,6 +359,7 @@ def funcionPrincipal():
                 print("Termino modelo")
                 print("Coninua con identifcacion de rostros")
                 db.child("Facial").update({"Configurado":True})
+                db.child("Facial").update({"ProcesoFinalizado":True})  
                 
             
         
