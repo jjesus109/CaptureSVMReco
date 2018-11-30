@@ -68,8 +68,10 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
         llamada=False
         
 
-
+        print("Cuantas veces hara esto:")
+        print(str(numeroUsuarios))
         while numeroUsuarios<numeroUsuariosAEntrenar+1:
+            print(str(numeroUsuarios))
             deteccionActivada = db.child("Facial/Captura").get()
             print("Esperando usuario para ser capturado...")
             detener= db.child("Facial/Detener").get()
