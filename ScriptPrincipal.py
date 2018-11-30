@@ -66,7 +66,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
         
         sale = False
         
-        while sale != False:
+        while sale != True:
             print("Esperando a iniciar capturas")    
             mensajeError = db.child("Facial/Error").get()
             mensajeError = mensajeError.val()
