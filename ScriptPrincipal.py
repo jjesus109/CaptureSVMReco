@@ -142,7 +142,6 @@ from gpiozero import MotionSensor
 import pickle 
 pir = MotionSensor(4) # Numero de pin de raspberry
 
-
 llamada = False
 p, inputQueue, outputQueue = 0 ,0 ,0
 estadoActualPasillo = False
@@ -152,6 +151,8 @@ nombre = "Sin reconocer"
 conexionExitosa,firebase,db, valores,_ = conectarFirebase()
 
 def funcionPrincipal():
+    movimientoPir = False
+    primeraVez = True
     abriendo="nada"
     nombre = "Sin reconocer"
     extraccion = False
@@ -295,7 +296,7 @@ def funcionPrincipal():
                         print("Esta en el true")
                         abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
                         abriendo = abriendo.val()
-                        if abriendo == "abierto":
+                        if abriendo == "Abierto":
                             break
                     print("Esta esperando los 15 segundos")
                     time.sleep(15)
@@ -307,12 +308,21 @@ def funcionPrincipal():
                 print("valor llamada: "+ str(llamada))
                 print("Sale del reconocimiento")
             elif nombre != "Sin reconocer" and nombre != "Desconocido":
-        
+                
+                if primeraVez ==True:
+                    t0= time.time()
                 print("estado actual PIR")
                 print(pir.motion_detected)
-                    
-                if pir.motion_detected == False:
-                    time.sleep(5)
+                if time.time()-t0 >= 5:
+                    primeraVez=True
+                    if pir.motion_detected == True:
+                        movimientoPir = True
+                        
+                    else:
+                        movimientoPir = False
+                else:      
+                    primeraVez=False
+                if movimientoPir == False:
                     print("Puerta cerrada")
                     db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
                     nombre = "Sin reconocer"   
