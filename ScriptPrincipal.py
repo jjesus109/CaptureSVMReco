@@ -152,6 +152,7 @@ nombre = "Sin reconocer"
 conexionExitosa,firebase,db, valores,_ = conectarFirebase()
 
 def funcionPrincipal():
+    abriendo="nada"
     nombre = "Sin reconocer"
     extraccion = False
     indexCamara = 0
@@ -290,6 +291,13 @@ def funcionPrincipal():
                     time.sleep(4)
                 elif nombre!="Desconocido":
                     db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
+                    while True:
+                        print("Esta en el true")
+                        abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
+                        abriendo = abriendo.val()
+                        if abriendo == "abierto":
+                            break
+                    print("Esta esperando los 15 segundos")
                     time.sleep(15)
         #            t0 = 0.0
         #            if t0 == 0.0:
