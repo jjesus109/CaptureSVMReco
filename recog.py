@@ -46,7 +46,7 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
 #                        im[2:4] = str(substitucion + 1)
                     print("Este es el label imagen")
                     print(im)
-                    if (substitucion+1)>=71:
+                    if (substitucion)>=71:
                         print("entra aqui")
                         error=True
                         break
