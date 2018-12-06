@@ -39,6 +39,8 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
                 try:
                     print("Si recononocio rostro")
                     image_face_encoding = face_recognition.face_encodings(image)[0]
+                    print("ya se sallio")
+                    print(image_face_encoding)
                     break
                 except:
 #                    while True:
