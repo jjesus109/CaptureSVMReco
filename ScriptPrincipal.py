@@ -284,8 +284,8 @@ def funcionPrincipal():
             discriminantes=[]
             target_names = list(target_names)
             # Comparacion de metodos
-            for i in target_names:
-                if i not in usuariosActivados:
+            for i in usuariosActivados:
+                if i not in target_names:
                     discriminantes.append(i)
             if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
                 detener= db.child("Facial/Detener").get()
@@ -309,8 +309,8 @@ def funcionPrincipal():
                         abriendo = abriendo.val()
                         if abriendo == "Abierto":
                             break
-                    print("Esta esperando los 15 segundos")
-                    time.sleep(15)
+                    print("Esta esperando los 10 segundos")
+                    time.sleep(10)
         #            t0 = 0.0
         #            if t0 == 0.0:
         #                t0 = time.time()
@@ -349,9 +349,11 @@ def funcionPrincipal():
 
         
         else:
+            
             NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
             #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
             pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
+            
             try:
                 errorObtencion = True
                 targetnames = []
