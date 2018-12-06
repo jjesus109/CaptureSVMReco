@@ -39,9 +39,10 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
                 if len(face_bounding_boxes) != 1:
                     print("no reconocio ")
                     substitucion = int(im[2:4])
+                    substitucion +=1
                     print(substitucion)
                     print(type(substitucion))
-                    im.replace(im[2:4],str(substitucion + 1.0))
+                    im.replace(im[2:4],str(substitucion))
 #                        im[2:4] = str(substitucion + 1)
                     print("Este es el label imagen")
                     print(im)
