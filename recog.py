@@ -35,17 +35,9 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
             while True:
                 Rimagen = NombreCarpetaPrueba+"/"+im
                 image = face_recognition.load_image_file(Rimagen)
-            
-                try:
-                    print("Si recononocio rostro")
-                    image_face_encoding = face_recognition.face_encodings(image)[0]
-                    print("ya se sallio")
-                    print(image_face_encoding)
-                    break
-                except:
-#                    while True:
-                    print("No reconocio rostro")
-                    
+                face_bounding_boxes = face_recognition.face_locations(image)
+                if len(face_bounding_boxes) != 1:
+                    print("no reconocio reconocio")
                     substitucion = int(im[2:4])
                     print(substitucion)
                     im.replace(im[2:4],(substitucion + 1))
@@ -55,6 +47,31 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
                     if substitucion+1==71:
                         error=True
                         break
+                else:        
+                    print("si reconocio")
+                    image_face_encoding = face_recognition.face_encodings(image)[0]
+                    break
+#                try:
+#                    print("Si recononocio rostro")
+#                    image_face_encoding = face_recognition.face_encodings(image)[0]
+#                    print("ya se sallio")
+#                    print(image_face_encoding)
+#                    break
+#                except:
+#                    while True:
+#                        Rimagen = NombreCarpetaPrueba+"/"+im
+#                        image = face_recognition.load_image_file(Rimagen)
+#                        print("No reconocio rostro")
+#                        
+#                        substitucion = int(im[2:4])
+#                        print(substitucion)
+#                        im.replace(im[2:4],(substitucion + 1))
+#    #                        im[2:4] = str(substitucion + 1)
+#                        print("Este es el label imagen")
+#                        print(im)
+#                        if substitucion+1==71:
+#                            error=True
+#                            break
 #                    
             images_encondes.append(image_face_encoding) 
                 
