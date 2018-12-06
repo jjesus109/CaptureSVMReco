@@ -43,6 +43,7 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
                 except:
                     print("No reconocio rostro")
                     substitucion = int(im[2:4])
+                    print(substitucion)
                     im[2:4] = str(substitucion + 1)
                     if substitucion+1==71:
                         error=True
