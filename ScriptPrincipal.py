@@ -200,7 +200,7 @@ def funcionPrincipal():
             
     
             #Validacion para entrenar mas usuarios
-            if len(target_names)<numeroUsuarios:
+            if len(target_names)<numeroUsuarios-1:
                 print("se va a añadir un nuevo usuario")
                 NombresEtiquetas={}
                 for i in range(len(target_names)):
