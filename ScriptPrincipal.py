@@ -171,7 +171,7 @@ def funcionPrincipal():
             if detener.val() == True:
                 break
             if extraccion == False:
-                try:
+#                try:
                     print("Esta configurado")
                     
                     tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
@@ -185,16 +185,17 @@ def funcionPrincipal():
                     
                     if errorExtraccionImagenes:
                         print("Fallo Entrenamiento de modelo")
-                        db.child("Facial").update({"Error":"Train"})
+                        db.child("Facial").update({"Error":"Extract"})
+#                        db.child("Facial").update({"Error":"Train"})
                         break
                     
                     extraccion = True
                     print("Extracciòn de modelo realizado correctamente")
                     
                     db.child("Facial").update({"Error":"NoErrorExtract"})
-                except:
-                    print("Fallo en la extracción del modelo")
-                    db.child("Facial").update({"Error":"Extract"})
+#                except:
+#                    print("Fallo en la extracción del modelo")
+                    
                     
             
             
@@ -270,7 +271,7 @@ def funcionPrincipal():
                 im_en,errorExtraccionImagenes = rg.encode(NombreCarpetaPrueba, numeroUsuarios)
                 if errorExtraccionImagenes:
                     print("Fallo Entrenamiento de modelo")
-                    db.child("Facial").update({"Error":"Train"})
+                    db.child("Facial").update({"Error":"Extract"})
                     break
                 
             print("Clasificación de rostros")
