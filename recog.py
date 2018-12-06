@@ -40,7 +40,7 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
                     print("no reconocio ")
                     substitucion = int(im[2:4])
                     print(substitucion)
-                    im.replace(im[2:4],(substitucion + 1))
+                    im.replace(im[2:4],str(substitucion + 1))
 #                        im[2:4] = str(substitucion + 1)
                     print("Este es el label imagen")
                     print(im)
