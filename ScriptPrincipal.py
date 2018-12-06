@@ -149,6 +149,7 @@ nombre = "Sin reconocer"
 conexionExitosa,firebase,db, valores,_ = conectarFirebase()
 
 def funcionPrincipal():
+    video_capture = 1.0    
     movimientoPir = False
     primeraVez = True
     abriendo="nada"
@@ -275,6 +276,7 @@ def funcionPrincipal():
                     break
                 
             print("Clasificación de rostros")
+            
             # Obtener Discriminantes
             usuariosActivados = db.child("Facial/UsuariosActivados").get()
             usuariosActivados = usuariosActivados.val()
@@ -336,7 +338,7 @@ def funcionPrincipal():
                     db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
                     nombre = "Sin reconocer"   
             time.sleep(1)
-        
+
         
         else:
             NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
