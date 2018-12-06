@@ -41,18 +41,18 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
                     image_face_encoding = face_recognition.face_encodings(image)[0]
                     break
                 except:
-                    while True:
-                        print("No reconocio rostro")
-                        
-                        substitucion = int(im[2:4])
-                        print(substitucion)
-                        im.replace(im[2:4],(substitucion + 1))
+#                    while True:
+                    print("No reconocio rostro")
+                    
+                    substitucion = int(im[2:4])
+                    print(substitucion)
+                    im.replace(im[2:4],(substitucion + 1))
 #                        im[2:4] = str(substitucion + 1)
-                        print("Este es el label imagen")
-                        print(im)
-                        if substitucion+1==71:
-                            error=True
-                            break
+                    print("Este es el label imagen")
+                    print(im)
+                    if substitucion+1==71:
+                        error=True
+                        break
 #                    
             images_encondes.append(image_face_encoding) 
                 
