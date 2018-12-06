@@ -40,13 +40,13 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
                     print("no reconocio ")
                     substitucion = int(im[2:4])
                     substitucion +=1
+                    substitucion = str(substitucion)
                     print(substitucion)
-                    print(type(substitucion))
-                    im.replace(im[2:4],str(substitucion))
+                    im.replace(im[2:4],substitucion)
 #                        im[2:4] = str(substitucion + 1)
                     print("Este es el label imagen")
                     print(im)
-                    if (substitucion)>=71:
+                    if int(substitucion)>=71:
                         print("entra aqui")
                         error=True
                         break
