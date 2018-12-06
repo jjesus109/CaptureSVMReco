@@ -37,14 +37,14 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
                 image = face_recognition.load_image_file(Rimagen)
                 face_bounding_boxes = face_recognition.face_locations(image)
                 if len(face_bounding_boxes) != 1:
-                    print("no reconocio reconocio")
+                    print("no reconocio ")
                     substitucion = int(im[2:4])
                     print(substitucion)
                     im.replace(im[2:4],(substitucion + 1))
 #                        im[2:4] = str(substitucion + 1)
                     print("Este es el label imagen")
                     print(im)
-                    if substitucion+1==71:
+                    if (substitucion+1)>=71:
                         error=True
                         break
                 else:        
