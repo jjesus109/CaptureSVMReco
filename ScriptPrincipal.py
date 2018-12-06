@@ -150,7 +150,7 @@ conexionExitosa,firebase,db, valores,_ = conectarFirebase()
 
 def funcionPrincipal():
     video_capture = 1.0    
-    movimientoPir = False
+    movimientoPir = True
     primeraVez = True
     abriendo="nada"
     nombre = "Sin reconocer"
