@@ -183,7 +183,13 @@ def funcionPrincipal():
                     target_names =datos["target_names"]
                     NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
         
-                    im_en = rg.encode(NombreCarpetaPrueba, numeroUsuarios)
+                    im_en,errorExtraccionImagenes = rg.encode(NombreCarpetaPrueba, numeroUsuarios)
+                    
+                    if errorExtraccionImagenes:
+                        print("Fallo Entrenamiento de modelo")
+                        db.child("Facial").update({"Error":"Train"})
+                        break
+                    
                     extraccion = True
                     print("Extracciòn de modelo realizado correctamente")
                     
@@ -263,8 +269,12 @@ def funcionPrincipal():
                 target_names = datos["target_names"]
                 NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
     
-                im_en = rg.encode(NombreCarpetaPrueba,numeroUsuarios)
-            
+                im_en,errorExtraccionImagenes = rg.encode(NombreCarpetaPrueba, numeroUsuarios)
+                if errorExtraccionImagenes:
+                    print("Fallo Entrenamiento de modelo")
+                    db.child("Facial").update({"Error":"Train"})
+                    break
+                
             print("Clasificación de rostros")
             # Obtener Discriminantes
             usuariosActivados = db.child("Facial/UsuariosActivados").get()

@@ -11,13 +11,14 @@ import time
 import face_recognition
 
 def encode(NombreCarpetaPrueba,numeroUsuarios):
+    error = False
     images_encondes = []
     folders = os.listdir(NombreCarpetaPrueba)
 #    indiceImagen = 1
     substitucion = 0
     imagenes = []
     for i in range(numeroUsuarios):
-        imagenes.append(str(i+1)+"_50.")
+        imagenes.append(str(i+1)+"_30.")
 #    imagenes = ["1_40.","2_40."]
     folders.sort()
     for im in folders:
@@ -36,17 +37,22 @@ def encode(NombreCarpetaPrueba,numeroUsuarios):
                 image = face_recognition.load_image_file(Rimagen)
             
                 try:
+                    print("Si recononocio rostro")
                     image_face_encoding = face_recognition.face_encodings(image)[0]
                     break
                 except:
+                    print("No reconocio rostro")
                     substitucion = int(im[2:4])
                     im[2:4] = str(substitucion + 1)
+                    if substitucion+1==71:
+                        error=True
+                        break
 #                    
             images_encondes.append(image_face_encoding) 
                 
                 
         
-    return images_encondes
+    return images_encondes, error
 
 def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture, usuariosEliminados ):
     ledes.on()
