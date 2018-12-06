@@ -323,7 +323,7 @@ def funcionPrincipal():
                 if primeraVez ==True:
                     t0= time.time()
                 print("estado actual PIR")
-                print(pir.motion_detected)
+                print(movimientoPir)
                 if time.time()-t0 >= 5:
                     primeraVez=True
                     if pir.motion_detected == True:
