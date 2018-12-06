@@ -336,7 +336,15 @@ def funcionPrincipal():
                 if movimientoPir == False:
                     print("Puerta cerrada")
                     db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
+                    
+                    while True:
+                        print("Esta en el true")
+                        abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
+                        abriendo = abriendo.val()
+                        if abriendo == "Cerrado":
+                            break
                     nombre = "Sin reconocer"   
+                    
             time.sleep(1)
 
         
