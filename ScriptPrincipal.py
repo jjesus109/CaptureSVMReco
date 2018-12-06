@@ -15,8 +15,6 @@ from gpiozero import LED
 ledes = LED(17)
 
 # Activacion variable para saber cuando esta activado el sensor
-#NombreCarpetaPrueba = "D:/Documentos HDD/10mo/TT1/Pruebas mulicategorico/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
-
 
 # conexion a firebase
 def conectarFirebase():
@@ -64,14 +62,14 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
                  
 
         
-        sale = False
+#        sale = False
         
-        while sale != False:
+        while True:
             print("Esperando a iniciar capturas")    
             mensajeError = db.child("Facial/Error").get()
             mensajeError = mensajeError.val()
             if mensajeError == "inicap":
-                sale = True
+                break
         p, inputQueue, outputQueue = 0 ,0 ,0            
         numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
         numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
