@@ -288,6 +288,7 @@ def funcionPrincipal():
             discriminantes=[]
             target_names = list(target_names)
             # Comparacion de metodos
+            print(usuariosActivados)
             for i in usuariosActivados:
                 if i not in target_names:
                     discriminantes.append(i)
