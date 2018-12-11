@@ -289,8 +289,8 @@ def funcionPrincipal():
             target_names = list(target_names)
             # Comparacion de metodos
             print(usuariosActivados)
-            for i in usuariosActivados:
-                if i not in target_names:
+            for i in target_names:
+                if i not in usuariosActivados:
                     discriminantes.append(i)
             if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
                 detener= db.child("Facial/Detener").get()
