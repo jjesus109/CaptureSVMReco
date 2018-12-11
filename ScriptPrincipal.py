@@ -197,9 +197,13 @@ def funcionPrincipal():
 #                except:
 #                    print("Fallo en la extracción del modelo")
                     
-                    
-            
-            
+            """----------------!!!!!!!!!!!!!!!!!!!!!!!!!!!-----------------"""
+            ### checar la reconexion a firebase
+#            try:
+#                db.child("Facial/UsuariosActivados").update(nombreUsuario)
+#            except:
+#                conexionExitosa, firebase, db, valores,entrenamiento = conectarFirebase()
+                                            
     
             #Validacion para entrenar mas usuarios
             if len(target_names)<numeroUsuarios-1:

@@ -104,6 +104,8 @@ def recog( images_encondes, target_names,db,ledes,pca, clf,video_capture, usuari
     print("los target names:")
     print(target_names)
     print("Se comunico con camara:")
+    print("Usuarios eliminados")
+    print(usuariosEliminados)
     
     if video_capture.isOpened():
         t0 = time.time()
