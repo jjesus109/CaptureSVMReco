@@ -10,7 +10,7 @@ import time
 import pathlib
 import capturaRostrosQueues as cr
 import svm_pca_final as svm
-import cv2
+import os
 from gpiozero import LED
 ledes = LED(17)
 
@@ -181,7 +181,7 @@ def funcionPrincipal():
                     pca = datos["pca"]
                     target_names =datos["target_names"]
                     NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
-        
+                    tomaDatos.close()
                     im_en,errorExtraccionImagenes = rg.encode(NombreCarpetaPrueba, numeroUsuarios)
                     
                     if errorExtraccionImagenes:
@@ -272,6 +272,7 @@ def funcionPrincipal():
                 pca = datos["pca"]
                 target_names = datos["target_names"]
                 NombreCarpetaPrueba = datos["NombreCarpetaPrueba"]
+                tomaDatos.close()
     
                 im_en,errorExtraccionImagenes = rg.encode(NombreCarpetaPrueba, numeroUsuarios)
                 if errorExtraccionImagenes:
@@ -354,7 +355,7 @@ def funcionPrincipal():
 
         
         else:
-            
+            os.remove("archivo_modelo_LBP.pickle")
             NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
             #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
             pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
