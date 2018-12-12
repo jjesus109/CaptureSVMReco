@@ -306,7 +306,7 @@ def funcionPrincipal():
                 if nombre=="Desconocido":
                     tts = gTTS(text="Detectado como Desconocido", lang='es')
                     tts.save("/home/pi/Desktop/mal.mp3")
-                    os.system("mpg321 /home/pi/Desktop/malmp3")
+                    os.system("mpg321 /home/pi/Desktop/mal.mp3")
                     time.sleep(4)
                 elif nombre == "Sin reconocer":
                     time.sleep(4)
