@@ -13,7 +13,7 @@ import svm_pca_final as svm
 import os
 from gpiozero import LED
 ledes = LED(17)
-
+from gtts import gTTS
 # Activacion variable para saber cuando esta activado el sensor
 
 # conexion a firebase
@@ -191,7 +191,7 @@ def funcionPrincipal():
                         break
                     
                     extraccion = True
-                    print("Extracciòn de modelo realizado correctamente")
+                    print("Extracción de modelo realizado correctamente")
                     
                     db.child("Facial").update({"Error":"NoErrorExtract"})
 #                except:
@@ -304,10 +304,18 @@ def funcionPrincipal():
         #        vd.release()
         #        ledes.off()
                 if nombre=="Desconocido":
+                    tts = gTTS(text='Detectado como Desconocido", lang='es')
+                    tts.save("/home/pi/Desktop/mal.mp3")
+                    os.system("mpg321 /home/pi/Desktop/malmp3")
                     time.sleep(4)
                 elif nombre == "Sin reconocer":
                     time.sleep(4)
                 elif nombre!="Desconocido":
+                    tts = gTTS(text='Bienvenido' + nombre, lang='es')
+                    tts.save("/home/pi/Desktop/bien2.mp3")
+                    os.system("mpg321 /home/pi/Desktop/bien2.mp3")
+                    db.child("Facial").update({"RostroValidado":"speech"})
+                    """
                     db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
                     while True:
                         print("Esta en el true")
@@ -317,13 +325,15 @@ def funcionPrincipal():
                             break
                     print("Esta esperando los 10 segundos")
                     time.sleep(10)
+                    db.child("Facial").update({"RostroValidado":"neee"})
         #            t0 = 0.0
         #            if t0 == 0.0:
         #                t0 = time.time()
-                    
+                    """
                 llamada= True
                 print("valor llamada: "+ str(llamada))
                 print("Sale del reconocimiento")
+            """
             elif nombre != "Sin reconocer" and nombre != "Desconocido":
                 
                 if primeraVez ==True:
@@ -350,7 +360,7 @@ def funcionPrincipal():
                         if abriendo == "Cerrado":
                             break
                     nombre = "Sin reconocer"   
-                    
+            """        
             time.sleep(1)
 
         
