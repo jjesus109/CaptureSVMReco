@@ -315,6 +315,7 @@ def funcionPrincipal():
                     tts.save("/home/pi/Desktop/bien2.mp3")
                     os.system("mpg321 /home/pi/Desktop/bien2.mp3")
                     db.child("Facial").update({"RostroValidado":"speech"})
+                    nombre ="Desconocido"
                     """
                     db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
                     while True:
