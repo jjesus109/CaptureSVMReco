@@ -304,7 +304,7 @@ def funcionPrincipal():
         #        vd.release()
         #        ledes.off()
                 if nombre=="Desconocido":
-                    tts = gTTS(text='Detectado como Desconocido", lang='es')
+                    tts = gTTS(text="Detectado como Desconocido", lang='es')
                     tts.save("/home/pi/Desktop/mal.mp3")
                     os.system("mpg321 /home/pi/Desktop/malmp3")
                     time.sleep(4)
