@@ -314,9 +314,8 @@ def funcionPrincipal():
                     tts = gTTS(text='Bienvenido' + nombre, lang='es')
                     tts.save("/home/pi/Desktop/bien2.mp3")
                     os.system("mpg321 /home/pi/Desktop/bien2.mp3")
-                    db.child("Facial").update({"RostroValidado":"speech"})
-                    nombre ="Desconocido"
-                    """
+                    
+                    
                     db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
                     while True:
                         print("Esta en el true")
@@ -326,15 +325,15 @@ def funcionPrincipal():
                             break
                     print("Esta esperando los 10 segundos")
                     time.sleep(10)
-                    db.child("Facial").update({"RostroValidado":"neee"})
+                    
         #            t0 = 0.0
         #            if t0 == 0.0:
         #                t0 = time.time()
-                    """
+                    
                 llamada= True
                 print("valor llamada: "+ str(llamada))
                 print("Sale del reconocimiento")
-            """
+            
             elif nombre != "Sin reconocer" and nombre != "Desconocido":
                 
                 if primeraVez ==True:
@@ -361,7 +360,7 @@ def funcionPrincipal():
                         if abriendo == "Cerrado":
                             break
                     nombre = "Sin reconocer"   
-            """        
+                   
             time.sleep(1)
 
         
