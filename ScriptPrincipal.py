@@ -314,8 +314,9 @@ def funcionPrincipal():
                     tts = gTTS(text='Bienvenido' + nombre, lang='es')
                     tts.save("/home/pi/Desktop/bien2.mp3")
                     os.system("mpg321 /home/pi/Desktop/bien2.mp3")
+                    nombre = "Desconocido"
                     
-                    
+                    """
                     db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
                     while True:
                         print("Esta en el true")
@@ -360,7 +361,7 @@ def funcionPrincipal():
                         if abriendo == "Cerrado":
                             break
                     nombre = "Sin reconocer"   
-                   
+             """      
             time.sleep(1)
 
         
