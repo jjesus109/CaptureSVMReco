@@ -306,19 +306,20 @@ def funcionPrincipal():
                 if nombre=="Desconocido":
                     #tts = gTTS(text="Detectado como Desconocido", lang='es')
                     #tts.save("/home/pi/Desktop/mal.mp3")
-                    os.system("mpg321 /home/pi/Desktop/mal.mp3")
+                    os.system("mpg321 mal.mp3")
                     time.sleep(4)
                 elif nombre == "Sin reconocer":
                     time.sleep(4)
                 elif nombre!="Desconocido":
                     tts = gTTS(text='Bienvenido' + nombre, lang='es')
-                    tts.save("/home/pi/Desktop/bien2.mp3")
-                    os.system("mpg321 /home/pi/Desktop/bien2.mp3")
+                    tts.save("bien2.mp3")
+                    os.system("mpg321 bien2.mp3")
                     nombre = "Desconocido"
                     
                     """
                     db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
                     while True:
+
                         print("Esta en el true")
                         abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
                         abriendo = abriendo.val()
