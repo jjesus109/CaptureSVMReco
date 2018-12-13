@@ -310,24 +310,20 @@ def funcionPrincipal():
                     #tts.save("/home/pi/Desktop/mal.mp3")
                     #os.system("mpg321 mal.mp3")
                     #play = ["mplayer"]
-                    cmd = ["mpg321", "-o", "alsa"]
-                    audio = "/home/pi/Desktop/P2/CaptureSVMReco/mal.mp3"
-                    call(cmd+ [audio])
+cmd = ["mpg321", "-o", "alsa"]
+audio = "/home/pi/Desktop/P2/CaptureSVMReco/mal.mp3"
+call(cmd+ [audio])
                     time.sleep(4)
                 elif nombre == "Sin reconocer":
                     time.sleep(4)
                 elif nombre!="Desconocido":
                     tts = gTTS(text='Bienvenido' + nombre, lang='es')
                     tts.save("bien2.mp3")
-                    #tts.save("/home/pi/Desktop/P2/CaptureSVMReco/mal.mp3")
-                    
-                    #os.system("mpg321 bien2.mp3")
-                    nombre = "Desconocido"
                     cmd = ["mpg321", "-o", "alsa"]
                     audio = "/home/pi/Desktop/P2/CaptureSVMReco/bien2.mp3"
                     call(cmd+ [audio])
 
-                    """
+                    
                     db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
                     while True:
 
@@ -373,7 +369,8 @@ def funcionPrincipal():
                         if abriendo == "Cerrado":
                             break
                     nombre = "Sin reconocer"   
-             """      
+            
+
             time.sleep(1)
 
         
