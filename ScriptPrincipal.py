@@ -308,11 +308,9 @@ def funcionPrincipal():
                 if nombre=="Desconocido":
                     #tts = gTTS(text="Detectado como Desconocido", lang='es')
                     #tts.save("/home/pi/Desktop/mal.mp3")
-                    #os.system("mpg321 mal.mp3")
+                    os.system("mpg321 mal.mp3")
                     #play = ["mplayer"]
-cmd = ["mpg321", "-o", "alsa"]
-audio = "/home/pi/Desktop/P2/CaptureSVMReco/mal.mp3"
-call(cmd+ [audio])
+
                     time.sleep(4)
                 elif nombre == "Sin reconocer":
                     time.sleep(4)
@@ -320,7 +318,7 @@ call(cmd+ [audio])
                     tts = gTTS(text='Bienvenido' + nombre, lang='es')
                     tts.save("bien2.mp3")
                     cmd = ["mpg321", "-o", "alsa"]
-                    audio = "/home/pi/Desktop/P2/CaptureSVMReco/bien2.mp3"
+                    audio = "bien2.mp3"
                     call(cmd+ [audio])
 
                     
