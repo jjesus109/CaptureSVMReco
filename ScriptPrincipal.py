@@ -346,7 +346,7 @@ def funcionPrincipal():
                         print("Fallo entrenamiento")
                         db.child("Facial").update({"Error":"Train"})    
                     except:
-                        base-rostros-firebase-adminsdk-2w8tl-1940b517ba
+                        break
                 print("Termino modelo")
                 print("Coninua con identifcacion de rostros")
                 try:
@@ -497,7 +497,7 @@ def funcionPrincipal():
                         print("Esta cerrandose la puerta")
                         try:
                             abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
-                        except
+                        except:
                             print("Es posible que se cierre la puerta pero no se sabe por que se reiniciara el programa")
                             break
                         abriendo = abriendo.val()
@@ -582,8 +582,8 @@ def funcionPrincipal():
                         # Envio de mensaje de error <-------------------
                         print("Fallo entrenamiento")
                         db.child("Facial").update({"Error":"Train"})    
-                    except
-                        break|
+                    except:
+                        break
                 print("Termino modelo")
                 print("Coninua con identifcacion de rostros")
                 try:
