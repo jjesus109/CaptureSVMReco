@@ -162,7 +162,7 @@ def SVM(carpeta,target_names, numeroMuestrasRostros):
     print("Estos son los target a guardar")
     print(target_names)
     datos = {"modelo":clf, "pca": pca, "target_names": target_names,"NombreCarpetaPrueba":carpeta}
-    data = open("archivo_modelo_LBP.pickle",'wb')
+    data = open("/home/pi/Desktop/P2/CaptureSVMReco/archivo_modelo_LBP.pickle",'wb')
     pickle.dump(datos, data)
     data.close()
     
