@@ -158,7 +158,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
                     nombresAñadir.append(deteccionActivadaUsuario)
 #                    nombreUsuario= {deteccionActivadaUsuario: True}
 #                    db.child("Facial/UsuariosActivados").update(nombreUsuario)
-                time.sleep(0.1)
+                time.sleep(1)
                 llamada=True
             
         #keys = list(NombresEtiquetas.keys())

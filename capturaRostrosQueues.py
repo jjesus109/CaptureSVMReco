@@ -73,7 +73,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
         print("Simon")
     elif video_capture.isOpened() == False:
         video_capture.release()
-        time.sleep(0.5)
+        time.sleep(1)
         video_capture = cv2.VideoCapture(0) 
 
     conexionCamara = video_capture.isOpened()
@@ -141,10 +141,9 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
                 break
     else:
         print("no se conecto con la camara")
-    time.sleep(0.1)   
+    #time.sleep(1)   
 
-#    video_capture.release()
-    
+    video_capture.release()
     cv2.destroyAllWindows()
         
     return conexionCamara,p, inputQueue, outputQueue,video_capture,numeroMuestrasRostros-10
