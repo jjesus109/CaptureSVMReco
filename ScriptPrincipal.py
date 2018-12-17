@@ -347,6 +347,7 @@ def funcionPrincipal():
                         db.child("Facial").update({"Error":"Train"})    
                     except:
                         break
+                    
                 print("Termino modelo")
                 print("Coninua con identifcacion de rostros")
                 try:
