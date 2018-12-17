@@ -70,8 +70,11 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
             mensajeError = mensajeError.val()
             if mensajeError == "inicap":
                 break
-        p, inputQueue, outputQueue = 0 ,0 ,0            
-        numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
+        p, inputQueue, outputQueue = 0 ,0 ,0     
+        try:       
+            numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
+        except:
+            return True,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara,numeroMuestrasRostros, nombresAñadir
         numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
         llamada=False
         print("Ya comienza captura")
@@ -79,13 +82,50 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
         print(str(numeroUsuariosAEntrenar))
         while numeroUsuarios<numeroUsuariosAEntrenar:
             print(str(numeroUsuarios))
-            deteccionActivada = db.child("Facial/Captura").get()
+            try:
+                deteccionActivada = db.child("Facial/Captura").get()
+            except:
+                t0 = time.time()
+                while True:
+                    print("Conxion perdida, reconectando con firebase")
+                    conexionExitosa, firebase, db, valores, configur = conectarFirebase()
+                    if conexionExitosa == True:
+                        deteccionActivada = db.child("Facial/Captura").get()
+                        break
+                    if time.time()-t0>=120:
+                        break
+                    time.sleep(0.5)
             print("Esperando usuario para ser capturado...")
-            detener= db.child("Facial/Detener").get()
+            try:
+                detener= db.child("Facial/Detener").get()
+            except:
+                t0 = time.time()
+                while True:
+                    print("Conxion perdida, reconectando con firebase")
+                    conexionExitosa, firebase, db, valores, configur = conectarFirebase()
+                    if conexionExitosa == True:
+                        detener= db.child("Facial/Detener").get()
+                        break
+                    if time.time()-t0>=120:
+                        break
+                    time.sleep(0.5)
             if detener.val() == True:
                 break
             if deteccionActivada.val()==True:
-                deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
+                try:
+                    deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
+                except:
+                    t0 = time.time()
+                    while True:
+                        print("Conxion perdida, reconectando con firebase")
+                        conexionExitosa, firebase, db, valores, configur = conectarFirebase()
+                        if conexionExitosa == True:
+                            deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
+                            break
+                        if time.time()-t0>=120:
+                            break
+                        time.sleep(0.5)
+
                 deteccionActivadaUsuario = deteccionActivadaUsuario.val()
                 print("La captura de rostros del usuario "+deteccionActivadaUsuario)
                 for i in range(3):
@@ -100,13 +140,25 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
 
                     targetnames.append(deteccionActivadaUsuario)
                     numeroUsuarios+=1
-                    db.child("Facial").update({"Captura":False})
+                    try:
+                        db.child("Facial").update({"Captura":False})
+                    except:
+                        t0 = time.time()
+                        while True:
+                            print("Conxion perdida, reconectando con firebase")
+                            conexionExitosa, firebase, db, valores, configur = conectarFirebase()
+                            if conexionExitosa == True:
+                                db.child("Facial").update({"Captura":False})
+                                break
+                            if time.time()-t0>=120:
+                                break
+                            time.sleep(0.5)
                     #print("Usuario capturado: "+deteccionActivadaUsuario)
                     #print(NombresEtiquetas)
                     nombresAñadir.append(deteccionActivadaUsuario)
 #                    nombreUsuario= {deteccionActivadaUsuario: True}
 #                    db.child("Facial/UsuariosActivados").update(nombreUsuario)
-                
+                time.sleep(0.1)
                 llamada=True
             
         #keys = list(NombresEtiquetas.keys())
@@ -158,19 +210,30 @@ def funcionPrincipal():
     nombre = "Sin reconocer"
     extraccion = False
     indexCamara = 0
-    db.child("Facial").update({"Error":"IniciaProg"})
+    try:
+        db.child("Facial").update({"Error":"IniciaProg"})
+    except:
+        print("Se inicio el programa pero no actualizo valor") 
     print("Inicia el proceso")
     while True:
         
         numeroMuestrasRostros = 60
-        configurado = db.child("Facial/Configurado").get()
+        try:
+            configurado = db.child("Facial/Configurado").get()
+        except:
+            break
         configurado = configurado.val()
         print("valor configurado"+ str(configurado))
         if configurado==True:
-    
-            numeroUsuarios = db.child("Facial/NumeroUsuarios").get()
+            try:
+                numeroUsuarios = db.child("Facial/NumeroUsuarios").get()
+            except:
+                break
             numeroUsuarios = numeroUsuarios.val()
-            detener= db.child("Facial/Detener").get()
+            try:
+                detener= db.child("Facial/Detener").get()
+            except:
+                break
             if detener.val() == True:
                 break
             if extraccion == False:
@@ -188,14 +251,21 @@ def funcionPrincipal():
                     
                     if errorExtraccionImagenes:
                         print("Fallo Entrenamiento de modelo")
-                        db.child("Facial").update({"Error":"Extract"})
+                        try:
+                            db.child("Facial").update({"Error":"Extract"})
+                        except:
+                            break
 #                        db.child("Facial").update({"Error":"Train"})
                         break
                     
                     extraccion = True
                     print("Extracción de modelo realizado correctamente")
                     
-                    db.child("Facial").update({"Error":"NoErrorExtract"})
+                    try:
+                        db.child("Facial").update({"Error":"NoErrorExtract"})
+                    except:
+                        print("no hubo problema de extraccion de modelo pero no se actualizo valor en Firebase")
+                        break
 #                except:
 #                    print("Fallo en la extracción del modelo")
                     
@@ -223,17 +293,27 @@ def funcionPrincipal():
                     
                     for i in nombresAñadir:
                         nombreUsuario= {i: True}
-                        db.child("Facial/UsuariosActivados").update(nombreUsuario)    
-                    
-                    db.child("Facial").update({"Error":"NoErrorCaptura"})    
+                        try:
+                            db.child("Facial/UsuariosActivados").update(nombreUsuario)    
+                        except:
+                            break
+                    try:
+                        db.child("Facial").update({"Error":"NoErrorCaptura"})    
+                    except:
+                        break
                     
                 except:
                     
                     print("Fallo en metodo de obtencion de rostros")
                     # Envio de mensaje de error <-------------------
-                    db.child("Facial").update({"Error":"Captura"})    
-                    
-                detener= db.child("Facial/Detener").get()
+                    try:
+                        db.child("Facial").update({"Error":"Captura"})    
+                    except:
+                        break
+                try:
+                    detener= db.child("Facial/Detener").get()
+                except:
+                    break
                 if detener.val() == True:
                     break
                     
@@ -241,8 +321,10 @@ def funcionPrincipal():
                 vR.filtrar(NombreCarpetaPrueba,numeroUsuarios)
     #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
                 
-    
-                detener= db.child("Facial/Detener").get()
+                try:
+                    detener= db.child("Facial/Detener").get()
+                except:
+                    break
                 if detener.val() == True:
                     break
                 
@@ -250,21 +332,33 @@ def funcionPrincipal():
                     svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
                     # Envio de mensaje de error <-------------------
                     print("Entrenamiento realizado correctamente")
-                    
-                    db.child("Facial").update({"Error":"NoErrorTrain"})    
+                    try:
+                        db.child("Facial").update({"Error":"NoErrorTrain"})    
+                    except:
+                        print()
+                        break
                 except:
                     # Actualiza 
-                    db.child("Facial").update({"ProcesoFinalizado":True})            
-                    # Envio de mensaje de error <-------------------
-                    print("Fallo entrenamiento")
-                    db.child("Facial").update({"Error":"Train"})    
+                    try:
+
+                        db.child("Facial").update({"ProcesoFinalizado":True})            
+                        # Envio de mensaje de error <-------------------
+                        print("Fallo entrenamiento")
+                        db.child("Facial").update({"Error":"Train"})    
+                    except:
+                        base-rostros-firebase-adminsdk-2w8tl-1940b517ba
                 print("Termino modelo")
                 print("Coninua con identifcacion de rostros")
-                db.child("Facial").update({"Configurado":True})
-                db.child("Facial").update({"ProcesoFinalizado":True})  
+                try:
+                    db.child("Facial").update({"Configurado":True})
+                    db.child("Facial").update({"ProcesoFinalizado":True})  
+                except:
+                    break
                 
-                
-                detener= db.child("Facial/Detener").get()
+                try:
+                    detener= db.child("Facial/Detener").get()
+                except:
+                    break
                 if detener.val() == True:
                     break
                 print("Extraccion de modelo con nuevos usuarios")
@@ -279,13 +373,20 @@ def funcionPrincipal():
                 im_en,errorExtraccionImagenes = rg.encode(NombreCarpetaPrueba, numeroUsuarios)
                 if errorExtraccionImagenes:
                     print("Fallo Entrenamiento de modelo")
-                    db.child("Facial").update({"Error":"Extract"})
+                    try:
+
+                        db.child("Facial").update({"Error":"Extract"})
+                    except:
+                        break
                     break
                 
             print("Clasificación de rostros")
             
             # Obtener Discriminantes
-            usuariosActivados = db.child("Facial/UsuariosActivados").get()
+            try:
+                usuariosActivados = db.child("Facial/UsuariosActivados").get()
+            except:
+                break
             usuariosActivados = usuariosActivados.val()
             usuariosActivados = list(usuariosActivados)
             discriminantes=[]
@@ -296,7 +397,10 @@ def funcionPrincipal():
                 if i not in usuariosActivados:
                     discriminantes.append(i)
             if pir.motion_detected == True and (nombre =="Desconocido" or nombre == "Sin reconocer"):
-                detener= db.child("Facial/Detener").get()
+                try:
+                    detener= db.child("Facial/Detener").get()
+                except:
+                    break
                 if detener.val() == True:
                     break
         #        ledes.on()
@@ -321,12 +425,28 @@ def funcionPrincipal():
                     audio = "bien2.mp3"
                     call(cmd+ [audio])
 
-                    
-                    db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
+                    try:                    
+                        db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
+                    except:
+                        break
                     while True:
 
-                        print("Esta en el true")
-                        abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
+                        print("Esta abriendose la puerta")
+                        try:
+                            abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
+                        except:
+
+                            while True:
+                                print("Conxion perdida, reconectando con firebase")
+                                conexionExitosa, firebase, db, valores, configur = conectarFirebase()
+                                if conexionExitosa == True:
+                                    abriendo = db.child("Habitaciones/Entrada/Puerta").get()
+                                    break
+                                if time.time()-t0>=10:
+                                    break
+                                time.sleep(0.5)
+
+
                         abriendo = abriendo.val()
                         if abriendo == "Abierto":
                             break
@@ -357,12 +477,29 @@ def funcionPrincipal():
                 else:      
                     primeraVez=False
                 if movimientoPir == False:
-                    print("Puerta cerrada")
-                    db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
+                    print("La puerta se cerrara")
+                    try:
+                        db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
+
+                    except:
+                        while True:
+                            print("Conxion perdida, reconectando con firebase")
+                            conexionExitosa, firebase, db, valores, configur = conectarFirebase()
+                            if conexionExitosa == True:
+                                db.child("Habitaciones/Entrada").update({"Puerta":"Cerrar"})
+                                break
+                            if time.time()-t0>=120:
+                                break
+                            time.sleep(0.5)
+   
                     
                     while True:
-                        print("Esta en el true")
-                        abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
+                        print("Esta cerrandose la puerta")
+                        try:
+                            abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
+                        except
+                            print("Es posible que se cierre la puerta pero no se sabe por que se reiniciara el programa")
+                            break
                         abriendo = abriendo.val()
                         if abriendo == "Cerrado":
                             break
@@ -393,20 +530,40 @@ def funcionPrincipal():
                     break
                 for i in nombresAñadir:
                     nombreUsuario= {i: True}
-                    db.child("Facial/UsuariosActivados").update(nombreUsuario)    
+                    try:
+                        db.child("Facial/UsuariosActivados").update(nombreUsuario)    
+                    except:
+                        while True:
+                            print("Conxion perdida, reconectando con firebase")
+                            conexionExitosa, firebase, db, valores, configur = conectarFirebase()
+                            if conexionExitosa == True:
+                                db.child("Facial/UsuariosActivados").update(nombreUsuario)    
+                                break
+                            if time.time()-t0>=120:
+                                break
+                            time.sleep(0.5)
+
                 # Envio de mensaje de error <-------------------
-                db.child("Facial").update({"Error":"NoErrorCaptura"})    
+                try:
+                    db.child("Facial").update({"Error":"NoErrorCaptura"})    
+                except:
+                    print("sin error de captura")
 
                 
             except:
                 
                 print("Fallo en metodo de obtencion de rostros")
                 # Envio de mensaje de error <-------------------
-                db.child("Facial").update({"Error":"Captura"})    
+                try:
+                    db.child("Facial").update({"Error":"Captura"})    
+                except:
+                    break
                 
             if errorObtencion ==False:
-    #            try:
-                db.child("Facial").update({"ProcesoFinalizado":False})            
+                try:
+                    db.child("Facial").update({"ProcesoFinalizado":False})            
+                except:
+                    break
                 print("ruta carpeta imagenes: "+NombreCarpetaPrueba)
                 vR.filtrar(NombreCarpetaPrueba,len(nombreUsuarios))
     #            NombreCarpetaPrueba = "/home/pi/Desktop/P2/CaptureSVMReco/"
@@ -414,18 +571,26 @@ def funcionPrincipal():
                     svm.SVM(NombreCarpetaPrueba,nombreUsuarios,numeroMuestrasRostros)
                     # Envio de mensaje de error <-------------------
                     print("Entrenamiento realizado correctamente")
-                    
-                    db.child("Facial").update({"Error":"NoErrorTrain"})    
+                    try:
+                        db.child("Facial").update({"Error":"NoErrorTrain"})    
+                    except:
+                        break
                 except:
                     # Actualiza 
-                    db.child("Facial").update({"ProcesoFinalizado":True})            
-                    # Envio de mensaje de error <-------------------
-                    print("Fallo entrenamiento")
-                    db.child("Facial").update({"Error":"Train"})    
+                    try:
+                        db.child("Facial").update({"ProcesoFinalizado":True})            
+                        # Envio de mensaje de error <-------------------
+                        print("Fallo entrenamiento")
+                        db.child("Facial").update({"Error":"Train"})    
+                    except
+                        break|
                 print("Termino modelo")
                 print("Coninua con identifcacion de rostros")
-                db.child("Facial").update({"Configurado":True})
-                db.child("Facial").update({"ProcesoFinalizado":True})  
+                try:
+                    db.child("Facial").update({"Configurado":True})
+                    db.child("Facial").update({"ProcesoFinalizado":True})  
+                except:
+                    break
                 
             
         
