@@ -435,7 +435,7 @@ def funcionPrincipal():
                         try:
                             abriendo = db.child("Habitaciones/Entrada/Puerta").get()            
                         except:
-
+                            t0 = time.time()
                             while True:
                                 print("Conxion perdida, reconectando con firebase")
                                 conexionExitosa, firebase, db, valores, configur = conectarFirebase()
