@@ -12,7 +12,7 @@ import svm_pca_final as svm
 import os
 from gpiozero import LED
 ledes = LED(17)
-
+from gtts import gTTS
 # Activacion variable para saber cuando esta activado el sensor
 
 # conexion a firebase
@@ -303,10 +303,15 @@ def funcionPrincipal():
         #        vd.release()
         #        ledes.off()
                 if nombre=="Desconocido":
+                    os.system("mpg321 /home/pi/Desktop/mal.mp3")
+                    
                     time.sleep(4)
                 elif nombre == "Sin reconocer":
                     time.sleep(4)
                 elif nombre!="Desconocido":
+                    tts = gTTS(text='Bienvenido' + nombre, lang='es')
+                    tts.save("/home/pi/Desktop/bien2.mp3")
+                    os.system("mpg321 /home/pi/Desktop/bien2.mp3")
                     db.child("Habitaciones/Entrada").update({"Puerta":"Abrir"})
                     while True:
                         print("Esta en el true")
