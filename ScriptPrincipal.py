@@ -219,7 +219,7 @@ def funcionPrincipal(db):
     while True:
         try:
             db.child("Facial").update({"Error":"IniciaProg"})
-       except:
+        except:
            print("va ")
            break
            
