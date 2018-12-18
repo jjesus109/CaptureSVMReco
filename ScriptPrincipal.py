@@ -151,6 +151,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
                             conexionExitosa, firebase, db, valores, configur = conectarFirebase()
                             if conexionExitosa == True:
                                 db.child("Facial").update({"Captura":False})
+                                
                                 db.child("Facial").update({"ProcesoFinalizado":False})
                                 break
                             if time.time()-t0>=120:
