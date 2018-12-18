@@ -174,7 +174,7 @@ def funcionPrincipal():
 #                try:
                     print("Esta configurado")
                     
-                    tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
+                    tomaDatos = open("/home/pi/Desktop/P2/CaptureSVMReco/archivo_modelo_LBP.pickle", "rb")
                     datos = pickle.load(tomaDatos)
                     clf = datos["modelo"]
                     pca = datos["pca"]
@@ -265,7 +265,7 @@ def funcionPrincipal():
                 if detener.val() == True:
                     break
                 print("Extraccion de modelo con nuevos usuarios")
-                tomaDatos = open("archivo_modelo_LBP.pickle", "rb")
+                tomaDatos = open("/home/pi/Desktop/P2/CaptureSVMReco/archivo_modelo_LBP.pickle", "rb")
                 datos = pickle.load(tomaDatos)
                 clf = datos["modelo"]
                 pca = datos["pca"]
