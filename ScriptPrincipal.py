@@ -210,13 +210,17 @@ def funcionPrincipal():
     nombre = "Sin reconocer"
     extraccion = False
     indexCamara = 0
-    try:
-        db.child("Facial").update({"Error":"IniciaProg"})
-    except:
-        print("Se inicio el programa pero no actualizo valor") 
+   
+        
+
+
+
     print("Inicia el proceso")
     while True:
-        
+        try:
+            db.child("Facial").update({"Error":"IniciaProg"})
+        except:
+            print("Se inicio el programa pero no actualizo 
         numeroMuestrasRostros = 60
         try:
             configurado = db.child("Facial/Configurado").get()
