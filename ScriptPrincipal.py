@@ -115,7 +115,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
             if deteccionActivada.val()==True:
                 try:
                     deteccionActivadaUsuario = db.child("Facial/UsuarioActivado").get()
-                    db.child("Facial").update({"ProcesoFinalizado":True})
+                    db.child("Facial").update({"ProcesoFinalizado":False})
                     
                 except:
                     t0 = time.time()
