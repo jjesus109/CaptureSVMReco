@@ -27,7 +27,7 @@ def _detect_(inputQueue, outputQueue):
                 outputQueue.put(vectorDim)
 
 # Funcion de ajuste Gamma
-def ajusteGamma(imagen,gamma=1.2):
+def ajusteGamma(imagen,gamma):
     invGamma =  1.0 / gamma
     table = np.array([((i/255.0)**invGamma)*255
 
@@ -90,7 +90,7 @@ def capturaCamara(NombreCarpetaPrueba,numeroUsuarios, llamada,p, inputQueue, out
 #            Clahe_Gamma = clahe.apply(CorreccionGamma)
 #            
 
-            CGamma = ajusteGamma(frame,1.4)
+            CGamma = ajusteGamma(frame,1.2)
             clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
             lab = cv2.cvtColor(CGamma, cv2.COLOR_BGR2LAB)
             lab_planes = cv2.split(lab)
