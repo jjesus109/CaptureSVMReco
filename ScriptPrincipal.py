@@ -73,6 +73,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
         p, inputQueue, outputQueue = 0 ,0 ,0     
         try:       
             numeroUsuariosAEntrenar = db.child("Facial/NumeroUsuarios").get()
+            db.child("Facial").update({"ProcesoFinalizado":True})
         except:
             return True,NombreCarpetaPrueba, targetnames, NombresEtiquetas,video_capture, indexCamara,numeroMuestrasRostros, nombresAñadir
         numeroUsuariosAEntrenar = int(numeroUsuariosAEntrenar.val())
@@ -155,7 +156,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
                             if conexionExitosa == True:
                                 db.child("Facial").update({"Captura":False})
                                 
-                                db.child("Facial").update({"ProcesoFinalizado":True})
+                                
                                 break
                             if time.time()-t0>=120:
                                 break
