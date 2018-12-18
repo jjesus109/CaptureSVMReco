@@ -217,9 +217,11 @@ def funcionPrincipal(db):
 
     print("Inicia el proceso")
     while True:
-        
-        db.child("Facial").update({"Error":"IniciaProg"})
-       
+        try:
+            db.child("Facial").update({"Error":"IniciaProg"})
+       except:
+           print("va ")
+           break
            
        
             
