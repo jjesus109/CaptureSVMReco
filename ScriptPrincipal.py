@@ -217,11 +217,11 @@ def funcionPrincipal():
 
     print("Inicia el proceso")
     while True:
-        try:
-            db.child("Facial").update({"Error":"IniciaProg"})
-        except:
-            print("Se inicio el programa pero no actualizo")
-            break
+        
+        db.child("Facial").update({"Error":"IniciaProg"})
+       
+           
+       
             
         numeroMuestrasRostros = 60
         try:
