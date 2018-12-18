@@ -84,6 +84,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
             print(str(numeroUsuarios))
             try:
                 deteccionActivada = db.child("Facial/Captura").get()
+                
             except:
                 t0 = time.time()
                 while True:
@@ -142,6 +143,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
                     numeroUsuarios+=1
                     try:
                         db.child("Facial").update({"Captura":False})
+                        db.child("Facial").update({"ProcesoFinalizado":False})
                     except:
                         t0 = time.time()
                         while True:
@@ -149,6 +151,7 @@ def obtenerRostros(indexCamara, targetnames, numeroUsuarios,NombresEtiquetas, No
                             conexionExitosa, firebase, db, valores, configur = conectarFirebase()
                             if conexionExitosa == True:
                                 db.child("Facial").update({"Captura":False})
+                                db.child("Facial").update({"ProcesoFinalizado":False})
                                 break
                             if time.time()-t0>=120:
                                 break
@@ -305,6 +308,7 @@ def funcionPrincipal(db):
                             db.child("Facial/UsuariosActivados").update(nombreUsuario)    
                         except:
                             break
+                        
                     try:
                         db.child("Facial").update({"Error":"NoErrorCaptura"})    
                     except:
