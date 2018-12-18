@@ -536,7 +536,10 @@ def funcionPrincipal(db):
             NombreCarpetaPrueba = "/home/pi/Desktop/P2/Imagenes/Proyecto del " + time.strftime("%Y_%B_%d") + "_" + time.strftime('%H_%M_%S')
             #NombreCarpetaPrueba = "/home/pi/Desktop/P2/Prue/2018_October_11_16_49_11/"
             pathlib.Path(NombreCarpetaPrueba).mkdir(parents=True, exist_ok=True)
-            
+            try:
+                db.child("Facial").update({"ProcesoFinalizado":True})   
+            except:
+                break
             try:
                 errorObtencion = True
                 targetnames = []
@@ -570,7 +573,7 @@ def funcionPrincipal(db):
 
                 
             except:
-                
+                db.child("Facial").update({"ProcesoFinalizado":True})   
                 print("Fallo en metodo de obtencion de rostros")
                 # Envio de mensaje de error <-------------------
                 try:
