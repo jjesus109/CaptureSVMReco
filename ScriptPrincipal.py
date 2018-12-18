@@ -202,7 +202,7 @@ conexionExitosa,firebase,db, valores,_ = conectarFirebase()
 """Para reproducir  audio por bluetooth"""
 from subprocess import call
 
-def funcionPrincipal():
+def funcionPrincipal(db):
     video_capture = 1.0    
     movimientoPir = True
     primeraVez = True
@@ -603,6 +603,6 @@ def funcionPrincipal():
         
 
 if __name__ == "__main__":
-    
+    conexionExitosa,firebase,db, valores,_ = conectarFirebase()
     while True:
-        funcionPrincipal()
+        funcionPrincipal(db)
