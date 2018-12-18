@@ -220,7 +220,9 @@ def funcionPrincipal():
         try:
             db.child("Facial").update({"Error":"IniciaProg"})
         except:
-            print("Se inicio el programa pero no actualizo 
+            print("Se inicio el programa pero no actualizo")
+            break
+            
         numeroMuestrasRostros = 60
         try:
             configurado = db.child("Facial/Configurado").get()
